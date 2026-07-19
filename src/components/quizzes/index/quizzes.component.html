@@ -1,0 +1,46 @@
+<div class="qz">
+
+  <!-- ══ Page header ══════════════════════════════════════════════════ -->
+  <section class="qz-header">
+    <div class="container">
+      <div class="section">
+        <div class="section__center">
+          <div class="section__title">الاختبارات</div>
+          <div class="section__description">
+            اختبر معلوماتك وقيّم مستواك في مختلف المجالات التقنية والمهنية.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ Quiz grid ══════════════════════════════════════════════════ -->
+  <section class="qz-grid-section">
+    <div class="container">
+      <div class="qz-grid">
+
+        @for (quiz of allQuizzes; track quiz.id) {
+          <div class="qz-card">
+            <img [src]="quiz.image" alt="{{ quiz.title }}" class="qz-card__image">
+            <div class="qz-card__body">
+              <div class="qz-card__top">
+                <span class="badge badge-primary">{{ quiz.category }}</span>
+                <span class="qz-card__difficulty qz-card__difficulty--{{ quiz.difficulty === 'سهل' ? 'easy' : quiz.difficulty === 'صعب' ? 'hard' : 'medium' }}">{{ quiz.difficulty }}</span>
+              </div>
+              <h3 class="qz-card__title">{{ quiz.title }}</h3>
+              <div class="qz-card__meta">
+                <span><i class="pi pi-question-circle"></i> {{ quiz.questions }} سؤال</span>
+                <span><i class="pi pi-clock"></i> {{ quiz.duration }} دقيقة</span>
+              </div>
+            </div>
+            <div class="qz-card__footer">
+              <a class="btn btn-primary w-100" [routerLink]="[quiz?.categories?.length > 0 ? '/quizzes/categories/' + quiz.id : '/quizzes/details/' + quiz.id]">ابدأ الاختبار</a>
+            </div>
+          </div>
+        }
+
+      </div>
+    </div>
+  </section>
+
+</div>

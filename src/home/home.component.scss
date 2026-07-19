@@ -1,0 +1,293 @@
+@use '../assets/styles/variables' as *;
+
+// ════════════════════════════════════════════════════════════════════════════
+// HOME — ANIMATIONS & MOTION
+// ════════════════════════════════════════════════════════════════════════════
+
+// ── Keyframes ─────────────────────────────────────────────────────────────
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-10px); }
+}
+
+@keyframes float-sm {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-6px); }
+}
+
+@keyframes badge-bounce {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50%       { transform: translateY(-8px) scale(1.05); }
+}
+
+@keyframes pulse-ring {
+  0%   { box-shadow: 0 0 0 0   rgba(255, 255, 255, 0.45); }
+  70%  { box-shadow: 0 0 0 16px rgba(255, 255, 255, 0); }
+  100% { box-shadow: 0 0 0 0   rgba(255, 255, 255, 0); }
+}
+
+@keyframes shimmer-text {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+@keyframes wave-breathe {
+  0%, 100% { transform: scaleY(1); }
+  50%       { transform: scaleY(1.18); }
+}
+
+// ── Intro: on-load entrance (no scroll needed) ────────────────────────────
+
+.hp-intro__text {
+  animation: fade-in-from-start 0.85s cubic-bezier(.22, 1, .36, 1) both;
+}
+
+.hp-intro__visual {
+  animation: fade-in-from-end 1s cubic-bezier(.22, 1, .36, 1) 0.2s both;
+}
+
+@keyframes fade-in-from-start {
+  from { opacity: 0; transform: translateX(-36px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fade-in-from-end {
+  from { opacity: 0; transform: translateX(36px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+// Floating cards — independent continuous float
+.hp-intro__float--students  { animation: float    3.6s ease-in-out infinite; }
+.hp-intro__float--analytics { animation: float-sm 2.8s ease-in-out infinite 0.6s; }
+.hp-intro__float--congrats  { animation: float    3.2s ease-in-out infinite 1.1s; }
+.hp-intro__float--class     { animation: float-sm 4.1s ease-in-out infinite 0.3s; }
+
+// CTA join button — pulsing ring
+.hp-intro__btn-join {
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    animation: pulse-ring 2.4s cubic-bezier(.36, .07, .19, .97) infinite;
+  }
+}
+
+// Shimmer on the highlight word
+.hp-intro__title-highlight {
+  background: linear-gradient(90deg, #f7971e 0%, #ffd200 40%, #f7971e 80%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer-text 3s linear infinite;
+}
+
+// Wave breathing at intro bottom
+.hp-intro__wave svg {
+  transform-origin: bottom center;
+  animation: wave-breathe 6s ease-in-out infinite;
+}
+
+// ── Hero section: floating badges ─────────────────────────────────────────
+
+.hp-hero__badge--courses {
+  animation: badge-bounce 3.2s ease-in-out infinite;
+}
+.hp-hero__badge--students {
+  animation: badge-bounce 3.8s ease-in-out infinite 1.4s;
+}
+
+// ── Scroll reveal: sections slide up on enter ─────────────────────────────
+// IntersectionObserver (TypeScript) adds .is-visible to each section
+
+section:not(.hp-intro) {
+  transform: translateY(24px);
+  transition: transform 0.75s cubic-bezier(.22, 1, .36, 1);
+
+  &.is-visible {
+    transform: translateY(0);
+  }
+}
+
+// ── About section: directional child reveals ──────────────────────────────
+
+.hp-about__images {
+  opacity: 0;
+  transform: translateX(36px);
+  transition: opacity 0.75s ease,
+              transform 0.75s cubic-bezier(.22, 1, .36, 1);
+}
+
+.hp-about__content {
+  opacity: 0;
+  transform: translateX(-36px);
+  transition: opacity 0.75s ease 0.15s,
+              transform 0.75s cubic-bezier(.22, 1, .36, 1) 0.15s;
+}
+
+section.hp-about.is-visible {
+  .hp-about__images,
+  .hp-about__content {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+// Images — hover depth
+.hp-about__img--main {
+  transition: transform 0.5s cubic-bezier(.22, 1, .36, 1),
+              box-shadow 0.4s ease,
+              opacity 0.75s ease;      // preserve the reveal transition
+
+  &:hover {
+    transform: scale(1.04) translateY(-6px);
+    box-shadow: 0 28px 60px rgba(0, 0, 0, 0.22);
+  }
+}
+
+// ── Hero section: inner reveals ───────────────────────────────────────────
+
+.hp-hero__text {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.7s ease 0.1s,
+              transform 0.7s cubic-bezier(.22, 1, .36, 1) 0.1s;
+}
+
+.hp-hero__img-wrap {
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity 0.7s ease 0.28s,
+              transform 0.7s cubic-bezier(.22, 1, .36, 1) 0.28s;
+}
+
+section.hp-hero.is-visible {
+  .hp-hero__text,
+  .hp-hero__img-wrap {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+// ── Stats: stagger items ───────────────────────────────────────────────────
+
+.hp-stats__item {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease,
+              transform 0.5s cubic-bezier(.22, 1, .36, 1);
+
+  @for $i from 1 through 4 {
+    &:nth-child(#{$i}) { transition-delay: #{($i - 1) * 0.1}s; }
+  }
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: $shadow-md;
+  }
+}
+
+section.hp-stats.is-visible .hp-stats__item {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+// ── Features: stagger cards ────────────────────────────────────────────────
+
+.hp-feature-card {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.5s ease,
+              transform 0.5s cubic-bezier(.22, 1, .36, 1),
+              box-shadow $transition-base;
+
+  @for $i from 1 through 4 {
+    &:nth-child(#{$i}) { transition-delay: #{($i - 1) * 0.12}s; }
+  }
+}
+
+section.hp-features.is-visible .hp-feature-card {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+// Feature icon: spin+scale on card hover
+.hp-feature-card__icon {
+  transition: transform 0.4s cubic-bezier(.22, 1, .36, 1);
+
+  .hp-feature-card:hover & {
+    transform: scale(1.22) rotate(-10deg);
+  }
+}
+
+// ── Explore: stagger category strips ──────────────────────────────────────
+
+.hp-cat-strip {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.45s ease,
+              transform 0.45s cubic-bezier(.22, 1, .36, 1),
+              transform $transition-base, box-shadow $transition-base;
+
+  @for $i from 1 through 6 {
+    &:nth-child(#{$i}) { transition-delay: #{($i - 1) * 0.07}s; }
+  }
+}
+
+section.hp-explore.is-visible .hp-cat-strip {
+  opacity: 1;
+  transform: translateY(0);
+
+  // re-allow hover transform after reveal settles
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: $shadow-lg;
+  }
+}
+
+// ── Blog & courses: section headers fade up ───────────────────────────────
+
+.hp-blog .home-section__header,
+.hp-courses .home-section__header {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.5s ease 0.2s, transform 0.5s ease 0.2s;
+}
+
+section.hp-blog.is-visible,
+section.hp-courses.is-visible {
+  .home-section__header {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ── Reduced motion: respect user preference ───────────────────────────────
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+  }
+
+  section:not(.hp-intro),
+  .hp-about__images,
+  .hp-about__content,
+  .hp-hero__text,
+  .hp-hero__img-wrap,
+  .hp-stats__item,
+  .hp-feature-card,
+  .hp-cat-strip {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

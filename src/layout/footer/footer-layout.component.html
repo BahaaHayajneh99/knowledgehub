@@ -1,0 +1,97 @@
+<footer class="footer">
+
+  <!-- ── Main grid ─────────────────────────────────────────────────── -->
+  <div class="footer__main">
+    <div class="footer__container">
+
+      <!-- About -->
+      <div class="footer__col footer__col--about">
+        <p class="footer__about-text">
+KnowledgeHub هي منصة تعليمية عبر الإنترنت تقدم دورات تدريبية، وإرشادات مهنية، ومحتوى مدونة لمساعدتك على تنمية مهاراتك
+والارتقاء بمسارك المهني.
+        </p>
+        <p class="footer__about-sub">
+            تم تصميم دوراتنا ومسارات التعلم بعناية لتقديم نتائج واقعية يمكنك تطبيقها على الفور.
+        </p>
+      </div>
+
+      <!-- Categories -->
+      <div class="footer__col">
+        <h4 class="footer__col-title">فئات</h4>
+        <ul class="footer__list">
+          <li><a class="footer__link" [routerLink]="'/blogs'">مقالات</a></li> 
+          <li><a class="footer__link" [routerLink]="'/quizzes'">اختبارات</a></li>
+        </ul>
+      </div>
+
+      <!-- Learning Paths -->
+      <div class="footer__col">
+        <h4 class="footer__col-title">مسارات التعلم</h4>
+        <ul class="footer__list">
+          <li><a class="footer__link" [routerLink]="'/paths/frontend'">تطوير الواجهة الأمامية</a></li>
+          <li><a class="footer__link" [routerLink]="'/paths/backend'">تطوير الواجهة الخلفية</a></li>
+          <li><a class="footer__link" [routerLink]="'/paths/data'">علوم البيانات</a></li>
+          <li><a class="footer__link" [routerLink]="'/paths/ux'">تصميم تجربة المستخدم</a></li>
+          <li><a class="footer__link" [routerLink]="'/paths/leadership'">القيادة</a></li>
+          <li><a class="footer__link" [routerLink]="'/paths/management'">إدارة المشاريع</a></li>
+        </ul>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="footer__col">
+        <h4 class="footer__col-title">روابط سريعة</h4>
+        <ul class="footer__list">
+          <li><a class="footer__link" [routerLink]="'/'">الرئيسية</a></li>
+          <li><a class="footer__link" [routerLink]="'/about'">من نحن</a></li>
+          <li><a class="footer__link" [routerLink]="'/contact-us'">اتصل بنا</a>
+          </li><li><a class="footer__link" [routerLink]="'/faq'">الأسئلة الشائعة</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── Social row ─────────────────────────────────────────────────── -->
+  <div class="footer__social-row">
+    <div class="footer__container">
+      <hr class="footer__divider" />
+      <div class="footer__social-icons">
+
+        <!-- Facebook -->
+        <a class="footer__social-link" href="https://facebook.com" aria-label="Facebook" target="_blank" rel="noopener">
+          <i class="pi pi-facebook"></i>
+        </a>
+
+        <!-- Instagram -->
+        <a class="footer__social-link" href="https://instagram.com" aria-label="Instagram" target="_blank" rel="noopener">
+          <i class="pi pi-instagram"></i>
+        </a>
+
+        <!-- X / Twitter -->
+        <a class="footer__social-link" href="https://x.com" aria-label="X" target="_blank" rel="noopener">
+          <i class="pi pi-twitter"></i>
+        </a>
+
+        <!-- YouTube -->
+        <a class="footer__social-link" href="https://youtube.com" aria-label="YouTube" target="_blank" rel="noopener">
+          <i class="pi pi-youtube"></i>
+        </a>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Bottom bar ──────────────────────────────────────────────────── -->
+  <div class="footer__bottom">
+    <div class="footer__container footer__bottom-inner">
+      <!-- Legal links first so flex space-between places them on the right (RTL start) -->
+      <div class="footer__legal">
+        <a class="footer__legal-link" href="/terms">الشروط والأحكام</a>
+        <a class="footer__legal-link" href="/privacy">سياسة الخصوصية</a>
+      </div>
+      <span class="footer__copyright">حقوق النشر 2026 &copy; KnowledgeHub</span>
+    </div>
+  </div>
+
+</footer>
+

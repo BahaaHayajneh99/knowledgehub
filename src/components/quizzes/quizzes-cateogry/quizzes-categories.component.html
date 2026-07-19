@@ -1,0 +1,63 @@
+@if (quiz) {
+<div class="qz">
+
+  <!-- ══ Page header ══════════════════════════════════════════════════ -->
+  <section class="qz-header">
+    <div class="container">
+      <nav class="cd-breadcrumb" style="margin-bottom: 1rem">
+        <a routerLink="/">الرئيسية</a>
+        <i class="pi pi-angle-left"></i>
+        <a routerLink="/quizzes">الاختبارات</a>
+        <i class="pi pi-angle-left"></i>
+        <span>{{ quiz.title }}</span>
+      </nav>
+      <div class="section">
+        <div class="section__center">
+          <div class="section__title">{{ quiz.title }}</div>
+          <div class="section__description">
+            اختر الفئة التي تريد الاختبار فيها
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ Categories grid ══════════════════════════════════════════════ -->
+  <section class="qz-grid-section">
+    <div class="container">
+      @if (quiz.categories && quiz.categories.length > 0) {
+        <div class="qz-grid">
+          @for (cat of quiz.categories; track cat.id; let i = $index) {
+            <article class="card card--lg" style="cursor:pointer"
+                     [routerLink]="['/quizzes/details', quiz.id]"
+                     [queryParams]="{ categoryId: cat.id }">
+              <div class="card-img card-img--lg {{ gradFor(i) }}"></div>
+              <div class="card-body">
+                <h3 class="card-title">{{ cat.name }}</h3> 
+                <span class="badge badge-primary">{{ quiz.category }}</span> 
+              </div>
+              <div class="card-footer">
+                <a class="btn btn-primary w-100"
+                   [routerLink]="['/quizzes/details', quiz.id]"
+                   [queryParams]="{ categoryId: cat.id }">دخول</a>
+              </div>
+            </article>
+          }
+        </div>
+      } @else {
+        <div style="text-align:center; padding: 3rem 0; color: #777">
+          <i class="pi pi-inbox" style="font-size:3rem; display:block; margin-bottom:1rem"></i>
+          <p>لا توجد فئات متاحة لهذا الاختبار</p>
+        </div>
+      }
+    </div>
+  </section>
+
+</div>
+} @else {
+  <div class="container" style="padding:4rem 0; text-align:center">
+    <i class="pi pi-exclamation-triangle" style="font-size:3rem; color:#f7971e; display:block; margin-bottom:1rem"></i>
+    <h2>الاختبار غير موجود</h2>
+    <a class="btn btn-primary" routerLink="/quizzes" style="margin-top:1.5rem; display:inline-flex">العودة للاختبارات</a>
+  </div>
+}

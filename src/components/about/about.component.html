@@ -1,0 +1,131 @@
+<div class="ab">
+
+  <!-- ══ Hero ══════════════════════════════════════════════════════════════ -->
+  <section class="cd-hero" style="background-image: linear-gradient(rgba(26,26,46,.75),rgba(26,26,46,.75)), url('assets/img/landing-pic-3.jpg')">
+    <div class="container cd-hero__inner">
+      <nav class="cd-breadcrumb">
+        <a routerLink="/">الرئيسية</a>
+        <i class="pi pi-angle-left"></i>
+        <span>من نحن</span>
+      </nav>
+      <span class="badge badge-primary cd-hero__badge">من نحن</span>
+      <h1 class="cd-hero__title">نحن KnowledgeHub</h1>
+      <div class="cd-hero__meta">
+        <span><i class="pi pi-users"></i> أكثر من 250,000 طالب</span>
+        <span><i class="pi pi-book"></i> 500+ دورة تدريبية</span>
+        <span><i class="pi pi-verified"></i> منصة عربية معتمدة</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ Mission ═════════════════════════════════════════════════════ -->
+  <section class="ab-mission">
+    <div class="container ab-mission__inner">
+
+      <div class="ab-mission__images">
+        <img src="assets/img/landing-pic-8.jpg" alt="مهمتنا" class="ab-mission__img ab-mission__img--main">
+        <img src="assets/img/landing-pic-6.jpg" alt="فريقنا" class="ab-mission__img ab-mission__img--secondary">
+      </div>
+
+      <div class="ab-mission__content">
+        <span class="ab-mission__tag">من نحن؟</span>
+        <h2 class="ab-mission__title">منصة تعليمية تفاعلية للعقل العربي</h2>
+        <p class="ab-mission__desc">
+          KnowledgeHub منصة تعليمية عربية متكاملة تجمع بين الدورات التقنية والمهنية
+          والمحتوى الثقافي، بهدف تمكين الفرد العربي من مواكبة التطور وتحقيق النجاح.
+          انطلقنا عام 2020 برؤية واضحة: جعل التعليم الجيد في متناول كل متحدث.
+        </p>
+        <ul class="ab-mission__list">
+          <li><i class="pi pi-check-circle"></i> محتوى باللغة العربية بالكامل</li>
+          <li><i class="pi pi-check-circle"></i> مدرّسون معتمدون من كبرى الجامعات</li>
+          <li><i class="pi pi-check-circle"></i> تمارين تطبيقية وامتحانات تقييمية</li>
+          <li><i class="pi pi-check-circle"></i> مجتمع تعليمي داعم ونشط</li>
+        </ul>
+        <a class="btn btn-primary" routerLink="/courses">استعرض الدورات</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ Stats ══════════════════════════════════════════════════════════════ -->
+  <section class="ab-stats">
+    <div class="container">
+      <div class="ab-stats__grid">
+        @for (stat of stats; track stat.label) {
+          <div class="ab-stats__item">
+            <div class="ab-stats__icon"><i class="pi {{ stat.icon }}"></i></div>
+            <span class="ab-stats__number">{{ stat.value }}</span>
+            <span class="ab-stats__label">{{ stat.label }}</span>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ Values ═════════════════════════════════════════════════════════════ -->
+  <section class="ab-values">
+    <div class="container">
+      <div class="section">
+        <div class="section__center">
+          <div class="section__title">قيمنا</div>
+          <div class="section__description">نؤمن بأن التعليم حق لكل إنسان، ونسعى إلى تقديم تجربة تعليمية تتميز بالجودة والإتقان.</div>
+        </div>
+      </div>
+      <div class="ab-values__grid">
+        @for (v of values; track v.title) {
+          <div class="ab-value-card">
+            <div class="ab-value-card__icon"><i class="pi {{ v.icon }}"></i></div>
+            <h3 class="ab-value-card__title">{{ v.title }}</h3>
+            <p class="ab-value-card__desc">{{ v.desc }}</p>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ Team ══════════════════════════════════════════════════════════════ -->
+  <section class="ab-team">
+    <div class="container">
+      <div class="section">
+        <div class="section__center">
+          <div class="section__title">فريقنا</div>
+          <div class="section__description">نخبة من الخبراء والمتخصصين يعملون معاً لتقديم أفضل تجربة تعليمية لكم.</div>
+        </div>
+      </div>
+      <div class="ab-team__grid">
+        @for (m of team; track m.name) {
+          <div class="ab-team-card">
+            <img [src]="m.avatar" alt="{{ m.name }}" class="ab-team-card__avatar">
+            <div class="ab-team-card__body">
+              <h3 class="ab-team-card__name">{{ m.name }}</h3>
+              <p class="ab-team-card__role">{{ m.role }}</p>
+              <p class="ab-team-card__bio">{{ m.bio }}</p>
+              <div class="ab-team-card__social">
+                <a href="#" class="ab-team-card__social-link" aria-label="LinkedIn"><i class="pi pi-linkedin"></i></a>
+                <a href="#" class="ab-team-card__social-link" aria-label="Twitter"><i class="pi pi-twitter"></i></a>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ CTA ══════════════════════════════════════════════════════════════ -->
+  <section class="ab-cta">
+    <div class="container ab-cta__inner">
+      <div class="ab-cta__text">
+        <h2 class="ab-cta__title">ابدأ رحلتك التعليمية معنا اليوم</h2>
+        <p class="ab-cta__desc">انضم إلى مجتمعنا المتنامي واحصل على وصول فوري إلى أكثر من 500 دورة تدريبية وشهادات معتمدة.</p>
+        <div class="ab-cta__actions">
+          <a class="btn btn-primary" routerLink="/courses">ابدأ التعلم</a>
+          <a class="btn btn-outline ab-cta__btn-outline" routerLink="/contact">تواصل معنا</a>
+        </div>
+      </div>
+      <div class="ab-cta__image">
+        <img src="assets/img/landing-pic-4.jpg" alt="انضم إلينا">
+      </div>
+    </div>
+  </section>
+
+</div>

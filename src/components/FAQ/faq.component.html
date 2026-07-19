@@ -1,0 +1,75 @@
+<div class="faq">
+
+  <!-- ══ Hero ══════════════════════════════════════════════════════════════ -->
+  <section class="cd-hero" style="background-image: linear-gradient(rgba(26,26,46,.72),rgba(26,26,46,.72)), url('../../assets/img/faq.jpg')">
+    <div class="container cd-hero__inner">
+      <nav class="cd-breadcrumb">
+        <a routerLink="/">الرئيسية</a>
+        <i class="pi pi-angle-left"></i>
+        <span>الأسئلة الشائعة</span>
+      </nav>
+      <span class="badge badge-primary cd-hero__badge">دعم وتعليم</span>
+      <h1 class="cd-hero__title">صفحة الأسئلة الشائعة</h1>
+      <div class="cd-hero__meta">
+        <span><i class="pi pi-question-circle"></i> {{ faqs.length }} سؤال</span>
+        <span><i class="pi pi-users"></i> يجيب على أكثر الأسئلة شيوعاً</span>
+        <span><i class="pi pi-clock"></i> تحديث مستمر</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ Accordion ════════════════════════════════════════════════════════ -->
+  <section class="faq-body">
+    <div class="container">
+      <div class="section">
+        <div class="section__center">
+          <div class="section__title faq-body__heading">
+            الأسئلة الشائعة <span class="faq-body__heading-accent">التي يتم طرحها</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-accordion">
+        @for (item of faqs; track $index) {
+          <div class="faq-accordion__item" [class.faq-accordion__item--open]="item.open">
+            <button class="faq-accordion__trigger" (click)="toggle($index)">
+              <span class="faq-accordion__question">{{ item.question }}</span>
+              <span class="faq-accordion__icon">
+                <i class="pi" [class.pi-plus]="!item.open" [class.pi-minus]="item.open"></i>
+              </span>
+            </button>
+            @if (item.open) {
+              <div class="faq-accordion__body">
+                <p class="faq-accordion__answer">{{ item.answer }}</p>
+              </div>
+            }
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ Newsletter ════════════════════════════════════════════════════════ -->
+  <section class="faq-newsletter">
+    <div class="faq-newsletter__deco faq-newsletter__deco--circle"></div>
+    <div class="container faq-newsletter__inner">
+      <h2 class="faq-newsletter__title">
+        اشترك في <span class="faq-newsletter__title-accent">النشرة الإخبارية</span>
+      </h2>
+      <p class="faq-newsletter__desc">
+        اشترك الآن لتصلك التوصيات المخصصة من كامل كتالوج الدورات.
+      </p>
+      <div class="faq-newsletter__form">
+        <input
+          class="faq-newsletter__input"
+          type="email"
+          placeholder="أدخل بريدك الإلكتروني"
+          #emailInput />
+        <button class="btn btn-primary faq-newsletter__btn" (click)="subscribe(emailInput.value)">
+          اشترك
+        </button>
+      </div>
+    </div>
+  </section>
+
+</div>

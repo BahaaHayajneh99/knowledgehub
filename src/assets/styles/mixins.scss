@@ -1,0 +1,46 @@
+@use 'variables' as *;
+
+// ════════════════════════════════════════════════════════════════════════════
+// GRID MIXIN
+//
+//  Usage:
+//    @include grid(4);           → 4-col grid with default $space-md gap
+//    @include grid(3, $space-lg); → 3-col grid with large gap
+//    @include grid(2, $space-sm); → 2-col grid with small gap
+//
+//  Generates:
+//    display: grid;
+//    grid-template-columns: repeat($cols, 1fr);
+//    gap: $gap;
+// ════════════════════════════════════════════════════════════════════════════
+
+@mixin grid($cols: 1, $gap: $space-md) {
+    display: grid;
+    grid-template-columns: repeat($cols, 1fr);
+    gap: $gap;
+}
+
+// ── Responsive grid helper ────────────────────────────────────────────────
+//
+//  Usage:
+//    @include grid-responsive(4, 2, 1);
+//    → 4 cols default, 2 cols ≤1024px, 1 col ≤640px
+//
+//    @include grid-responsive(3, 2);
+//    → 3 cols default, 2 cols ≤1024px, unchanged below that
+//
+@mixin grid-responsive($cols-lg, $cols-md: null, $cols-sm: null, $gap: $space-md) {
+    @include grid($cols-lg, $gap);
+
+    @if $cols-md {
+        @media (max-width: 1024px) {
+            grid-template-columns: repeat($cols-md, 1fr);
+        }
+    }
+
+    @if $cols-sm {
+        @media (max-width: 640px) {
+            grid-template-columns: repeat($cols-sm, 1fr);
+        }
+    }
+}

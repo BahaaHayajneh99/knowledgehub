@@ -1,0 +1,208 @@
+<section class="checkout-page">
+
+  <!-- ══════════════════════════════════════════════
+       Payment Success Screen
+  ══════════════════════════════════════════════ -->
+  @if (step === 'success') {
+    <div class="success-overlay">
+      <div class="success-card">
+        <div class="success-icon">
+          <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="30" cy="30" r="29" stroke="#43e97b" stroke-width="2"/>
+            <path d="M18 31l9 9 15-18" stroke="#43e97b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h2>تم الدفع بنجاح!</h2>
+        <p>شكراً لك على شرائك. ستصلك تفاصيل الطلب عبر البريد الإلكتروني قريباً.</p>
+        <a routerLink="/courses" class="btn-back-courses">العودة إلى الدورات</a>
+      </div>
+    </div>
+  }
+
+  <!-- ══════════════════════════════════════════════
+       Main Checkout Layout
+  ══════════════════════════════════════════════ -->
+  @if (step !== 'success') {
+    <div class="checkout-layout">
+
+      <!-- ── Checkout / Payment Form ── -->
+      <div class="checkout-form-card">
+        <h2 class="card-title">الدفع</h2>
+
+        <!-- Payment method icons -->
+        <div class="payment-methods">
+          <span class="pm-label">نوع البطاقة</span>
+          <div class="pm-icons">
+            <div class="pm-icon paypal"><span>Pay</span><span class="pal">Pal</span></div>
+            <div class="pm-icon amex">AMEX</div>
+            <div class="pm-icon visa">VISA</div>
+            <div class="pm-icon mastercard">
+              <span class="mc-c mc-red"></span>
+              <span class="mc-c mc-orange"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Form -->
+        <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+
+          <!-- Name on card -->
+          <div class="form-group" [class.has-error]="invalid('nameOnCard')">
+            <label for="nameOnCard">الاسم على البطاقة</label>
+            <input id="nameOnCard" type="text" formControlName="nameOnCard"
+                   placeholder="أدخل الاسم على البطاقة">
+            @if (invalid('nameOnCard')) {
+              <span class="err-msg">يرجى إدخال الاسم الكامل (٣ أحرف على الأقل)</span>
+            }
+          </div>
+
+          <!-- Card number -->
+          <div class="form-group" [class.has-error]="invalid('cardNumber')">
+            <label for="cardNumber">رقم البطاقة</label>
+            <div class="input-icon-wrap">
+              <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+                <line x1="1" y1="10" x2="23" y2="10"/>
+              </svg>
+              <input id="cardNumber" type="text" formControlName="cardNumber"
+                     placeholder="XXXX XXXX XXXX XXXX"
+                     (input)="formatCardNumber($event)" maxlength="19" dir="ltr">
+            </div>
+            @if (invalid('cardNumber')) {
+              <span class="err-msg">يرجى إدخال رقم البطاقة بالصيغة الصحيحة</span>
+            }
+          </div>
+
+          <!-- Expiry + CVC row -->
+          <div class="form-row">
+            <div class="form-group" [class.has-error]="invalid('expirationDate')">
+              <label for="expiry">تاريخ الانتهاء (MM/YY)</label>
+              <input id="expiry" type="text" formControlName="expirationDate"
+                     placeholder="MM/YY"
+                     (input)="formatExpiry($event)" maxlength="5" dir="ltr">
+              @if (invalid('expirationDate')) {
+                <span class="err-msg">تاريخ غير صحيح</span>
+              }
+            </div>
+            <div class="form-group" [class.has-error]="invalid('cvc')">
+              <label for="cvc">CVC</label>
+              <input id="cvc" type="text" formControlName="cvc"
+                     placeholder="CVC" maxlength="4" dir="ltr">
+              @if (invalid('cvc')) {
+                <span class="err-msg">CVC غير صحيح</span>
+              }
+            </div>
+          </div>
+
+          <!-- Save info -->
+          <div class="form-check">
+            <input type="checkbox" id="saveInfo" formControlName="saveInfo">
+            <label for="saveInfo">حفظ معلوماتي للمدفوعات المستقبلية</label>
+          </div>
+
+          <!-- Submit -->
+          <button type="submit" class="btn-confirm"
+                  [class.loading]="step === 'processing'"
+                  [disabled]="step === 'processing'">
+            @if (step === 'processing') {
+              <span class="spinner"></span>
+              <span>جارٍ المعالجة...</span>
+            } @else {
+              <span>تأكيد الدفع</span>
+            }
+          </button>
+
+        </form>
+      </div><!-- /checkout-form-card -->
+
+      <!-- ── Order Summary ── -->
+      <div class="summary-card">
+        <h3 class="card-title">ملخص الطلب</h3>
+
+        <!-- Cart items -->
+        <div class="cart-items">
+          @for (item of cart.items(); track item.course.id) {
+            <div class="cart-item">
+              <img [src]="item.course.image" [alt]="item.course.title" class="cart-item__img">
+              <div class="cart-item__info">
+                <p class="cart-item__title">{{ item.course.title }}</p>
+                <span class="cart-item__author">{{ item.course.author }}</span>
+              </div>
+              <span class="cart-item__price">${{ item.course.price.toFixed(2) }}</span>
+            </div>
+          }
+        </div>
+
+        <hr class="divider">
+
+        <!-- Coupon -->
+        <div class="coupon-row">
+          <input type="text" [(ngModel)]="couponCode"
+                 placeholder="أدخل كود الخصم" class="coupon-input">
+          <button class="coupon-btn" (click)="applyCoupon()">تطبيق</button>
+        </div>
+        @if (couponMsg) {
+          <p class="coupon-msg" [class.error]="couponIsError">{{ couponMsg }}</p>
+        }
+
+        <hr class="divider">
+
+        <!-- Totals -->
+        <div class="totals">
+          <div class="total-row">
+            <span>المجموع الفرعي</span>
+            <span>${{ cart.subtotal().toFixed(2) }}</span>
+          </div>
+          <div class="total-row">
+            <span>خصم الكوبون</span>
+            <span class="discount-val">
+              @if (cart.discount() > 0) {
+                - ${{ cart.discount().toFixed(2) }} ({{ discountPct() }}%)
+              } @else {
+                0%
+              }
+            </span>
+          </div>
+          <div class="total-row">
+            <span>الضريبة (10%)</span>
+            <span>${{ cart.tax().toFixed(2) }}</span>
+          </div>
+          <div class="total-row total-row--final">
+            <span>المجموع الكلي</span>
+            <span>${{ cart.total().toFixed(2) }}</span>
+          </div>
+        </div>
+      </div><!-- /summary-card -->
+
+    </div><!-- /checkout-layout -->
+  }
+
+  <!-- ══════════════════════════════════════════════
+       Offers Section
+  ══════════════════════════════════════════════ -->
+  <section class="offers-section">
+    <div class="offers-header">
+      <h3>أفضل العروض والدورات التعليمية</h3>
+      <a routerLink="/courses" class="see-all-link">عرض الكل</a>
+    </div>
+
+    <div class="offers-grid">
+      @for (course of offerCourses; track course.id; let i = $index) {
+        <div class="offer-card">
+          <div class="offer-card__img-wrap">
+            <img [src]="course.image" [alt]="course.title">
+            <div class="offer-badge" [class.offer-badge--alt]="i === 1">
+              {{ i === 1 ? '10%' : '50%' }}
+            </div>
+          </div>
+          <div class="offer-card__body">
+            <h4>{{ course.title }}</h4>
+            <p>{{ course.description }}</p>
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+
+</section>
+

@@ -1,0 +1,231 @@
+@if (post) {
+<div class="bd">
+
+    <!-- ══ Hero banner ══════════════════════════════════════════════════ -->
+    <section class="cd-hero"
+             [style.background-image]="'linear-gradient(rgba(26,26,46,.72),rgba(26,26,46,.72)), url(' + post.image + ')'">
+        <div class="container cd-hero__inner">
+            <nav class="cd-breadcrumb">
+                <a routerLink="/">الرئيسية</a>
+                <i class="pi pi-angle-left"></i>
+                <a routerLink="/blogs">المدونة</a>
+                <i class="pi pi-angle-left"></i>
+                <span>{{ post.category }}</span>
+            </nav>
+            <span class="badge badge-primary cd-hero__badge">{{ post.category }}</span>
+            <h1 class="cd-hero__title">{{ post.title }}</h1>
+            <div class="cd-hero__meta">
+                <span><i class="pi pi-calendar"></i> {{ post.date }}</span>
+                <span><i class="pi pi-clock"></i> {{ post.readTime }} دقائق قراءة</span>
+                <span><i class="pi pi-user"></i> {{ post.author }}</span>
+                <span><i class="pi pi-tag"></i> {{ post.tags.join(' · ') }}</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ Main layout ══════════════════════════════════════════════════ -->
+    <div class="container bd-layout">
+
+        <!-- Article -->
+        <article class="bd-article">
+
+            <div class="bd-article__header">
+                <span class="badge badge-primary">{{ post.category }}</span>
+                <span class="card-meta">{{ post.date }}</span>
+                <span class="card-meta"><i class="pi pi-clock"></i> {{ post.readTime }} دقائق قراءة</span>
+            </div>
+
+            <h1 class="bd-article__title">{{ post.title }}</h1>
+
+            <div class="bd-article__meta">
+                <img [src]="post.authorAvatar" alt="{{ post.author }}" class="card-avatar">
+                <div>
+                    <p class="card-author__name">{{ post.author }}</p>
+                    <p class="card-meta">{{ post.authorBio }}</p>
+                </div>
+            </div>
+
+            <div class="bd-article__desc">{{ post.description }}</div>
+
+            <div class="bd-article__content">
+                @for (para of post.content; track $index) {
+                <p>{{ para }}</p>
+                }
+            </div>
+
+            <!-- Tags -->
+            <div class="bd-article__tags">
+                <span class="bd-article__tags-label">الوسوم:</span>
+                @for (tag of post.tags; track tag) {
+                <span class="bd-tag">{{ tag }}</span>
+                }
+            </div>
+
+        </article>
+
+        <!-- Sidebar -->
+        <aside class="bd-sidebar">
+
+            <div class="bd-sidebar__card">
+                <h3 class="bd-sidebar__title">شارك المقال</h3>
+                <div class="cd-share">
+                    <a class="cd-share__icon cd-share__icon--fb" href="#" aria-label="Facebook"><i
+                            class="pi pi-facebook"></i></a>
+                    <a class="cd-share__icon cd-share__icon--tw" href="#" aria-label="Twitter"><i
+                            class="pi pi-twitter"></i></a>
+                    <a class="cd-share__icon cd-share__icon--wa" href="#" aria-label="WhatsApp"><i
+                            class="pi pi-whatsapp"></i></a>
+                    <a class="cd-share__icon cd-share__icon--li" href="#" aria-label="LinkedIn"><i
+                            class="pi pi-linkedin"></i></a>
+                </div>
+            </div>
+
+            <div class="bd-sidebar__card">
+                <h3 class="bd-sidebar__title">عن الكاتب</h3>
+                <div class="bd-author-card">
+                    <img [src]="post.authorAvatar" alt="{{ post.author }}" class="card-avatar bd-author-card__avatar">
+                    <div>
+                        <p class="card-author__name">{{ post.author }}</p>
+                        <p class="card-meta">{{ post.authorBio }}</p>
+                    </div>
+                </div>
+            </div>
+
+        </aside>
+    </div>
+
+    <!-- ══ Comments ════════════════════════════════════════════════════════ -->
+    <section class="bd-comments">
+      <div class="container">
+
+        <!-- Comments list -->
+        <div class="bd-comments__header">
+          <h2 class="bd-comments__title">التعليقات</h2>
+          <span class="bd-comments__count">{{ comments.length }} تعليق</span>
+        </div>
+
+        <div class="bd-comment-list">
+          @for (c of pagedComments; track c.id) {
+            <div class="bd-comment">
+              <img [src]="c.avatar" alt="{{ c.name }}" class="bd-comment__avatar">
+              <div class="bd-comment__body">
+                <div class="bd-comment__meta">
+                  <span class="bd-comment__name">{{ c.name }}</span>
+                  <span class="bd-comment__date">{{ c.date }}</span>
+                </div>
+                <p class="bd-comment__text">{{ c.text }}</p>
+                <button class="bd-comment__reply-btn">
+                  <i class="pi pi-reply"></i> رد
+                </button>
+
+                <!-- Nested replies -->
+                @if (c.replies && c.replies.length > 0) {
+                  <div class="bd-comment-replies">
+                    @for (r of c.replies; track r.id) {
+                      <div class="bd-comment bd-comment--reply">
+                        <img [src]="r.avatar" alt="{{ r.name }}" class="bd-comment__avatar">
+                        <div class="bd-comment__body">
+                          <div class="bd-comment__meta">
+                            <span class="bd-comment__name">{{ r.name }}</span>
+                            <span class="bd-comment__date">{{ r.date }}</span>
+                          </div>
+                          <p class="bd-comment__text">{{ r.text }}</p>
+                          <button class="bd-comment__reply-btn">
+                            <i class="pi pi-reply"></i> رد
+                          </button>
+                        </div>
+                      </div>
+                    }
+                  </div>
+                }
+              </div>
+            </div>
+          }
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination">
+          <button class="pagination__btn" [disabled]="commentsPage <= 1" (click)="commentsPage = commentsPage - 1">
+            <i class="pi pi-angle-right"></i>
+          </button>
+          @for (p of pageNums; track p) {
+            <button class="pagination__page" [class.pagination__page--active]="p === commentsPage" (click)="commentsPage = p">{{ p }}</button>
+          }
+          <button class="pagination__btn" [disabled]="commentsPage >= totalPages" (click)="commentsPage = commentsPage + 1">
+            <i class="pi pi-angle-left"></i>
+          </button>
+        </div>
+
+        <!-- Leave a comment form -->
+        <div class="bd-comment-form">
+          <h3 class="bd-comment-form__title">اترك تعليقاً</h3>
+          <p class="bd-comment-form__note">لن يتم نشر بريدك الإلكتروني. الحقول المطلوبة مُعلَّمة <span class="bd-comment-form__required">*</span></p>
+
+          <form class="bd-comment-form__fields" (ngSubmit)="submitComment()" novalidate>
+            <div class="bd-comment-form__row">
+              <input class="bd-comment-form__input" type="text" placeholder="الاسم *"
+                name="commentName" [(ngModel)]="commentForm.name" required />
+              <input class="bd-comment-form__input" type="email" placeholder="البريد الإلكتروني *"
+                name="commentEmail" [(ngModel)]="commentForm.email" required />
+            </div>
+            <textarea class="bd-comment-form__input bd-comment-form__textarea"
+              placeholder="التعليق"
+              name="commentText" [(ngModel)]="commentForm.text" rows="5" required></textarea>
+            <label class="bd-comment-form__save">
+              <input type="checkbox" name="commentSave" [(ngModel)]="commentForm.save" />
+              احفظ اسمي وبريدي الإلكتروني في هذا المتصفح للمرة القادمة
+            </label>
+            <div>
+              <button class="btn btn-primary" type="submit">نشر التعليق</button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══ Related blog ══════════════════════════════════════════════════ -->
+    <section class="bd-related">
+        <div class="container">
+            <div class="section">
+                <div class="section__center">
+                    <div class="section__title">مقالات ذات صلة</div>
+                    <div class="section__description">مقالات أخرى قد تهتم بها</div>
+                </div>
+            </div>
+            <div class="bd-related__grid">
+                @for (p of related; track p.id) {
+                <article class="card card--lg" [routerLink]="['/blogs', p.id]">
+                    <img [src]="p.image" alt="{{ p.title }}" class="card-img card-img--lg">
+                    <div class="card-body">
+                        <span class="badge badge-primary">{{ p.category }}</span>
+                        <h3 class="card-title">{{ p.title }}</h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="card-author">
+                            <img [src]="p.authorAvatar" alt="{{ p.author }}" class="card-avatar">
+                            <span class="card-author__name">{{ p.author }}</span>
+                        </div>
+                        <span class="card-meta">{{ p.date }}</span>
+                        <a class="home-section__show-all" [routerLink]="['/blogs/details', p.id]">عرض التفاصيل</a>
+
+                    </div>
+                </article>
+                }
+            </div>
+            <div class="bd-related__footer">
+                <a class="btn btn-outline" routerLink="/blogs">عرض كل المقالات</a>
+            </div>
+        </div>
+    </section>
+
+</div>
+} @else {
+<div class="container" style="padding:4rem 0;text-align:center">
+    <i class="pi pi-exclamation-triangle" style="font-size:3rem;color:#f7971e;display:block;margin-bottom:1rem"></i>
+    <h2>المقال غير موجود</h2>
+    <a class="btn btn-primary" routerLink="/blogs" style="margin-top:1.5rem;display:inline-flex">العودة للمدونة</a>
+</div>
+}
+
+

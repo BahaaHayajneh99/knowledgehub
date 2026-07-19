@@ -1,0 +1,238 @@
+@if (course) {
+<div class="cd">
+
+  <!-- ══ Hero ════════════════════════════════════════════════════════════ -->
+  <section class="cd-hero" [style.background-image]="'linear-gradient(rgba(26,26,46,.72),rgba(26,26,46,.72)), url(' + course.image + ')'">
+    <div class="container cd-hero__inner">
+      <nav class="cd-breadcrumb">
+        <a routerLink="/">الرئيسية</a>
+        <i class="pi pi-angle-left"></i>
+        <a routerLink="/courses">الدورات</a>
+        <i class="pi pi-angle-left"></i>
+        <span>{{ course.category }}</span>
+      </nav>
+      <span class="badge badge-primary cd-hero__badge">{{ course.category }}</span>
+      <h1 class="cd-hero__title">{{ course.title }}</h1>
+      <div class="cd-hero__meta">
+        <span class="cd-hero__stars">
+          @for (_ of fullStars; track $index) {
+            <i class="pi pi-star-fill cd-star cd-star--full"></i>
+          }
+          @if (hasHalfStar) {
+            <i class="pi pi-star-half-fill cd-star cd-star--half"></i>
+          }
+          @for (_ of emptyStars; track $index) {
+            <i class="pi pi-star cd-star cd-star--empty"></i>
+          }
+          <span class="cd-hero__rate">{{ course.rate }}</span>
+        </span>
+        <span><i class="pi pi-users"></i> ٢٬٤٠٠+ طالب</span>
+        <span><i class="pi pi-video"></i> {{ course.numberOfLessons }} درساً</span>
+        <span><i class="pi pi-user"></i> {{ course.author }}</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ Main layout ═════════════════════════════════════════════════════ -->
+  <div class="container cd-layout">
+
+    <!-- ── Left: main content ─────────────────────────────────────────── -->
+    <main class="cd-main">
+
+      <!-- Description -->
+      <section class="cd-section">
+        <h2 class="cd-section__title">نبذة عن الدورة</h2>
+        <p class="cd-desc">{{ course.description }}</p>
+        <ul class="cd-outcomes">
+          @for (o of outcomes; track $index) {
+            <li><i class="pi pi-check-circle"></i> {{ o }}</li>
+          }
+        </ul>
+      </section>
+
+      <!-- Curriculum -->
+      <section class="cd-section">
+        <h2 class="cd-section__title">محتوى الدورة</h2>
+        <p class="cd-section__sub">{{ curriculum.length }} أقسام &nbsp;·&nbsp; {{ course.numberOfLessons }} درساً</p>
+        <ul class="cd-curriculum">
+          @for (chapter of curriculum; track $index) {
+            <li class="cd-chapter">
+              <div class="cd-chapter__header">
+                <span class="cd-chapter__icon"><i class="pi pi-folder"></i></span>
+                <span class="cd-chapter__title">{{ chapter.title }}</span>
+                <span class="cd-chapter__meta">{{ chapter.lessons }} دروس · {{ chapter.duration }}</span>
+              </div>
+            </li>
+          }
+        </ul>
+      </section>
+
+      <!-- Rating breakdown -->
+      <section class="cd-section">
+        <h2 class="cd-section__title">تقييمات الطلاب</h2>
+        <div class="cd-rating">
+          <div class="cd-rating__overall">
+            <span class="cd-rating__big">{{ course.rate }}</span>
+            <div class="cd-rating__stars">
+              @for (_ of fullStars; track $index) {
+                <i class="pi pi-star-fill cd-star cd-star--full"></i>
+              }
+              @if (hasHalfStar) {
+                <i class="pi pi-star-half-fill cd-star cd-star--half"></i>
+              }
+            </div>
+            <span class="cd-rating__label">تقييم الدورة</span>
+          </div>
+          <div class="cd-rating__bars">
+            @for (row of ratingBreakdown; track row.stars) {
+              <div class="cd-rating__row">
+                <div class="cd-rating__bar-wrap">
+                  <div class="cd-rating__bar" [style.width]="row.percent + '%'"></div>
+                </div>
+                <span class="cd-rating__bar-stars">
+                  @for (i of [1,2,3,4,5]; track i) {
+                    <i class="pi" [class.pi-star-fill]="i <= row.stars" [class.pi-star]="i > row.stars" [class.cd-star--full]="i <= row.stars"></i>
+                  }
+                </span>
+                <span class="cd-rating__percent">{{ row.percent }}%</span>
+              </div>
+            }
+          </div>
+        </div>
+      </section>
+
+      <!-- Reviews -->
+      <section class="cd-section">
+        <h2 class="cd-section__title">آراء الطلاب</h2>
+        <div class="cd-reviews">
+          @for (review of reviews; track $index) {
+            <div class="cd-review">
+              <img [src]="review?.personAvatar" alt="Student avatar" class="card-avatar cd-review__avatar">
+              <div class="cd-review__body">
+                <div class="cd-review__header">
+                  <span class="card-author__name">{{ review.name }}</span>
+                  <span class="card-meta">{{ review.date }}</span>
+                  <div class="cd-review__stars">
+                    @for (i of [1,2,3,4,5]; track i) {
+                      <i class="pi" [class.pi-star-fill]="i <= review.rate" [class.pi-star]="i > review.rate" [class.cd-star--full]="i <= review.rate"></i>
+                    }
+                  </div>
+                </div>
+                <p class="cd-review__comment">{{ review.comment }}</p>
+              </div>
+            </div>
+          }
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ── Right: sidebar ─────────────────────────────────────────────── -->
+    <aside class="cd-sidebar">
+      <div class="cd-price-card">
+
+        <!-- Pricing -->
+        <div class="cd-price-card__prices">
+          <span class="cd-price-card__current">{{ course.price }} <small>DJ</small></span>
+          <span class="cd-price-card__original">{{ originalPrice }} DJ</span>
+          <span class="badge badge-dark">خصم {{ discountPercent }}%</span>
+        </div>
+
+        <a class="btn btn-primary w-100 cd-price-card__buy" [routerLink]="['/courses/checkout']">اشترِ الآن</a>
+        <button class="btn btn-outline w-100">أضف للمفضلة</button>
+
+        <p class="cd-price-card__note"><i class="pi pi-clock"></i> العرض ينتهي قريباً!</p>
+
+        <!-- What's included -->
+        <hr class="divider">
+        <h4 class="cd-price-card__section-title">تشمل هذه الدورة</h4>
+        <ul class="cd-includes">
+          <li><i class="pi pi-play-circle"></i> {{ course.numberOfLessons }} درساً مرئياً</li>
+          <li><i class="pi pi-info"></i> وصول مدى الحياة</li>
+          <li><i class="pi pi-mobile"></i> متاح على الجوال والكمبيوتر</li>
+          <li><i class="pi pi-download"></i> ملفات ومصادر قابلة للتنزيل</li>
+          <li><i class="pi pi-verified"></i> شهادة إتمام معتمدة</li>
+          <li><i class="pi pi-comments"></i> دعم مباشر من المدرّب</li>
+        </ul>
+
+        <!-- Share -->
+        <hr class="divider">
+        <h4 class="cd-price-card__section-title">شارك الدورة</h4>
+        <div class="cd-share">
+          <a class="cd-share__icon cd-share__icon--fb"  href="#" aria-label="Facebook"><i class="pi pi-facebook"></i></a>
+          <a class="cd-share__icon cd-share__icon--tw"  href="#" aria-label="Twitter"><i class="pi pi-twitter"></i></a>
+          <a class="cd-share__icon cd-share__icon--wa"  href="#" aria-label="WhatsApp"><i class="pi pi-whatsapp"></i></a>
+          <a class="cd-share__icon cd-share__icon--li"  href="#" aria-label="LinkedIn"><i class="pi pi-linkedin"></i></a>
+        </div>
+
+      </div>
+    </aside>
+
+  </div><!-- /cd-layout -->
+
+  <!-- ══ Related courses ══════════════════════════════════════════════════ -->
+  <section class="cd-related">
+    <div class="container">
+        <div class="section">
+            <div class="section__center">
+                <div class="section__title">
+                    دورات قد تعجبك
+                </div>
+        
+                <div class="section__description">
+                    اكتشف دورات تعليمية مختارة بعناية لتناسب اهتماماتك وتساعدك على تطوير مهاراتك. <br>
+                    تصفح توصياتنا وابدأ رحلة التعلم في المجالات التي تلهمك.
+                </div>
+            </div>
+        </div>
+      <div class="home-section__header"> 
+        <a class="home-section__show-all" routerLink="/courses">عرض الكل</a>
+      </div>
+      <div class="cd-related__grid">
+        @for (c of relatedCourses; track c.id) {
+          <article class="card card--lg" [routerLink]="['/courses/details', c.id]" style="cursor:pointer"> 
+          <img [src]="c.image" alt="{{ c.title }}" class="card-img card-img--lg card-img--grad-6">
+            <div class="card-body">
+              <span class="badge badge-primary">{{ c.category }}</span>
+              <h3 class="card-title">{{ c.title }}</h3>
+              <p class="card-meta"><i class="pi pi-star-fill cd-star--full" style="font-size:.8rem"></i> {{ c.rate }} &nbsp;·&nbsp; {{ c.numberOfLessons }} درساً</p>
+            </div>
+            <div class="card-footer">
+              <div class="card-author"> 
+              <img [src]="c.personAvatar" alt="Instructor avatar" class="card-avatar">
+
+                <span class="card-author__name">{{ c.author }}</span>
+              </div>
+              <span class="cd-price-tag">{{ c.price }} DJ</span>
+            </div>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ CTA Banner ══════════════════════════════════════════════════════ -->
+  <section class="cd-cta">
+    <div class="container cd-cta__inner">
+      <div class="cd-cta__text">
+        <h2 class="cd-cta__title">
+          كل ما تفعله في الفصل الدراسي<br>
+          <span class="cd-cta__highlight">يمكنك فعله مع KnowledgeHub</span>
+        </h2>
+        <p class="cd-cta__desc">
+          منصة تعليمية متكاملة توفّر لك بيئة تعلّم تفاعلية، مع دعم مباشر من المدرّبين
+          ومجتمع نشط من المتعلمين.
+        </p>
+        <a class="btn btn-primary" routerLink="/courses">ابدأ التعلّم الآن</a>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /cd -->
+} @else {
+  <div class="container" style="padding: 4rem 0; text-align: center;">
+    <i class="pi pi-exclamation-triangle" style="font-size:3rem; color:#f7971e; display:block; margin-bottom:1rem;"></i>
+    <h2>الدورة غير موجودة</h2>
+    <a class="btn btn-primary" routerLink="/courses" style="margin-top:1.5rem; display:inline-flex;">العودة للدورات</a>
+  </div>
+}

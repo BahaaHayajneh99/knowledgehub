@@ -1,0 +1,125 @@
+<div class="ct">
+
+  <!-- ══ Page intro ════════════════════════════════════════════════════════ -->
+  <section class="ct-intro">
+    <div class="container ct-intro__inner">
+      <h1 class="ct-intro__title">تواصل معنا</h1>
+      <p class="ct-intro__desc">
+        مرحباً بك في KnowledgeHub. إذا كان لديك أي استفسار أو اقتراح أو تحتاج إلى مساعدة،
+        فريقنا جاهز للرد عليك في أقرب وقت ممكن.
+      </p>
+    </div>
+  </section>
+
+  <!-- ══ Contact card ══════════════════════════════════════════════════════ -->
+  <section class="ct-body">
+    <div class="container">
+      <div class="ct-card">
+
+        <!-- ── Form ───────────────────────────────────────────────────── -->
+        <form class="ct-form" (ngSubmit)="send()" #contactForm="ngForm" novalidate>
+
+          <div class="ct-form__row">
+            <div class="ct-form__group">
+              <label class="ct-form__label">الاسم الأول</label>
+              <input class="ct-form__input" type="text" placeholder="أدخل الاسم الأول"
+                name="firstName" [(ngModel)]="model.firstName" required />
+            </div>
+            <div class="ct-form__group">
+              <label class="ct-form__label">الاسم الأخير</label>
+              <input class="ct-form__input" type="text" placeholder="أدخل الاسم الأخير"
+                name="lastName" [(ngModel)]="model.lastName" required />
+            </div>
+          </div>
+
+          <div class="ct-form__row">
+            <div class="ct-form__group">
+              <label class="ct-form__label">البريد الإلكتروني</label>
+              <input class="ct-form__input" type="email" placeholder="أدخل بريدك الإلكتروني"
+                name="email" [(ngModel)]="model.email" required />
+            </div>
+            <div class="ct-form__group">
+              <label class="ct-form__label">رقم الهاتف</label>
+              <input class="ct-form__input" type="number" placeholder="أدخل رقم هاتفك"
+                name="phone" [(ngModel)]="model.phone" />
+            </div>
+          </div>
+
+          <div class="ct-form__group">
+            <label class="ct-form__label">الموضوع</label>
+            <input class="ct-form__input" type="text" placeholder="أدخل الموضوع"
+              name="subject" [(ngModel)]="model.subject" required />
+          </div>
+
+          <div class="ct-form__group">
+            <label class="ct-form__label">الرسالة</label>
+            <textarea class="ct-form__input ct-form__textarea" placeholder="أدخل رسالتك هنا..."
+              name="message" [(ngModel)]="model.message" rows="5" required></textarea>
+          </div>
+
+          <div class="ct-form__footer">
+            <button class="btn btn-primary ct-form__submit" type="submit">
+              إرسال الرسالة
+            </button>
+          </div>
+
+        </form>
+
+        <!-- ── Contact info ───────────────────────────────────────────── -->
+        <aside class="ct-info">
+
+          <div class="ct-info__item">
+            <div class="ct-info__icon">
+              <i class="pi pi-envelope"></i>
+            </div>
+            <div>
+              <p class="ct-info__label">البريد الإلكتروني</p>
+              <a class="ct-info__value" href="mailto:support@knowledgehub.com">
+                support&#64;knowledgehub.com
+              </a>
+            </div>
+          </div>
+
+          <div class="ct-info__item">
+            <div class="ct-info__icon">
+              <i class="pi pi-phone"></i>
+            </div>
+            <div>
+              <p class="ct-info__label">رقم الهاتف</p>
+              <a class="ct-info__value" href="tel:+96600000000">
+                ‎+966 000 000 0000
+              </a>
+            </div>
+          </div>
+
+          <div class="ct-info__item">
+            <div class="ct-info__icon">
+              <i class="pi pi-map-marker"></i>
+            </div>
+            <div>
+              <p class="ct-info__label">الموقع</p>
+              <p class="ct-info__value">المملكة الأردنية الهاشمية، اربد</p>
+            </div>
+          </div>
+
+          <div class="ct-info__social">
+            <p class="ct-info__label">تابعنا على</p>
+            <div class="ct-info__social-icons">
+              <a class="ct-info__social-link ct-info__social-link--fb" href="#" aria-label="Facebook">
+                <i class="pi pi-facebook"></i>
+              </a>
+              <a class="ct-info__social-link ct-info__social-link--tw" href="#" aria-label="Twitter">
+                <i class="pi pi-twitter"></i>
+              </a>
+              <a class="ct-info__social-link ct-info__social-link--li" href="#" aria-label="LinkedIn">
+                <i class="pi pi-linkedin"></i>
+              </a>
+            </div>
+          </div>
+
+        </aside>
+      </div>
+    </div>
+  </section>
+
+</div>

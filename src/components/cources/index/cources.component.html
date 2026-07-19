@@ -1,0 +1,287 @@
+<div class="co">
+
+    <!-- ══ Welcome banner ══════════════════════════════════════════ -->
+    <section class="co-welcome">
+        <div class="section">
+            <div class="section__center">
+                <div class="section__title">
+                    مرحباً بعودتك!
+                </div>
+
+                <div class="section__description">
+                    سعداء بعودتك لمواصلة رحلة التعلم. تابع تقدمك، واستكشف الدورات الجديدة،
+                    وواصل تطوير مهاراتك وتحقيق أهدافك التعليمية.
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="hp-courses__grid">
+                @for (c of pagedWelcome; track c.id) {
+                <article class="co-feat-card" [routerLink]="['/courses/details', c.id]">
+                    <img [src]="c.image" alt="{{ c.title }}" class="co-feat-card__img card-img--lg">
+                    <div class="co-feat-card__body">
+                        <span class="badge badge-primary">{{ c.category }}</span>
+                        <h3 class="co-feat-card__title">{{ c.title }}</h3>
+                        <div class="co-feat-card__meta">
+                                <img [src]="c.personAvatar" alt="Instructor avatar" class="card-avatar co-feat-card__avatar">
+
+                            <span class="card-author__name">{{ c.author }}</span>
+                            <span class="co-feat-card__price">{{ c.price }} DJ</span>
+                            <a class="home-section__show-all" [routerLink]="['/courses/details', c.id]">عرض التفاصيل</a>
+
+                        </div>
+                    </div>
+                </article>
+                }
+            </div>
+            <!-- Welcome pagination -->
+            <div class="pagination">
+              <button class="pagination__btn" [disabled]="welcomePage <= 1" (click)="welcomePage = welcomePage - 1">
+                <i class="pi pi-angle-right"></i>
+              </button>
+              @for (p of pageNums(totalWelcome); track p) {
+                <button class="pagination__page" [class.pagination__page--active]="p === welcomePage" (click)="welcomePage = p">{{ p }}</button>
+              }
+              <button class="pagination__btn" [disabled]="welcomePage >= totalWelcome" (click)="welcomePage = welcomePage + 1">
+                <i class="pi pi-angle-left"></i>
+              </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ Categories ═══════════════════════════════════════════════ -->
+    <!-- <section class="co-categories">
+        <div class="container">
+            <div class="section">
+                <div class="section__center">
+                    <div class="section__title">اختر دورتك المفضلة</div>
+                    <div class="section__description">اكتشف دورتك المفضلة من أفضل التخصصات وابدأ مسيرتك التعليمية اليوم.
+                    </div>
+                </div>
+            </div>
+            <div class="co-categories__grid">
+                @for (cat of categories; track cat.name) {
+                <a class="co-cat-card" [routerLink]="cat.route" [style.--cat-color]="cat.color"
+                    [style.--cat-bg]="cat.bg">
+                    <div class="co-cat-card__icon"><i class="pi {{ cat.icon }}"></i></div>
+                    <h3 class="co-cat-card__name">{{ cat.name }}</h3>
+                    <p class="co-cat-card__count">{{ cat.count }} دورة</p>
+                </a>
+                }
+            </div>
+        </div>
+    </section> -->
+
+    <!-- ══ Recommended for you ═════════════════════════════════════ -->
+    <section class="co-section">
+        <div class="container">
+            <div class="section section--with-action">
+                <div class="section__center">
+                    <div class="section__title">موصى به لك</div>
+                    <div class="section__description">دورات مختارة بناءً على اهتماماتك ومستواك.</div>
+                </div>
+                <a class="section__action" routerLink="/courses">عرض الكل</a>
+            </div>
+            <div class="co-section__grid">
+                @for (c of pagedRecommended; track c.id) {
+                <article class="co-course-card" [routerLink]="['/courses/details', c.id]">
+                    <img [src]="c.image" alt="{{ c.title }}" class="co-course-card__img card-img--lg">
+                    <div class="co-course-card__body">
+                        <span class="badge badge-primary">{{ c.category }}</span>
+                        <h3 class="co-course-card__title">{{ c.title }}</h3>
+                        <p class="co-course-card__desc">{{ c.description }}</p>
+                        <div class="co-course-card__footer">
+                            <div class="card-author">
+                                <img [src]="c.personAvatar" alt="Instructor avatar" class="card-avatar co-course-card__avatar">
+                                <span class="card-author__name">{{ c.author }}</span>
+                            </div>
+                            <div class="co-course-card__right">
+                                <span class="co-course-card__rate">
+                                    <i class="pi pi-star-fill cd-star--full" style="font-size:.75rem"></i>
+                                    {{ c.rate }}
+                                </span>
+                                <span class="co-course-card__price">{{ c.price }} DJ</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                }
+            </div>
+            <div class="pagination">
+              <button class="pagination__btn" [disabled]="recommendedPage <= 1" (click)="recommendedPage = recommendedPage - 1">
+                <i class="pi pi-angle-right"></i>
+              </button>
+              @for (p of pageNums(totalRecommended); track p) {
+                <button class="pagination__page" [class.pagination__page--active]="p === recommendedPage" (click)="recommendedPage = p">{{ p }}</button>
+              }
+              <button class="pagination__btn" [disabled]="recommendedPage >= totalRecommended" (click)="recommendedPage = recommendedPage + 1">
+                <i class="pi pi-angle-left"></i>
+              </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ Get ahead of your course ══════════════════════════════════ -->
+    <section class="co-section co-section--alt">
+        <div class="container">
+            <div class="section section--with-action">
+                <div class="section__center">
+                    <div class="section__title">تقدّم في دورتك</div>
+                    <div class="section__description">استمر من حيث توقّفت وحسّن مهاراتك بشكل متسارع.</div>
+                </div>
+                <a class="section__action" routerLink="/courses">عرض الكل</a>
+            </div>
+            <div class="co-section__grid">
+                @for (c of pagedGetAhead; track c.id) {
+                <article class="co-course-card" [routerLink]="['/courses/details', c.id]">
+                    <img [src]="c.image" alt="{{ c.title }}" class="co-course-card__img card-img--lg">
+                    <div class="co-course-card__body">
+                        <span class="badge badge-primary">{{ c.category }}</span>
+                        <h3 class="co-course-card__title">{{ c.title }}</h3>
+                        <p class="co-course-card__desc">{{ c.description }}</p>
+                        <div class="co-course-card__footer">
+                            <div class="card-author">
+                                <img [src]="c.personAvatar" alt="Instructor avatar" class="card-avatar co-course-card__avatar">
+                                <span class="card-author__name">{{ c.author }}</span>
+                            </div>
+                            <div class="co-course-card__right">
+                                <span class="co-course-card__rate">
+                                    <i class="pi pi-star-fill cd-star--full" style="font-size:.75rem"></i>
+                                    {{ c.rate }}
+                                </span>
+                                <span class="co-course-card__price">{{ c.price }} DJ</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                }
+            </div>
+            <div class="pagination">
+              <button class="pagination__btn" [disabled]="getAheadPage <= 1" (click)="getAheadPage = getAheadPage - 1">
+                <i class="pi pi-angle-right"></i>
+              </button>
+              @for (p of pageNums(totalGetAhead); track p) {
+                <button class="pagination__page" [class.pagination__page--active]="p === getAheadPage" (click)="getAheadPage = p">{{ p }}</button>
+              }
+              <button class="pagination__btn" [disabled]="getAheadPage >= totalGetAhead" (click)="getAheadPage = getAheadPage + 1">
+                <i class="pi pi-angle-left"></i>
+              </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ CTA Banner ═════════════════════════════════════════════════ -->
+    <section class="co-cta">
+        <div class="container co-cta__inner">
+            <div>
+                <h2 class="co-cta__title">دروس تدريبية عبر الإنترنت للتعلّم عن بُعد.</h2>
+                <p class="co-cta__desc">كل ما تفعله في الفصل الدراسي يمكنك فعله مع KnowledgeHub. استكشف محتوى تفاعلياً
+                    واتصل بمدرّبيك مباشرة، واحصل على شهادة معتمدة.</p>
+                <a class="btn btn-primary" routerLink="/courses">ابدأ التعلّم الآن</a>
+            </div>
+            <div class="co-cta__image card-img--grad-3"></div>
+        </div>
+    </section>
+
+    <!-- ══ Personal development ═══════════════════════════════════════ -->
+    <section class="co-section">
+        <div class="container">
+            <div class="section section--with-action">
+                <div class="section__center">
+                    <div class="section__title">دورات التطوير الشخصي</div>
+                    <div class="section__description">
+                        اكتشف مجموعة مختارة من الدورات التعليمية المصممة بعناية لتطوير مهاراتك وتعزيز خبراتك في مختلف
+                        المجالات.
+                    </div>
+                </div>
+                <a class="section__action" routerLink="/courses">عرض الكل</a>
+            </div>
+            <div class="co-section__grid">
+                @for (c of pagedPersonalDev; track c.id) {
+                <article class="co-course-card" [routerLink]="['/courses/details', c.id]">
+                    <img [src]="c.image" alt="{{ c.title }}" class="co-course-card__img card-img--lg">
+                    <div class="co-course-card__body">
+                        <span class="badge badge-primary">{{ c.category }}</span>
+                        <h3 class="co-course-card__title">{{ c.title }}</h3>
+                        <p class="co-course-card__desc">{{ c.description }}</p>
+                        <div class="co-course-card__footer">
+                            <div class="card-author">
+                                <img [src]="c.personAvatar" alt="Instructor avatar" class="card-avatar co-course-card__avatar">
+                                <span class="card-author__name">{{ c.author }}</span>
+                            </div>
+                            <div class="co-course-card__right">
+                                <span class="co-course-card__rate">
+                                    <i class="pi pi-star-fill cd-star--full" style="font-size:.75rem"></i>
+                                    {{ c.rate }}
+                                </span>
+                                <span class="co-course-card__price">{{ c.price }} DJ</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                }
+            </div>
+            <div class="pagination">
+              <button class="pagination__btn" [disabled]="personalDevPage <= 1" (click)="personalDevPage = personalDevPage - 1">
+                <i class="pi pi-angle-right"></i>
+              </button>
+              @for (p of pageNums(totalPersonalDev); track p) {
+                <button class="pagination__page" [class.pagination__page--active]="p === personalDevPage" (click)="personalDevPage = p">{{ p }}</button>
+              }
+              <button class="pagination__btn" [disabled]="personalDevPage >= totalPersonalDev" (click)="personalDevPage = personalDevPage + 1">
+                <i class="pi pi-angle-left"></i>
+              </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ Student also viewing ═══════════════════════════════════════ -->
+    <section class="co-section co-section--alt">
+        <div class="container">
+            <div class="section section--with-action">
+                <div class="section__center">
+                    <div class="section__title">يشاهدها الطلاب أيضاً</div>
+                    <div class="section__description">استلهم من زملائك واكتشف ما يتعلمه غيرك من الطلاب.</div>
+                </div>
+                <a class="section__action" routerLink="/courses">عرض الكل</a>
+            </div>
+            <div class="co-section__grid">
+                @for (c of pagedAlsoViewing; track c.id) {
+                <article class="co-course-card" [routerLink]="['/courses/details', c.id]">
+                    <img [src]="c.image" alt="{{ c.title }}" class="co-course-card__img card-img--lg">
+                    <div class="co-course-card__body">
+                        <span class="badge badge-primary">{{ c.category }}</span>
+                        <h3 class="co-course-card__title">{{ c.title }}</h3>
+                        <p class="co-course-card__desc">{{ c.description }}</p>
+                        <div class="co-course-card__footer">
+                            <div class="card-author">
+                                <div class="card-avatar co-course-card__avatar"></div>
+                                <span class="card-author__name">{{ c.author }}</span>
+                            </div>
+                            <div class="co-course-card__right">
+                                <span class="co-course-card__rate">
+                                    <i class="pi pi-star-fill cd-star--full" style="font-size:.75rem"></i>
+                                    {{ c.rate }}
+                                </span>
+                                <span class="co-course-card__price">{{ c.price }} DJ</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                }
+            </div>
+            <div class="pagination">
+              <button class="pagination__btn" [disabled]="alsoViewingPage <= 1" (click)="alsoViewingPage = alsoViewingPage - 1">
+                <i class="pi pi-angle-right"></i>
+              </button>
+              @for (p of pageNums(totalAlsoViewing); track p) {
+                <button class="pagination__page" [class.pagination__page--active]="p === alsoViewingPage" (click)="alsoViewingPage = p">{{ p }}</button>
+              }
+              <button class="pagination__btn" [disabled]="alsoViewingPage >= totalAlsoViewing" (click)="alsoViewingPage = alsoViewingPage + 1">
+                <i class="pi pi-angle-left"></i>
+              </button>
+            </div>
+        </div>
+    </section>
+
+</div>

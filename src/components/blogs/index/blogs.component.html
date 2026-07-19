@@ -1,0 +1,143 @@
+<main class="bl">
+
+    <!-- ══ Hero ═════════════════════════════════════════════════════ -->
+    @if (featured) {
+    <section class="bl-hero">
+        <div class="container bl-hero__inner">
+            <div class="bl-hero__text">
+                <span class="bl-hero__tag">{{ featured.category }} &nbsp;·&nbsp; {{ featured.date }}</span>
+                <h1 class="bl-hero__title">{{ featured.title }}</h1>
+                <p class="bl-hero__desc">{{ featured.description }}</p>
+                <a class="btn btn-primary" [routerLink]="['/blogs/details', featured.id]">اقرأ المزيد</a>
+            </div>
+            <img [src]="featured.image" alt="{{ featured.title }}" class="bl-hero__image">
+        </div>
+    </section>
+    }
+
+    <!-- ══ Trending ═══════════════════════════════════════════════════ -->
+    <section class="bl-trending">
+        <div class="container">
+            <div class="section">
+                <div class="section__center">
+                    <div class="section__title">قائمة المدونات الرائجة</div>
+                    <div class="section__description">استكشف أحدث المقالات التقنية والمهنية التي يتابعها آلاف المتعلّمين
+                        كل يوم.</div>
+                </div>
+            </div>
+            <p-carousel
+                [value]="trending"
+                [numVisible]="3"
+                [numScroll]="1"
+                [circular]="true"
+                [responsiveOptions]="responsiveOptions">
+                <ng-template let-p pTemplate="item">
+                    <article class="card card--lg hp-course-card" style="margin: 0 .5rem"
+                        [routerLink]="['/blogs/details', p.id]">
+                        <img [src]="p.image" alt="{{ p.title }}" class="card-img card-img--lg">
+                        <div class="card-body">
+                            <span class="badge badge-primary">{{ p.category }}</span>
+                            <h3 class="card-title">{{ p.title }}</h3>
+                            <p class="card-meta hp-course-card__level">
+                                <i class="pi pi-clock" style="font-size:.75rem"></i>
+                                {{ p.readTime }} دقائق &nbsp;&middot;&nbsp; {{ p.date }}
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                            <div class="card-author">
+                                <img [src]="p.authorAvatar" alt="{{ p.author }}" class="card-avatar">
+                                <span class="card-author__name">{{ p.author }}</span>
+                            </div>
+                            <a class="home-section__show-all" [routerLink]="['/blogs/details', p.id]">عرض التفاصيل</a>
+                        </div>
+                    </article>
+                </ng-template>
+            </p-carousel>
+        </div>
+    </section>
+
+    <!-- ══ Related Blog ═════════════════════════════════════════════════ -->
+    <section class="home-related">
+        <div class="container">
+            <div class="section">
+                <div class="section__center">
+                    <div class="section__title">مقالات ذات صلة</div>
+                    <div class="section__description">
+                        تعمّق في المحتوى واستكشف مقالات تكمل مسيرتك التعليمية وتجيب على أسئلتك المهنية.
+                    </div>
+                </div>
+            </div>
+            <p-carousel
+                [value]="related"
+                [numVisible]="2"
+                [numScroll]="1"
+                [circular]="true"
+                [responsiveOptions]="responsiveOptions">
+                <ng-template let-p pTemplate="item">
+                    <article class="card card--lg hp-course-card" style="margin: 0 .5rem"
+                        [routerLink]="['/blogs/details', p.id]">
+                        <img [src]="p.image" alt="{{ p.title }}" class="card-img card-img--lg">
+                        <div class="card-body">
+                            <span class="badge badge-primary">{{ p.category }}</span>
+                            <h3 class="card-title">{{ p.title }}</h3>
+                            <p class="card-meta hp-course-card__level">
+                                <i class="pi pi-clock" style="font-size:.75rem"></i>
+                                {{ p.readTime }} دقائق &nbsp;&middot;&nbsp; {{ p.date }}
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                            <div class="card-author">
+                                <img [src]="p.authorAvatar" alt="{{ p.author }}" class="card-avatar">
+                                <span class="card-author__name">{{ p.author }}</span>
+                            </div>
+                            <a class="home-section__show-all" [routerLink]="['/blogs/details', p.id]">عرض التفاصيل</a>
+                        </div>
+                    </article>
+                </ng-template>
+            </p-carousel>
+        </div>
+    </section>
+
+    <!-- ══ All Articles ═════════════════════════════════════════════════ -->
+    <section class="home-articles">
+        <div class="container">
+            <div class="section">
+                <div class="section__center">
+                    <div class="section__title">جميع المقالات</div>
+                    <div class="section__description">
+                        مكتبة شاملة من المقالات التقنية والمهنية بأقلام خبراء متخصصين لمساعدتك على النمو المهني.
+                    </div>
+                </div>
+            </div>
+            <p-carousel
+                [value]="allPosts"
+                [numVisible]="3"
+                [numScroll]="1"
+                [circular]="true"
+                [responsiveOptions]="responsiveOptions">
+                <ng-template let-p pTemplate="item">
+                    <article class="card card--lg hp-course-card" style="margin: 0 .5rem"
+                        [routerLink]="['/blogs/details', p.id]">
+                        <img [src]="p.image" alt="{{ p.title }}" class="card-img card-img--lg">
+                        <div class="card-body">
+                            <span class="badge badge-primary">{{ p.category }}</span>
+                            <h4 class="card-title">{{ p.title }}</h4>
+                            <p class="card-meta hp-course-card__level">
+                                <i class="pi pi-clock" style="font-size:.75rem"></i>
+                                {{ p.readTime }} دقائق &nbsp;&middot;&nbsp; {{ p.date }}
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                            <div class="card-author">
+                                <img [src]="p.authorAvatar" alt="{{ p.author }}" class="card-avatar">
+                                <span class="card-author__name">{{ p.author }}</span>
+                            </div>
+                            <a class="home-section__show-all" [routerLink]="['/blogs/details', p.id]">عرض التفاصيل</a>
+                        </div>
+                    </article>
+                </ng-template>
+            </p-carousel>
+        </div>
+    </section>
+
+</main>
