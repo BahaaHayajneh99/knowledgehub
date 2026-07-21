@@ -55,13 +55,24 @@
 
           <form class="sl-form__fields" (ngSubmit)="login()" novalidate>
 
+            @if (loginError) {
+              <div class="sl-alert sl-alert--error">
+                <i class="pi pi-exclamation-circle"></i> {{ loginError }}
+              </div>
+            }
+
             <div class="sl-field">
               <label class="sl-field__label">البريد الإلكتروني</label>
-              <div class="sl-field__wrap">
+              <div class="sl-field__wrap" [class.sl-field__wrap--error]="loginSubmitted && !loginEmailValid">
                 <i class="pi pi-envelope sl-field__icon"></i>
                 <input class="sl-field__input" type="email" placeholder="example@email.com"
                   name="loginEmail" [(ngModel)]="loginForm.email" required />
               </div>
+              @if (loginSubmitted && !loginForm.email) {
+                <span class="sl-field__error">البريد الإلكتروني مطلوب</span>
+              } @else if (loginSubmitted && !loginEmailValid) {
+                <span class="sl-field__error">صيغة البريد الإلكتروني غير صحيحة</span>
+              }
             </div>
 
             <div class="sl-field">
@@ -69,11 +80,19 @@
                 <label class="sl-field__label">كلمة المرور</label>
                 <a class="sl-field__forgot" href="#">نسيت كلمة المرور؟</a>
               </div>
-              <div class="sl-field__wrap">
+              <div class="sl-field__wrap" [class.sl-field__wrap--error]="loginSubmitted && !loginPasswordValid">
                 <i class="pi pi-lock sl-field__icon"></i>
-                <input class="sl-field__input" type="password" placeholder="••••••••"
+                <input class="sl-field__input" [type]="showLoginPassword ? 'text' : 'password'" placeholder="••••••••"
                   name="loginPassword" [(ngModel)]="loginForm.password" required />
+                <button type="button" class="sl-field__toggle" (click)="showLoginPassword = !showLoginPassword" tabindex="-1">
+                  <i class="pi" [class.pi-eye]="!showLoginPassword" [class.pi-eye-slash]="showLoginPassword"></i>
+                </button>
               </div>
+              @if (loginSubmitted && !loginForm.password) {
+                <span class="sl-field__error">كلمة المرور مطلوبة</span>
+              } @else if (loginSubmitted && !loginPasswordValid) {
+                <span class="sl-field__error">كلمة المرور يجب أن تكون 6 أحرف على الأقل</span>
+              }
             </div>
 
             <label class="sl-check">
@@ -116,46 +135,83 @@
 
           <form class="sl-form__fields" (ngSubmit)="signUp()" novalidate>
 
+            @if (signupError) {
+              <div class="sl-alert sl-alert--error">
+                <i class="pi pi-exclamation-circle"></i> {{ signupError }}
+              </div>
+            }
+
             <div class="sl-field">
               <label class="sl-field__label">الاسم الكامل</label>
-              <div class="sl-field__wrap">
+              <div class="sl-field__wrap" [class.sl-field__wrap--error]="signupSubmitted && !signupNameValid">
                 <i class="pi pi-user sl-field__icon"></i>
                 <input class="sl-field__input" type="text" placeholder="أحمد محمد"
                   name="signupName" [(ngModel)]="signupForm.fullName" required />
               </div>
+              @if (signupSubmitted && !signupForm.fullName.trim()) {
+                <span class="sl-field__error">الاسم الكامل مطلوب</span>
+              } @else if (signupSubmitted && !signupNameValid) {
+                <span class="sl-field__error">الاسم يجب أن يكون 3 أحرف على الأقل</span>
+              }
             </div>
 
             <div class="sl-field">
               <label class="sl-field__label">البريد الإلكتروني</label>
-              <div class="sl-field__wrap">
+              <div class="sl-field__wrap" [class.sl-field__wrap--error]="signupSubmitted && !signupEmailValid">
                 <i class="pi pi-envelope sl-field__icon"></i>
                 <input class="sl-field__input" type="email" placeholder="example@email.com"
                   name="signupEmail" [(ngModel)]="signupForm.email" required />
               </div>
+              @if (signupSubmitted && !signupForm.email) {
+                <span class="sl-field__error">البريد الإلكتروني مطلوب</span>
+              } @else if (signupSubmitted && !signupEmailValid) {
+                <span class="sl-field__error">صيغة البريد الإلكتروني غير صحيحة</span>
+              }
             </div>
 
             <div class="sl-field">
               <label class="sl-field__label">كلمة المرور</label>
-              <div class="sl-field__wrap">
+              <div class="sl-field__wrap" [class.sl-field__wrap--error]="signupSubmitted && !signupPasswordValid">
                 <i class="pi pi-lock sl-field__icon"></i>
-                <input class="sl-field__input" type="password" placeholder="8 أحرف على الأقل"
+                <input class="sl-field__input" [type]="showSignupPassword ? 'text' : 'password'" placeholder="8 أحرف على الأقل"
                   name="signupPassword" [(ngModel)]="signupForm.password" required />
+                <button type="button" class="sl-field__toggle" (click)="showSignupPassword = !showSignupPassword" tabindex="-1">
+                  <i class="pi" [class.pi-eye]="!showSignupPassword" [class.pi-eye-slash]="showSignupPassword"></i>
+                </button>
               </div>
+              @if (signupSubmitted && !signupForm.password) {
+                <span class="sl-field__error">كلمة المرور مطلوبة</span>
+              } @else if (signupSubmitted && !signupPasswordValid) {
+                <span class="sl-field__error">كلمة المرور يجب أن تكون 8 أحرف على الأقل</span>
+              }
             </div>
 
             <div class="sl-field">
               <label class="sl-field__label">تأكيد كلمة المرور</label>
-              <div class="sl-field__wrap">
+              <div class="sl-field__wrap" [class.sl-field__wrap--error]="signupSubmitted && !signupConfirmValid">
                 <i class="pi pi-lock sl-field__icon"></i>
-                <input class="sl-field__input" type="password" placeholder="أعد كتابة كلمة المرور"
+                <input class="sl-field__input" [type]="showSignupConfirm ? 'text' : 'password'" placeholder="أعد كتابة كلمة المرور"
                   name="signupConfirm" [(ngModel)]="signupForm.confirmPassword" required />
+                <button type="button" class="sl-field__toggle" (click)="showSignupConfirm = !showSignupConfirm" tabindex="-1">
+                  <i class="pi" [class.pi-eye]="!showSignupConfirm" [class.pi-eye-slash]="showSignupConfirm"></i>
+                </button>
               </div>
+              @if (signupSubmitted && !signupForm.confirmPassword) {
+                <span class="sl-field__error">تأكيد كلمة المرور مطلوب</span>
+              } @else if (signupSubmitted && !signupConfirmValid) {
+                <span class="sl-field__error">كلمتا المرور غير متطابقتين</span>
+              }
             </div>
 
-            <label class="sl-check">
-              <input type="checkbox" name="signupTerms" [(ngModel)]="signupForm.terms" required />
-              أوافق على <a class="sl-check__link" href="#">شروط الخدمة</a> و <a class="sl-check__link" href="#">سياسة الخصوصية</a>
-            </label>
+            <div>
+              <label class="sl-check" [class.sl-check--error]="signupSubmitted && !signupTermsValid">
+                <input type="checkbox" name="signupTerms" [(ngModel)]="signupForm.terms" required />
+                أوافق على <a class="sl-check__link" href="#">شروط الخدمة</a> و <a class="sl-check__link" href="#">سياسة الخصوصية</a>
+              </label>
+              @if (signupSubmitted && !signupTermsValid) {
+                <span class="sl-field__error">يجب الموافقة على الشروط والأحكام</span>
+              }
+            </div>
 
             <button class="btn btn-primary w-100" type="submit">إنشاء الحساب</button>
 

@@ -1,0 +1,125 @@
+// ── User avatar area ──────────────────────────────────────────────
+.header__actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-inline-start: auto;
+}
+
+.header__user {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 40px;
+  border: 1.5px solid #e2e8f0;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  user-select: none;
+
+  &:hover {
+    border-color: #4DD9CF;
+    box-shadow: 0 0 0 3px rgba(77, 217, 207, 0.12);
+  }
+}
+
+.header__avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #4DD9CF, #2b9e96);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  letter-spacing: 0.5px;
+}
+
+.header__user-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.header__chevron {
+  font-size: 0.65rem;
+  color: #64748b;
+  transition: transform 0.2s;
+
+  &--open {
+    transform: rotate(180deg);
+  }
+}
+
+// ── Dropdown ──────────────────────────────────────────────────────
+.header__dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  inset-inline-end: 0;
+  min-width: 180px;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  overflow: hidden;
+  animation: dropdownIn 0.15s ease;
+}
+
+@keyframes dropdownIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.header__dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 11px 16px;
+  font-size: 0.875rem;
+  color: #334155;
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s;
+
+  &:hover {
+    background: #f8fafc;
+  }
+
+  &--danger {
+    color: #ef4444;
+
+    &:hover {
+      background: #fef2f2;
+    }
+  }
+}
+
+.header__dropdown-divider {
+  height: 1px;
+  background: #f1f5f9;
+}
+
+// ── Login button (unauthenticated) ────────────────────────────────
+.header__login-btn {
+  padding: 8px 20px;
+  border-radius: 40px;
+  border: 1.5px solid #4DD9CF;
+  color: #2b9e96;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+
+  &:hover {
+    background: #4DD9CF;
+    color: #fff;
+  }
+}

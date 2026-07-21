@@ -1,0 +1,149 @@
+@if (specialty) {
+<div class="sp-page">
+
+  <!-- ══ Hero ══════════════════════════════════════════════════════════ -->
+  <section class="sp-hero" [ngClass]="specialty.colorClass">
+    <div class="container">
+
+      <!-- Breadcrumb -->
+      <nav class="sp-breadcrumb" aria-label="breadcrumb">
+        <a routerLink="/">الرئيسية</a>
+        <i class="pi pi-angle-left"></i>
+        <a routerLink="/courses">الدورات</a>
+        <i class="pi pi-angle-left"></i>
+        <span>{{ specialty.title }}</span>
+      </nav>
+
+      <div class="sp-hero__content">
+        <div class="sp-hero__icon-wrap">
+          <i class="pi {{ specialty.icon }}"></i>
+        </div>
+        <h1 class="sp-hero__title">{{ specialty.title }}</h1>
+        <p class="sp-hero__subtitle">{{ specialty.subtitle }}</p>
+
+        <div class="sp-hero__stats">
+          <div class="sp-hero__stat">
+            <span class="sp-hero__stat-num">{{ specialty.totalCount }}+</span>
+            <span class="sp-hero__stat-label">دورة متاحة</span>
+          </div>
+          <div class="sp-hero__stat-div"></div>
+          <div class="sp-hero__stat">
+            <span class="sp-hero__stat-num">+18K</span>
+            <span class="sp-hero__stat-label">طالب مسجّل</span>
+          </div>
+          <div class="sp-hero__stat-div"></div>
+          <div class="sp-hero__stat">
+            <span class="sp-hero__stat-num">4.7</span>
+            <span class="sp-hero__stat-label">متوسط التقييم</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ Description ════════════════════════════════════════════════ -->
+  <section class="sp-about">
+    <div class="container">
+      <p class="sp-about__text">{{ specialty.description }}</p>
+    </div>
+  </section>
+
+  <!-- ══ Courses ════════════════════════════════════════════════════ -->
+  <section class="sp-courses">
+    <div class="container">
+
+      <!-- toolbar -->
+      <div class="sp-toolbar">
+        <span class="sp-toolbar__count">
+          <i class="pi pi-book"></i>
+          {{ courses.length }} دورة متاحة
+        </span>
+        <a class="btn btn-outline sp-toolbar__all-btn" routerLink="/courses">
+          <i class="pi pi-th-large"></i>
+          كل الدورات
+        </a>
+      </div>
+
+      <!-- grid -->
+      @if (pagedCourses.length > 0) {
+        <div class="sp-grid">
+          @for (c of pagedCourses; track c.id) {
+            <app-shared-card
+              [image]="c.image"
+              [title]="c.title"
+              [category]="c.category"
+              [detailRoute]="['/courses/details', c.id]"
+              [author]="c.author"
+              [authorAvatar]="c.personAvatar"
+              [rate]="c.rate"
+              [lessons]="c.numberOfLessons"
+              [price]="c.price">
+            </app-shared-card>
+          }
+        </div>
+      }
+
+      <!-- pagination -->
+      @if (totalPages > 1) {
+        <div class="sp-pagination">
+          <button class="sp-pagination__btn"
+                  [disabled]="currentPage === 1"
+                  (click)="setPage(currentPage - 1)">
+            <i class="pi pi-angle-right"></i>
+          </button>
+
+          @for (page of pages; track page) {
+            <button class="sp-pagination__btn"
+                    [class.sp-pagination__btn--active]="currentPage === page"
+                    (click)="setPage(page)">
+              {{ page }}
+            </button>
+          }
+
+          <button class="sp-pagination__btn"
+                  [disabled]="currentPage === totalPages"
+                  (click)="setPage(currentPage + 1)">
+            <i class="pi pi-angle-left"></i>
+          </button>
+        </div>
+      }
+
+    </div>
+  </section>
+
+  <!-- ══ Other specialties ══════════════════════════════════════════ -->
+  <section class="sp-others">
+    <div class="container">
+      <div class="section">
+        <div class="section__center">
+          <div class="section__title">استكشف تخصصات أخرى</div>
+        </div>
+      </div>
+      <div class="sp-others__grid">
+        @for (s of svc.specialties; track s.slug) {
+          @if (s.slug !== specialty.slug) {
+            <a class="sp-other-card" [routerLink]="['/courses', s.slug]" [ngClass]="s.colorClass">
+              <i class="pi {{ s.icon }} sp-other-card__icon"></i>
+              <span class="sp-other-card__title">{{ s.title }}</span>
+              <span class="sp-other-card__count">{{ s.totalCount }}+ دورة</span>
+            </a>
+          }
+        }
+      </div>
+    </div>
+  </section>
+
+</div>
+} @else {
+<div class="container" style="padding:5rem 0;text-align:center">
+  <i class="pi pi-exclamation-triangle" style="font-size:3.5rem;color:#f7971e;display:block;margin-bottom:1rem"></i>
+  <h2>التخصص غير موجود</h2>
+  <p style="color:#666;margin:.75rem 0 1.5rem">عذراً، لم يتم العثور على هذا التخصص.</p>
+  <a class="btn btn-primary" routerLink="/courses"
+     style="display:inline-flex;align-items:center;gap:.4rem">
+    <i class="pi pi-arrow-right"></i>
+    عرض جميع الدورات
+  </a>
+</div>
+}

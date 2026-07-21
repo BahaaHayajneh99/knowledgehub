@@ -4,3 +4,27 @@
 // @import "primeng/resources/primeng.css";
 
 @import "primeicons/primeicons.css";
+
+// ── Certificate print ─────────────────────────────────────────────
+// The print() method clones #kh-cert directly onto <body> as #kh-cert-print,
+// then adds .kh-printing to <body>. This avoids position:fixed repetition.
+@media print {
+  @page { size: A4 landscape; margin: 0; }
+
+  // Hide every direct child of body EXCEPT the cloned cert
+  body.kh-printing > *:not(#kh-cert-print) { display: none !important; }
+
+  // The cloned cert fills exactly one A4 landscape page
+  body.kh-printing > #kh-cert-print {
+    display: block !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 297mm !important;
+    height: 210mm !important;
+    aspect-ratio: unset !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    overflow: hidden !important;
+  }
+}

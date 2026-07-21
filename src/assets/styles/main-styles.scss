@@ -1084,6 +1084,7 @@ $_footer-divider: rgba(255, 255, 255, 0.12);
         gap: $space-sm + 2;
         text-decoration: none;
         flex-shrink: 0;
+        margin-left: 12px;
     }
 
     &__logo-icon {
@@ -1102,6 +1103,12 @@ $_footer-divider: rgba(255, 255, 255, 0.12);
         display: flex;
         align-items: center;
         gap: 36px;
+    }
+
+    nav {
+        display: flex;
+        align-items: center;
+        gap: 24px;
     }
 
     &__nav-link {
@@ -2990,6 +2997,12 @@ $_footer-divider: rgba(255, 255, 255, 0.12);
     background-color: $bg-light;
 }
 
+.co-courses {
+    &__grid {
+        @include grid(3, $space-lg);
+    }
+}
+
 // ── Welcome banner ────────────────────────────────────────────────────────
 .co-welcome {
     background: linear-gradient(135deg, rgba($brand-primary, 0.1) 0%, rgba($brand-primary, 0.04) 100%);
@@ -3996,7 +4009,7 @@ $_footer-divider: rgba(255, 255, 255, 0.12);
 
     &__progress {
         fill: none;
-        stroke: #43e97b;
+        stroke: $brand-primary;
         stroke-width: 6;
         stroke-linecap: round;
         transition: stroke-dashoffset $transition-slow;
@@ -4112,9 +4125,51 @@ $_footer-divider: rgba(255, 255, 255, 0.12);
         color: $text-primary;
     }
 
+    &__status {
+        font-size: $font-size-md;
+        font-weight: $font-weight-semibold;
+        color: $text-secondary;
+    }
+
     &__desc {
         font-size: $font-size-md;
         color: $text-muted;
+    }
+
+    // State variants
+    &--passed .qd-finished__icon { background: linear-gradient(135deg, #4DD9CF, #0e7490); }
+    &--failed .qd-finished__icon { background: linear-gradient(135deg, #f5576c, #c0392b); }
+
+    // Certificate action row
+    &__cert-row {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    &__cert-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 11px 22px;
+        border-radius: 40px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        cursor: pointer;
+        border: 1.5px solid #4DD9CF;
+        background: transparent;
+        color: #0e7490;
+        transition: background 0.2s, color 0.2s;
+
+        &:hover { background: #4DD9CF; color: #fff; }
+
+        &--primary {
+            background: linear-gradient(135deg, #4DD9CF, #0e7490);
+            border-color: transparent;
+            color: #fff;
+            &:hover { opacity: 0.9; color: #fff; }
+        }
     }
 }
 
@@ -4654,9 +4709,17 @@ $_footer-divider: rgba(255, 255, 255, 0.12);
             transform: translateY(-2px);
         }
 
-        &--fb { background: #1877f2; }
-        &--tw { background: #1da1f2; }
-        &--li { background: #0a66c2; }
+        &--fb {
+            background: #1877f2;
+        }
+
+        &--tw {
+            background: #1da1f2;
+        }
+
+        &--li {
+            background: #0a66c2;
+        }
     }
 }
 
@@ -4902,6 +4965,7 @@ $_footer-divider: rgba(255, 255, 255, 0.12);
 .pg-not-found {
 
     text-align: center;
+
     &__title {
         font-size: 2rem;
         font-weight: $font-weight-bold;
@@ -5051,7 +5115,7 @@ $_footer-divider: rgba(255, 255, 255, 0.12);
         gap: $space-sm;
         padding: $space-md 0;
 
-        & + & {
+        &+& {
             border-inline-start: 1px solid rgba(255, 255, 255, 0.1);
         }
     }
@@ -5295,6 +5359,7 @@ $_footer-divider: rgba(255, 255, 255, 0.12);
 
 // ── AB Responsive ─────────────────────────────────────────────────────────
 @media (max-width: 1024px) {
+
     .ab-values__grid,
     .ab-team__grid {
         grid-template-columns: repeat(2, 1fr);
@@ -5325,6 +5390,7 @@ $_footer-divider: rgba(255, 255, 255, 0.12);
 }
 
 @media (max-width: 640px) {
+
     .ab-values__grid,
     .ab-team__grid {
         grid-template-columns: 1fr;
@@ -5333,7 +5399,7 @@ $_footer-divider: rgba(255, 255, 255, 0.12);
     .ab-stats__grid {
         grid-template-columns: repeat(2, 1fr);
 
-        .ab-stats__item + .ab-stats__item {
+        .ab-stats__item+.ab-stats__item {
             border-inline-start: none;
         }
     }

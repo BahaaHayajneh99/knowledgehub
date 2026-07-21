@@ -3,10 +3,11 @@ import { NgFor, NgIf } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import {CarouselModule } from 'primeng/carousel';
 import { BlogPost, BlogsService } from '../components/blogs/blogs.service';
+import { SharedCardComponent } from '../components/shared/card/shared-card.component';
 
 @Component({
   selector: 'app-home',
-  imports: [NgFor, NgIf, RouterLink, CarouselModule],
+  imports: [NgFor, NgIf, RouterLink, CarouselModule, SharedCardComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { CoursesService, Course } from '../courses.service';
+import { SharedCardComponent } from '../../shared/card/shared-card.component';
 
 @Component({
   selector: 'app-courses-details',
-  imports: [RouterModule],
+  imports: [RouterModule, SharedCardComponent],
   templateUrl: './courses-details.component.html',
   styleUrl: './courses-details.component.scss'
 })

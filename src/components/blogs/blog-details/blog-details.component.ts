@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { BlogsService, BlogPost } from '../blogs.service';
 import { FormsModule } from '@angular/forms';
+import { SharedCardComponent } from '../../shared/card/shared-card.component';
 
 export interface Comment {
   id: number;
@@ -14,7 +15,7 @@ export interface Comment {
 
 @Component({
   selector: 'app-blog-details',
-  imports: [RouterModule, FormsModule],
+  imports: [RouterModule, FormsModule, SharedCardComponent],
   templateUrl: './blog-details.component.html',
   styleUrl: './blog-details.component.scss'
 })

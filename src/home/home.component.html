@@ -275,26 +275,18 @@
                     [circular]="true"
                     [responsiveOptions]="responsiveOptions">
                     <ng-template let-course pTemplate="item">
-                        <article class="card card--lg hp-course-card" style="margin: 0 .5rem">
-                            <img src="{{ course.image }}" alt="{{ course.title }}"
-                                class="card-img card-img--lg">
-                            <div class="card-body">
-                                <span class="badge badge-primary">{{ course.category }}</span>
-                                <h3 class="card-title">{{ course.title }}</h3>
-                                <p class="card-meta hp-course-card__level">
-                                    <i class="pi pi-star-fill cd-star--full" style="font-size:.75rem"></i>
-                                    {{ course.rate }} &nbsp;·&nbsp; {{ course.numberOfLessons }} درساً
-                                </p>
-                            </div>
-                            <div class="card-footer">
-                                <div class="card-author">
-                                    <img src="{{ course.personAvatar }}" alt="Instructor avatar" class="card-avatar">
-                                    <span class="card-author__name">{{ course.author }}</span>
-                                </div>
-                                <span class="hp-course-card__price">{{ course.price }} DJ</span>
-                                <a class="home-section__show-all" [routerLink]="['/courses/details', course.id]">عرض التفاصيل</a>
-                            </div>
-                        </article>
+                        <app-shared-card
+                            style="margin: 0 .5rem"
+                            [image]="course.image"
+                            [title]="course.title"
+                            [category]="course.category"
+                            [detailRoute]="['/courses/details', course.id]"
+                            [author]="course.author"
+                            [authorAvatar]="course.personAvatar"
+                            [rate]="course.rate"
+                            [lessons]="course.numberOfLessons"
+                            [price]="course.price">
+                        </app-shared-card>
                     </ng-template>
                 </p-carousel>
             </div>
@@ -378,21 +370,16 @@
                     [circular]="true"
                     [responsiveOptions]="responsiveOptions">
                     <ng-template let-blog pTemplate="item">
-                        <article class="card card--lg hp-course-card"  style="margin: 0 .5rem">
-                            <img [src]="blog.image" alt="{{ blog.title }}" class="card-img card-img--lg">
-                            <div class="card-body">
-                                <span class="badge badge-primary">{{ blog.category }}</span>
-                                <h3 class="card-title">{{ blog.title }}</h3>
-                            </div>
-                            <div class="card-footer">
-                                <div class="card-author">
-                                    <img [src]="blog.authorAvatar" alt="{{ blog.author }}" class="card-avatar">
-                                    <span class="card-author__name">{{ blog.author }}</span>
-                                </div>
-                                <span class="card-meta">{{ blog.date }}</span>
-                                <a class="home-section__show-all" [routerLink]="['/blogs/details', blog.id]">عرض التفاصيل</a>
-                            </div>
-                        </article>
+                        <app-shared-card
+                            style="margin: 0 .5rem"
+                            [image]="blog.image"
+                            [title]="blog.title"
+                            [category]="blog.category"
+                            [detailRoute]="['/blogs/details', blog.id]"
+                            [author]="blog.author"
+                            [authorAvatar]="blog.authorAvatar"
+                            [date]="blog.date">
+                        </app-shared-card>
                     </ng-template>
                 </p-carousel>
             </div>
@@ -415,32 +402,32 @@
                 </div>
             </div>
             <div class="hp-explore__grid">
-                <a class="hp-cat-strip hp-cat-strip--1" href="/courses/tech">
+                <a class="hp-cat-strip hp-cat-strip--1" [routerLink]="'/courses/tech'">
                     <i class="pi pi-desktop"></i>
                     <span>تطوير البرمجيات</span>
                     <small>١٤٢ دورة</small>
                 </a>
-                <a class="hp-cat-strip hp-cat-strip--2" href="/courses/design">
+                <a class="hp-cat-strip hp-cat-strip--2" [routerLink]="'/courses/design'">
                     <i class="pi pi-palette"></i>
                     <span>التصميم الإبداعي</span>
                     <small>٨٧ دورة</small>
                 </a>
-                <a class="hp-cat-strip hp-cat-strip--3" href="/courses/business">
+                <a class="hp-cat-strip hp-cat-strip--3" [routerLink]="'/courses/business'">
                     <i class="pi pi-briefcase"></i>
                     <span>الأعمال والإدارة</span>
                     <small>٦٤ دورة</small>
                 </a>
-                <a class="hp-cat-strip hp-cat-strip--4" href="/courses/data">
+                <a class="hp-cat-strip hp-cat-strip--4" [routerLink]="'/courses/data'">
                     <i class="pi pi-chart-bar"></i>
                     <span>علم البيانات</span>
                     <small>٥٣ دورة</small>
                 </a>
-                <a class="hp-cat-strip hp-cat-strip--5" href="/courses/marketing">
+                <a class="hp-cat-strip hp-cat-strip--5" [routerLink]="'/courses/marketing'">
                     <i class="pi pi-megaphone"></i>
                     <span>التسويق الرقمي</span>
                     <small>٤٨ دورة</small>
                 </a>
-                <a class="hp-cat-strip hp-cat-strip--6" href="/courses/lang">
+                <a class="hp-cat-strip hp-cat-strip--6" [routerLink]="'/courses/lang'">
                     <i class="pi pi-language"></i>
                     <span>اللغات</span>
                     <small>٣٩ دورة</small>

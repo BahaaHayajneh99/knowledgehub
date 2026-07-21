@@ -195,22 +195,15 @@
             </div>
             <div class="bd-related__grid">
                 @for (p of related; track p.id) {
-                <article class="card card--lg" [routerLink]="['/blogs', p.id]">
-                    <img [src]="p.image" alt="{{ p.title }}" class="card-img card-img--lg">
-                    <div class="card-body">
-                        <span class="badge badge-primary">{{ p.category }}</span>
-                        <h3 class="card-title">{{ p.title }}</h3>
-                    </div>
-                    <div class="card-footer">
-                        <div class="card-author">
-                            <img [src]="p.authorAvatar" alt="{{ p.author }}" class="card-avatar">
-                            <span class="card-author__name">{{ p.author }}</span>
-                        </div>
-                        <span class="card-meta">{{ p.date }}</span>
-                        <a class="home-section__show-all" [routerLink]="['/blogs/details', p.id]">عرض التفاصيل</a>
-
-                    </div>
-                </article>
+                <app-shared-card
+                    [image]="p.image"
+                    [title]="p.title"
+                    [category]="p.category"
+                    [detailRoute]="['/blogs/details', p.id]"
+                    [author]="p.author"
+                    [authorAvatar]="p.authorAvatar"
+                    [date]="p.date">
+                </app-shared-card>
                 }
             </div>
             <div class="bd-related__footer">

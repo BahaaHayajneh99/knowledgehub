@@ -1,0 +1,49 @@
+// ── Field error state ─────────────────────────────────────────────
+.sl-field__wrap--error {
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.12);
+}
+
+.sl-field__error {
+  display: block;
+  color: #ef4444;
+  font-size: 0.75rem;
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+// ── Alert banner ───────────────────────────────────────────────────
+.sl-alert {
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+
+  &--error {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #dc2626;
+  }
+}
+
+// ── Password toggle button ─────────────────────────────────────────
+.sl-field__toggle {
+  background: none;
+  border: none;
+  padding: 0 10px;
+  cursor: pointer;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  transition: color 0.2s;
+
+  &:hover { color: #475569; }
+}
+
+// ── Terms checkbox error ───────────────────────────────────────────
+.sl-check--error {
+  color: #ef4444;
+}

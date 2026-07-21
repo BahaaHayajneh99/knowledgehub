@@ -1,0 +1,408 @@
+// ── Overlay ───────────────────────────────────────────────────────
+.cert-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 15, 30, 0.82);
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 24px 16px;
+  overflow-y: auto;
+  backdrop-filter: blur(4px);
+  animation: overlayIn 0.2s ease;
+}
+
+@keyframes overlayIn {
+  from { opacity: 0 }
+  to   { opacity: 1 }
+}
+
+.cert-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  max-width: 960px;
+}
+
+// ── Toolbar ───────────────────────────────────────────────────────
+.cert-toolbar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 16px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 12px;
+  backdrop-filter: blur(8px);
+
+  &__info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #e2e8f0;
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 10px;
+  }
+
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 18px;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid rgba(255,255,255,0.18);
+    background: rgba(255,255,255,0.08);
+    color: #e2e8f0;
+    transition: background 0.2s;
+
+    &:hover { background: rgba(255,255,255,0.16); }
+
+    &--primary {
+      background: linear-gradient(135deg, #4DD9CF, #0e7490);
+      border-color: transparent;
+      color: #fff;
+
+      &:hover { opacity: 0.9; }
+    }
+  }
+}
+
+// ── Certificate page (A4 landscape) ──────────────────────────────
+.cert-page {
+  width: 100%;
+  aspect-ratio: 297 / 210;
+  background: #fffdf5;
+  border-radius: 4px;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+  position: relative;
+  overflow: hidden;
+  animation: certIn 0.25s ease;
+}
+
+@keyframes certIn {
+  from { opacity: 0; transform: scale(0.97) }
+  to   { opacity: 1; transform: scale(1) }
+}
+
+// ── Frame ─────────────────────────────────────────────────────────
+.cert-frame {
+  position: absolute;
+  inset: 12px;
+  border: 2px solid #b8860b;
+  display: flex;
+  flex-direction: column;
+  padding: 3% 5%;
+  box-sizing: border-box;
+  background: linear-gradient(160deg, #fffdf5 0%, #fff9e6 60%, #fffcf0 100%);
+
+  // Subtle inner shadow
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 5px;
+    border: 1px solid rgba(184, 134, 11, 0.3);
+    pointer-events: none;
+  }
+}
+
+// ── Outer page border pattern ──────────────────────────────────────
+.cert-page::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border: 4px double #c9a84c;
+  border-radius: 2px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+// ── Corner ornaments ───────────────────────────────────────────────
+.cert-corner {
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  z-index: 2;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    background: #b8860b;
+  }
+
+  &::before { width: 100%; height: 3px; top: 0; }
+  &::after  { width: 3px; height: 100%; }
+
+  &--tl { top: 12px; inset-inline-start: 12px; }
+  &--tr { top: 12px; inset-inline-end: 12px; &::after { inset-inline-end: 0; inset-inline-start: auto; } }
+  &--bl { bottom: 12px; inset-inline-start: 12px; &::before { top: auto; bottom: 0; } }
+  &--br { bottom: 12px; inset-inline-end: 12px; &::before { top: auto; bottom: 0; } &::after { inset-inline-end: 0; inset-inline-start: auto; } }
+}
+
+// ── Watermark ──────────────────────────────────────────────────────
+.cert-watermark {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 0;
+
+  i {
+    font-size: 30vw;
+    color: rgba(77, 217, 207, 0.04);
+  }
+}
+
+// ── Header ─────────────────────────────────────────────────────────
+.cert-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 2;
+  margin-bottom: 2%;
+}
+
+.cert-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  &__icon { width: 28px; height: 28px; }
+  &__text { font-size: clamp(0.85rem, 1.8vw, 1.1rem); font-weight: 800; color: #0f172a; letter-spacing: 0.5px; }
+}
+
+.cert-seal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+
+  &__ring {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #4DD9CF, #0e7490);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(77, 217, 207, 0.4);
+  }
+
+  &__icon { font-size: 1.4rem; color: #fff; }
+  &__label { font-size: clamp(0.55rem, 1vw, 0.7rem); font-weight: 700; color: #0e7490; letter-spacing: 1px; text-transform: uppercase; }
+}
+
+// ── Title block ────────────────────────────────────────────────────
+.cert-title-block {
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  margin-bottom: 2%;
+}
+
+.cert-subtitle-ar {
+  font-size: clamp(0.55rem, 1.1vw, 0.75rem);
+  color: #64748b;
+  letter-spacing: 2px;
+  margin-bottom: 4px;
+}
+
+.cert-title-ar {
+  font-size: clamp(1.4rem, 3.5vw, 2.4rem);
+  font-weight: 800;
+  color: #b8860b;
+  letter-spacing: 3px;
+  line-height: 1;
+  margin-bottom: 4px;
+  text-shadow: 0 1px 2px rgba(184,134,11,0.2);
+}
+
+.cert-title-en {
+  font-size: clamp(0.55rem, 1.2vw, 0.8rem);
+  color: #94a3b8;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-style: italic;
+}
+
+// ── Ornament divider ───────────────────────────────────────────────
+.cert-ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 10px;
+
+  &__line {
+    flex: 1;
+    max-width: 120px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #c9a84c, transparent);
+  }
+
+  &__diamond {
+    width: 8px;
+    height: 8px;
+    background: #c9a84c;
+    transform: rotate(45deg);
+    flex-shrink: 0;
+  }
+}
+
+// ── Body ───────────────────────────────────────────────────────────
+.cert-body {
+  flex: 1;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.cert-awarded-label {
+  font-size: clamp(0.6rem, 1.2vw, 0.78rem);
+  color: #64748b;
+  letter-spacing: 1px;
+}
+
+.cert-name-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 4px 0;
+}
+
+.cert-name-deco {
+  font-size: clamp(0.8rem, 1.6vw, 1rem);
+  color: #c9a84c;
+}
+
+.cert-name {
+  font-size: clamp(1.3rem, 3vw, 2rem);
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: 2px;
+  line-height: 1.1;
+  font-style: italic;
+}
+
+.cert-completion-text {
+  font-size: clamp(0.6rem, 1.1vw, 0.75rem);
+  color: #475569;
+  margin-top: 6px;
+}
+
+.cert-course-name {
+  font-size: clamp(0.85rem, 1.9vw, 1.25rem);
+  font-weight: 700;
+  color: #0e7490;
+  margin: 2px 0;
+}
+
+.cert-instructor-text {
+  font-size: clamp(0.55rem, 1vw, 0.7rem);
+  color: #64748b;
+
+  strong { color: #334155; }
+}
+
+// ── Footer ─────────────────────────────────────────────────────────
+.cert-footer {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: flex-end;
+  gap: 16px;
+  position: relative;
+  z-index: 2;
+  margin-top: 2%;
+}
+
+.cert-sig {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+
+  &__line {
+    width: 80%;
+    height: 1px;
+    background: #94a3b8;
+    margin-bottom: 4px;
+  }
+
+  &__name {
+    font-size: clamp(0.55rem, 1.1vw, 0.72rem);
+    font-weight: 700;
+    color: #334155;
+    text-align: center;
+  }
+
+  &__role {
+    font-size: clamp(0.5rem, 0.9vw, 0.62rem);
+    color: #64748b;
+    text-align: center;
+    letter-spacing: 0.5px;
+  }
+}
+
+.cert-emblem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+
+  &__circle {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #b8860b, #d4a017);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 14px rgba(184,134,11,0.35);
+    border: 2px solid rgba(255,255,255,0.6);
+
+    i { font-size: 1.4rem; color: #fff; }
+  }
+
+  &__date {
+    font-size: clamp(0.5rem, 1vw, 0.65rem);
+    color: #475569;
+    font-weight: 600;
+  }
+
+  &__id {
+    font-size: clamp(0.45rem, 0.85vw, 0.58rem);
+    color: #94a3b8;
+    letter-spacing: 0.5px;
+  }
+}
+
+// ── Print styles ──────────────────────────────────────────────────
+// All actual print isolation is handled in styles.scss via body.kh-printing.
+// This block only hides the modal chrome (toolbar, backdrop) so they are
+// invisible even if the browser renders them alongside #kh-cert.
+@media print {
+  .no-print       { display: none !important; }
+  .cert-overlay   { background: none !important; backdrop-filter: none !important; }
+}

@@ -1,0 +1,275 @@
+@use 'sass:list';
+
+// ── Color gradient map ───────────────────────────────────────────────
+$specialty-gradients: (
+  'tech':      (#0d47a1, #1976d2),
+  'design':    (#4a148c, #7b1fa2),
+  'business':  (#bf360c, #e64a19),
+  'data':      (#004d40, #00796b),
+  'marketing': (#880e4f, #c2185b),
+  'lang':      (#01579b, #0288d1),
+);
+
+// ── Page ────────────────────────────────────────────────────────────
+.sp-page {
+  background: #f5f6fa;
+  min-height: 100vh;
+}
+
+// ── Breadcrumb ──────────────────────────────────────────────────────
+.sp-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  font-size: .85rem;
+  color: rgba(255,255,255,.72);
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+
+  a {
+    color: rgba(255,255,255,.72);
+    text-decoration: none;
+    &:hover { color: #fff; }
+  }
+
+  span { color: #fff; font-weight: 600; }
+
+  i {
+    font-size: .65rem;
+    transform: scaleX(-1);
+  }
+}
+
+// ── Hero ────────────────────────────────────────────────────────────
+.sp-hero {
+  color: #fff;
+  padding: 4rem 0 5rem;
+  background: linear-gradient(135deg, #1a2340, #2c3e6a);
+
+  @each $name, $colors in $specialty-gradients {
+    &.sp-color--#{$name} {
+      background: linear-gradient(135deg, list.nth($colors, 1), list.nth($colors, 2));
+    }
+  }
+
+  &__content { max-width: 750px; }
+
+  &__icon-wrap {
+    width: 70px;
+    height: 70px;
+    border-radius: 18px;
+    background: rgba(255,255,255,.18);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+
+    i { font-size: 2.4rem; }
+  }
+
+  &__title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: .5rem;
+    line-height: 1.2;
+  }
+
+  &__subtitle {
+    font-size: 1.05rem;
+    opacity: .87;
+    margin-bottom: 2rem;
+    line-height: 1.7;
+    max-width: 580px;
+  }
+
+  &__stats {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  &__stat {
+    display: flex;
+    flex-direction: column;
+    gap: .15rem;
+  }
+
+  &__stat-num {
+    font-size: 1.7rem;
+    font-weight: 800;
+    color: rgba(255,255,255,.95);
+  }
+
+  &__stat-label {
+    font-size: .8rem;
+    opacity: .75;
+  }
+
+  &__stat-div {
+    width: 1px;
+    height: 36px;
+    background: rgba(255,255,255,.25);
+  }
+}
+
+// ── About ────────────────────────────────────────────────────────────
+.sp-about {
+  background: #fff;
+  padding: 2rem 0;
+  border-bottom: 1px solid #eee;
+
+  &__text {
+    max-width: 860px;
+    font-size: .97rem;
+    color: #555;
+    line-height: 1.9;
+  }
+}
+
+// ── Courses ──────────────────────────────────────────────────────────
+.sp-courses {
+  padding: 2.5rem 0 4rem;
+}
+
+// ── Toolbar ──────────────────────────────────────────────────────────
+.sp-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.75rem;
+  flex-wrap: wrap;
+  gap: .75rem;
+
+  &__count {
+    font-size: .95rem;
+    color: #555;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+
+    i { color: #f7971e; }
+  }
+
+  &__all-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    font-size: .87rem;
+    padding: .45rem 1rem;
+  }
+}
+
+// ── Grid ─────────────────────────────────────────────────────────────
+.sp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.75rem;
+}
+
+// ── Pagination ───────────────────────────────────────────────────────
+.sp-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  margin-top: 3rem;
+  flex-wrap: wrap;
+
+  &__btn {
+    min-width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    border: 1px solid #dde1ea;
+    background: #fff;
+    color: #444;
+    font-size: .9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all .18s;
+    padding: 0 .75rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover:not(:disabled) {
+      border-color: #f7971e;
+      color: #f7971e;
+    }
+
+    &--active {
+      background: #f7971e;
+      border-color: #f7971e;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    &:disabled {
+      opacity: .4;
+      cursor: not-allowed;
+    }
+  }
+}
+
+// ── Other specialties ─────────────────────────────────────────────────
+.sp-others {
+  background: #fff;
+  padding: 3.5rem 0 4.5rem;
+  border-top: 1px solid #eee;
+
+  &__grid {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: .5rem;
+  }
+}
+
+.sp-other-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .5rem;
+  padding: 1.5rem 1.75rem;
+  border-radius: 14px;
+  color: #fff;
+  text-decoration: none;
+  min-width: 140px;
+  transition: transform .2s, box-shadow .2s;
+  background: linear-gradient(135deg, #555, #888);
+
+  @each $name, $colors in $specialty-gradients {
+    &.sp-color--#{$name} {
+      background: linear-gradient(135deg, list.nth($colors, 1), list.nth($colors, 2));
+    }
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,.18);
+    color: #fff;
+  }
+
+  &__icon { font-size: 2rem; }
+
+  &__title {
+    font-size: .9rem;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  &__count {
+    font-size: .78rem;
+    opacity: .8;
+  }
+}
+
+// ── Responsive ───────────────────────────────────────────────────────
+@media (max-width: 768px) {
+  .sp-hero__title { font-size: 1.9rem; }
+  .sp-grid { grid-template-columns: 1fr; }
+  .sp-hero__stat-div { display: none; }
+}

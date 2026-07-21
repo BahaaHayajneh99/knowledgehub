@@ -1,0 +1,114 @@
+<div class="cert-overlay" (click)="closeOnBackdrop($event)">
+  <div class="cert-wrapper">
+
+    <!-- ── Toolbar (hidden on print) ───────────────────────────────── -->
+    <div class="cert-toolbar no-print">
+      <div class="cert-toolbar__info">
+        <i class="pi pi-verified" style="color:#4DD9CF"></i>
+        <span>{{ cert?.title }}</span>
+      </div>
+      <div class="cert-toolbar__actions">
+        <button class="cert-toolbar__btn cert-toolbar__btn--primary" (click)="print()">
+          <i class="pi pi-print"></i> طباعة / حفظ PDF
+        </button>
+        <button class="cert-toolbar__btn" (click)="closed.emit()">
+          <i class="pi pi-times"></i> إغلاق
+        </button>
+      </div>
+    </div>
+
+    <!-- ── Certificate ─────────────────────────────────────────────── -->
+    <div class="cert-page" #certEl id="kh-cert">
+
+      <!-- Outer decorative frame -->
+      <div class="cert-frame">
+
+        <!-- Corner ornaments -->
+        <div class="cert-corner cert-corner--tl"></div>
+        <div class="cert-corner cert-corner--tr"></div>
+        <div class="cert-corner cert-corner--bl"></div>
+        <div class="cert-corner cert-corner--br"></div>
+
+        <!-- Background watermark seal -->
+        <div class="cert-watermark">
+          <i class="pi pi-verified"></i>
+        </div>
+
+        <!-- ── Header row ───────────────────────────────────────────── -->
+        <header class="cert-header">
+          <div class="cert-logo">
+            <svg class="cert-logo__icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="5" y="20" width="21" height="21" rx="2" transform="rotate(-45 5 20)" stroke="#4DD9CF" stroke-width="2.5" fill="none"/>
+            </svg>
+            <span class="cert-logo__text">KnowledgeHub</span>
+          </div>
+
+          <div class="cert-seal">
+            <div class="cert-seal__ring">
+              <i class="pi pi-verified cert-seal__icon"></i>
+            </div>
+            <span class="cert-seal__label">معتمدة</span>
+          </div>
+        </header>
+
+        <!-- ── Title block ──────────────────────────────────────────── -->
+        <div class="cert-title-block">
+          <p class="cert-subtitle-ar">تُقدّم منصة KnowledgeHub</p>
+          <h1 class="cert-title-ar">شَهَادَةُ إِتْمَامٍ</h1>
+          <p class="cert-title-en">Certificate of Completion</p>
+          <div class="cert-ornament">
+            <span class="cert-ornament__line"></span>
+            <span class="cert-ornament__diamond"></span>
+            <span class="cert-ornament__line"></span>
+          </div>
+        </div>
+
+        <!-- ── Body ─────────────────────────────────────────────────── -->
+        <div class="cert-body">
+          <p class="cert-awarded-label">هذه الشهادة تُمنح بكل فخر إلى</p>
+
+          <div class="cert-name-wrap">
+            <span class="cert-name-deco">✦</span>
+            <h2 class="cert-name">{{ cert?.studentName }}</h2>
+            <span class="cert-name-deco">✦</span>
+          </div>
+
+          <p class="cert-completion-text">
+            وذلك لإتمامه بنجاح وتميّز دورة
+          </p>
+          <h3 class="cert-course-name">{{ cert?.title }}</h3>
+          <p class="cert-instructor-text">
+            بإشراف المدرب <strong>{{ cert?.instructor }}</strong>
+          </p>
+        </div>
+
+        <!-- ── Footer ───────────────────────────────────────────────── -->
+        <footer class="cert-footer">
+
+          <div class="cert-sig">
+            <div class="cert-sig__line"></div>
+            <p class="cert-sig__name">{{ cert?.instructor }}</p>
+            <p class="cert-sig__role">المدرّب المعتمد</p>
+          </div>
+
+          <div class="cert-emblem">
+            <div class="cert-emblem__circle">
+              <i class="pi pi-star-fill"></i>
+            </div>
+            <p class="cert-emblem__date">{{ cert?.date }}</p>
+            <p class="cert-emblem__id">{{ cert?.id }}</p>
+          </div>
+
+          <div class="cert-sig">
+            <div class="cert-sig__line"></div>
+            <p class="cert-sig__name">منصة KnowledgeHub</p>
+            <p class="cert-sig__role">المدير التنفيذي</p>
+          </div>
+
+        </footer>
+
+      </div><!-- /cert-frame -->
+    </div><!-- /cert-page -->
+
+  </div><!-- /cert-wrapper -->
+</div><!-- /cert-overlay -->

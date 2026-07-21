@@ -2,6 +2,8 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { QuizzesService } from '../quizzes.service';
 import { NgIf, NgClass } from '@angular/common';
+import { AuthService } from '../../guard/auth/auth.service';
+import { CertificateModalComponent, CertData } from '../../profile/certificate-modal/certificate-modal.component';
 
 export interface QuizOption  { id: number; text: string; }
 export interface QuizQuestion {
@@ -13,20 +15,25 @@ export interface QuizQuestion {
 
 @Component({
   selector: 'app-quizzes-details',
-  imports: [RouterModule, NgIf, NgClass],
+  imports: [RouterModule, NgIf, NgClass, CertificateModalComponent],
   templateUrl: './quizzes-details.component.html',
   styleUrl: './quizzes-details.component.scss'
 })
 export class QuizzesDetailsComponent implements OnInit { 
   private activatedRoute = inject(ActivatedRoute);
   private quizeService = inject(QuizzesService);
+  private authService = inject(AuthService);
+
   quizId:number = 0;
   categoryId:number = 0;
   isFinished = false;
   activeQuestion = 1;
   questions: any[] = []; 
   quiz:any; 
-  remainingTime: number = 0; // in seconds
+  remainingTime: number = 0;
+
+  activeCert: CertData | null = null;
+  certAutoPrint = false;
 ngOnInit(): void {
   this.quizId = +this.activatedRoute.snapshot.params['id'];
   this.categoryId = +(this.activatedRoute.snapshot.queryParams['categoryId'] || 0); 
@@ -65,6 +72,37 @@ private loadQuestions(): void {
 
   get questionNums(): number[] {
     return this.questions.map(q => q.id);
+  }
+
+  get passed(): boolean {
+    return this.correctAnswers >= this.questions.length / 2;
+  }
+
+  get certData(): CertData {
+    const today = new Date();
+    const dateStr = today.toLocaleDateString('ar-SA', { year: 'numeric', month: 'long', day: 'numeric' });
+    return {
+      title: this.quiz?.title ?? 'اختبار',
+      date: dateStr,
+      instructor: 'منصة KnowledgeHub',
+      id: `QUIZ-${this.quizId}-${today.getFullYear()}`,
+      studentName: this.authService.getCurrentUser()?.fullName ?? ''
+    };
+  }
+
+  viewQuizCertificate(): void {
+    this.certAutoPrint = false;
+    this.activeCert = this.certData;
+  }
+
+  downloadQuizCertificate(): void {
+    this.certAutoPrint = true;
+    this.activeCert = this.certData;
+  }
+
+  closeCertModal(): void {
+    this.activeCert = null;
+    this.certAutoPrint = false;
   }
 
   submitQuiz(): void {

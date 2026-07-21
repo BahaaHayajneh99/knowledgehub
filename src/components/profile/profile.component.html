@@ -1,0 +1,422 @@
+<div class="profile">
+
+  <!-- ══ Hero ══════════════════════════════════════════════════════ -->
+  <div class="profile__hero">
+    <div class="profile__cover">
+      <div class="profile__cover-blob profile__cover-blob--1"></div>
+      <div class="profile__cover-blob profile__cover-blob--2"></div>
+    </div>
+
+    <div class="profile__meta-row">
+      <!-- Avatar -->
+      <div class="profile__avatar-wrap">
+        <div class="profile__avatar">{{ initials }}</div>
+        <span class="profile__online-dot"></span>
+      </div>
+
+      <!-- Name / email / badges -->
+      <div class="profile__meta">
+        <h1 class="profile__name">{{ user?.fullName }}</h1>
+        <p class="profile__email"><i class="pi pi-envelope"></i>{{ user?.email }}</p>
+        <p class="profile__bio">
+          {{ user?.bio || 'لا توجد نبذة شخصية بعد — أضفها من قسم الإعدادات.' }}
+        </p>
+        <div class="profile__badges">
+          <span class="profile__badge"><i class="pi pi-calendar"></i>عضو منذ {{ joinYear }}</span>
+          <span class="profile__badge profile__badge--teal"><i class="pi pi-star-fill"></i>1840 نقطة</span>
+          <span class="profile__badge profile__badge--blue"><i class="pi pi-verified"></i>طالب نشط</span>
+          <span class="profile__badge profile__badge--green"><i class="pi pi-check-circle"></i>3 شهادات</span>
+        </div>
+      </div>
+
+      <!-- Edit button -->
+      <button class="profile__edit-btn" (click)="activeTab = 'settings'">
+        <i class="pi pi-pencil"></i> تعديل الملف
+      </button>
+    </div>
+  </div>
+
+  <!-- ══ Stats bar ══════════════════════════════════════════════════ -->
+  <div class="profile__stats-bar">
+    <div class="profile__stats-inner">
+      @for (s of stats; track s.label) {
+        <div class="profile__stat">
+          <span class="profile__stat-icon-wrap" [style.background]="s.color + '22'">
+            <i class="pi {{ s.icon }}" [style.color]="s.color"></i>
+          </span>
+          <div>
+            <span class="profile__stat-value">{{ s.value }}</span>
+            <span class="profile__stat-label">{{ s.label }}</span>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+
+  <!-- ══ Tabs + content ═════════════════════════════════════════════ -->
+  <div class="profile__body">
+
+    <!-- Tab bar -->
+    <div class="profile__tabs">
+      <button class="profile__tab" [class.profile__tab--active]="activeTab === 'overview'" (click)="activeTab = 'overview'">
+        <i class="pi pi-home"></i>نظرة عامة
+      </button>
+      <button class="profile__tab" [class.profile__tab--active]="activeTab === 'courses'" (click)="activeTab = 'courses'">
+        <i class="pi pi-book"></i>دوراتي
+        <span class="profile__tab-chip">{{ courses.length }}</span>
+      </button>
+      <button class="profile__tab" [class.profile__tab--active]="activeTab === 'certificates'" (click)="activeTab = 'certificates'">
+        <i class="pi pi-verified"></i>الشهادات
+        <span class="profile__tab-chip">{{ certificates.length }}</span>
+      </button>
+      <button class="profile__tab" [class.profile__tab--active]="activeTab === 'settings'" (click)="activeTab = 'settings'">
+        <i class="pi pi-cog"></i>الإعدادات
+      </button>
+    </div>
+
+    <!-- ─────────────────── OVERVIEW ─────────────────── -->
+    @if (activeTab === 'overview') {
+      <div class="profile__panel">
+        <div class="overview-grid">
+
+          <!-- About card -->
+          <div class="pcard">
+            <h3 class="pcard__title"><i class="pi pi-user"></i>نبذة عني</h3>
+            <p class="pcard__body-text">
+              {{ user?.bio || 'لم تُضف نبذة شخصية بعد. يمكنك إضافتها من قسم الإعدادات لتعريف الآخرين بنفسك.' }}
+            </p>
+            <hr class="pcard__divider">
+            <ul class="info-list">
+              <li><i class="pi pi-envelope"></i><span>{{ user?.email }}</span></li>
+              <li><i class="pi pi-calendar"></i><span>عضو منذ {{ joinYear }}</span></li>
+              <li><i class="pi pi-map-marker"></i><span>المملكة العربية السعودية</span></li>
+              <li><i class="pi pi-language"></i><span>العربية · الإنجليزية</span></li>
+              <li><i class="pi pi-link"></i><span>knowledgehub.com/u/{{ user?.fullName?.split(' ')[0]?.toLowerCase() }}</span></li>
+            </ul>
+          </div>
+
+          <!-- Skills + learning progress -->
+          <div class="pcard">
+            <h3 class="pcard__title"><i class="pi pi-bolt"></i>المهارات والاهتمامات</h3>
+            <div class="skills-grid">
+              @for (s of skills; track s) {
+                <span class="skill-tag">{{ s }}</span>
+              }
+            </div>
+            <hr class="pcard__divider">
+            <h4 class="pcard__sub-title">تقدم التعلم حسب المجال</h4>
+            <div class="prog-list">
+              @for (p of progressAreas; track p.label) {
+                <div class="prog-row">
+                  <span class="prog-row__label">{{ p.label }}</span>
+                  <div class="prog-row__track">
+                    <div class="prog-row__fill" [style.width]="p.pct + '%'" [style.background]="p.color"></div>
+                  </div>
+                  <span class="prog-row__pct">{{ p.pct }}%</span>
+                </div>
+              }
+            </div>
+          </div>
+
+          <!-- Achievements -->
+          <div class="pcard">
+            <h3 class="pcard__title"><i class="pi pi-trophy"></i>الإنجازات</h3>
+            <div class="achievements-grid">
+              <div class="achievement achievement--earned">
+                <i class="pi pi-star-fill achievement__icon"></i>
+                <span class="achievement__name">أول شهادة</span>
+              </div>
+              <div class="achievement achievement--earned">
+                <i class="pi pi-fire achievement__icon"></i>
+                <span class="achievement__name">7 أيام متواصلة</span>
+              </div>
+              <div class="achievement achievement--earned">
+                <i class="pi pi-bolt achievement__icon"></i>
+                <span class="achievement__name">متعلم سريع</span>
+              </div>
+              <div class="achievement">
+                <i class="pi pi-crown achievement__icon"></i>
+                <span class="achievement__name">5 دورات مكتملة</span>
+              </div>
+              <div class="achievement">
+                <i class="pi pi-globe achievement__icon"></i>
+                <span class="achievement__name">متعدد التخصصات</span>
+              </div>
+              <div class="achievement">
+                <i class="pi pi-users achievement__icon"></i>
+                <span class="achievement__name">مُرشِد الآخرين</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent activity — full width -->
+          <div class="pcard pcard--full">
+            <h3 class="pcard__title"><i class="pi pi-clock"></i>النشاط الأخير</h3>
+            <ul class="activity-list">
+              @for (item of activity; track item.text) {
+                <li class="activity-item">
+                  <span class="activity-item__icon" [style.background]="item.color + '22'" [style.color]="item.color">
+                    <i class="pi {{ item.icon }}"></i>
+                  </span>
+                  <div class="activity-item__body">
+                    <p class="activity-item__text">{{ item.text }}</p>
+                    <span class="activity-item__time">{{ item.time }}</span>
+                  </div>
+                </li>
+              }
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    }
+
+    <!-- ─────────────────── COURSES ─────────────────── -->
+    @if (activeTab === 'courses') {
+      <div class="profile__panel">
+        <div class="panel-header">
+          <div>
+            <h2 class="panel-header__title">دوراتي التدريبية</h2>
+            <p class="panel-header__sub">تتبّع تقدمك في جميع الدورات التي سجّلت بها</p>
+          </div>
+          <span class="count-chip">{{ courses.length }} دورة</span>
+        </div>
+
+        <div class="courses-grid">
+          @for (c of courses; track c.title) {
+            <div class="course-card">
+              <div class="course-card__banner" [style.background]="'linear-gradient(135deg,' + c.color + '33,' + c.color + '11)'">
+                <span class="course-card__category" [style.color]="c.color" [style.background]="c.color + '22'">{{ c.category }}</span>
+                @if (c.progress === 100) {
+                  <span class="course-card__done-badge"><i class="pi pi-check"></i>مكتمل</span>
+                }
+              </div>
+              <div class="course-card__body">
+                <h4 class="course-card__title">{{ c.title }}</h4>
+                <p class="course-card__instructor"><i class="pi pi-user"></i>{{ c.instructor }}</p>
+                <div class="course-card__meta">
+                  <span><i class="pi pi-clock"></i>{{ c.duration }}</span>
+                </div>
+                <div class="course-card__prog-row">
+                  <div class="course-card__prog-track">
+                    <div class="course-card__prog-fill" [style.width]="c.progress + '%'" [style.background]="c.color"></div>
+                  </div>
+                  <span class="course-card__prog-pct">{{ c.progress }}%</span>
+                </div>
+                <a class="course-card__cta" [style.color]="c.color" routerLink="/courses">
+                  {{ c.progress === 100 ? 'مراجعة الدورة' : 'متابعة التعلم' }}
+                  <i class="pi pi-arrow-left"></i>
+                </a>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    }
+
+    <!-- ─────────────────── CERTIFICATES ─────────────────── -->
+    @if (activeTab === 'certificates') {
+      <div class="profile__panel">
+        <div class="panel-header">
+          <div>
+            <h2 class="panel-header__title">شهاداتي</h2>
+            <p class="panel-header__sub">الشهادات التي حصلت عليها عند إتمام الدورات</p>
+          </div>
+          <span class="count-chip">{{ certificates.length }} شهادة</span>
+        </div>
+
+        <div class="certs-grid">
+          @for (cert of certificates; track cert.id) {
+            <div class="cert-card">
+              <div class="cert-card__header">
+                <i class="pi pi-verified cert-card__seal"></i>
+                <div class="cert-card__sparkles">
+                  <span></span><span></span><span></span>
+                </div>
+              </div>
+              <div class="cert-card__body">
+                <span class="cert-card__label">شهادة إتمام دورة</span>
+                <h3 class="cert-card__title">{{ cert.title }}</h3>
+                <p class="cert-card__instructor">{{ cert.instructor }}</p>
+                <div class="cert-card__meta">
+                  <span><i class="pi pi-calendar"></i>{{ cert.date }}</span>
+                  <span><i class="pi pi-tag"></i>{{ cert.id }}</span>
+                </div>
+                <div class="cert-card__actions">
+                  <button class="cert-btn cert-btn--primary" (click)="downloadCertificate(cert)"><i class="pi pi-download"></i>تحميل PDF</button>
+                  <button class="cert-btn" (click)="viewCertificate(cert)"><i class="pi pi-eye"></i>عرض</button>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    }
+
+    <!-- ─────────────────── SETTINGS ─────────────────── -->
+    @if (activeTab === 'settings') {
+      <div class="profile__panel">
+        <div class="settings-grid">
+
+          <!-- Edit profile -->
+          <div class="pcard">
+            <h3 class="pcard__title"><i class="pi pi-user-edit"></i>تعديل الملف الشخصي</h3>
+
+            @if (settingsSaved) {
+              <div class="alert alert--success"><i class="pi pi-check-circle"></i>تم حفظ التغييرات بنجاح</div>
+            }
+            @if (settingsError) {
+              <div class="alert alert--error"><i class="pi pi-exclamation-circle"></i>{{ settingsError }}</div>
+            }
+
+            <form class="sf" (ngSubmit)="saveSettings()" novalidate>
+              <div class="sf__avatar-row">
+                <div class="sf__avatar">{{ initials }}</div>
+                <div>
+                  <p class="sf__avatar-name">{{ user?.fullName }}</p>
+                  <p class="sf__avatar-email">{{ user?.email }}</p>
+                </div>
+              </div>
+
+              <div class="sf__field">
+                <label class="sf__label">الاسم الكامل</label>
+                <input class="sf__input" type="text" name="sfName" [(ngModel)]="settingsForm.fullName" placeholder="الاسم الكامل" />
+              </div>
+
+              <div class="sf__field">
+                <label class="sf__label">البريد الإلكتروني</label>
+                <input class="sf__input sf__input--disabled" type="email" [value]="user?.email" disabled />
+                <span class="sf__hint"><i class="pi pi-info-circle"></i>لا يمكن تغيير البريد الإلكتروني</span>
+              </div>
+
+              <div class="sf__field">
+                <label class="sf__label">النبذة الشخصية</label>
+                <textarea class="sf__input sf__textarea" name="sfBio" [(ngModel)]="settingsForm.bio"
+                  placeholder="اكتب نبذة قصيرة عن نفسك…" rows="4"></textarea>
+              </div>
+
+              <button class="sf__submit-btn" type="submit">
+                <i class="pi pi-save"></i>حفظ التغييرات
+              </button>
+            </form>
+          </div>
+
+          <!-- Change password -->
+          <div class="pcard">
+            <h3 class="pcard__title"><i class="pi pi-lock"></i>تغيير كلمة المرور</h3>
+
+            @if (passwordSaved) {
+              <div class="alert alert--success"><i class="pi pi-check-circle"></i>تم تغيير كلمة المرور بنجاح</div>
+            }
+            @if (passwordError) {
+              <div class="alert alert--error"><i class="pi pi-exclamation-circle"></i>{{ passwordError }}</div>
+            }
+
+            <form class="sf" (ngSubmit)="changePassword()" novalidate>
+              <div class="sf__field">
+                <label class="sf__label">كلمة المرور الحالية</label>
+                <div class="sf__input-wrap">
+                  <input class="sf__input" [type]="showCurrentPwd ? 'text' : 'password'"
+                    name="pwdCurrent" [(ngModel)]="passwordForm.current" placeholder="••••••••" />
+                  <button type="button" class="sf__eye" (click)="showCurrentPwd = !showCurrentPwd">
+                    <i class="pi" [class.pi-eye]="!showCurrentPwd" [class.pi-eye-slash]="showCurrentPwd"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div class="sf__field">
+                <label class="sf__label">كلمة المرور الجديدة</label>
+                <div class="sf__input-wrap">
+                  <input class="sf__input" [type]="showNewPwd ? 'text' : 'password'"
+                    name="pwdNew" [(ngModel)]="passwordForm.newPass" placeholder="8 أحرف على الأقل" />
+                  <button type="button" class="sf__eye" (click)="showNewPwd = !showNewPwd">
+                    <i class="pi" [class.pi-eye]="!showNewPwd" [class.pi-eye-slash]="showNewPwd"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div class="sf__field">
+                <label class="sf__label">تأكيد كلمة المرور الجديدة</label>
+                <div class="sf__input-wrap">
+                  <input class="sf__input" [type]="showConfirmPwd ? 'text' : 'password'"
+                    name="pwdConfirm" [(ngModel)]="passwordForm.confirm" placeholder="أعد كتابة كلمة المرور" />
+                  <button type="button" class="sf__eye" (click)="showConfirmPwd = !showConfirmPwd">
+                    <i class="pi" [class.pi-eye]="!showConfirmPwd" [class.pi-eye-slash]="showConfirmPwd"></i>
+                  </button>
+                </div>
+              </div>
+
+              <button class="sf__submit-btn" type="submit">
+                <i class="pi pi-shield"></i>تغيير كلمة المرور
+              </button>
+            </form>
+
+            <hr class="pcard__divider" style="margin-top:28px">
+            <h4 class="pcard__danger-title"><i class="pi pi-exclamation-triangle"></i>منطقة الخطر</h4>
+            <p class="pcard__body-text pcard__body-text--sm">حذف الحساب سيُزيل جميع بياناتك بصورة نهائية ولا يمكن التراجع.</p>
+            <button class="btn-danger-outline"><i class="pi pi-trash"></i>حذف الحساب</button>
+          </div>
+
+          <!-- Notifications — full width -->
+          <div class="pcard pcard--full">
+            <h3 class="pcard__title"><i class="pi pi-bell"></i>إعدادات الإشعارات</h3>
+            <div class="notif-list">
+
+              <div class="notif-row">
+                <div>
+                  <p class="notif-row__label">إشعارات الدورات الجديدة</p>
+                  <p class="notif-row__desc">استقبل إشعاراً عند إضافة دورة جديدة في مجالاتك المفضلة</p>
+                </div>
+                <label class="toggle"><input type="checkbox" checked><span class="toggle__track"></span></label>
+              </div>
+
+              <div class="notif-row">
+                <div>
+                  <p class="notif-row__label">إشعارات نتائج الاختبارات</p>
+                  <p class="notif-row__desc">احصل على إشعار فور ظهور نتيجة اختبارك</p>
+                </div>
+                <label class="toggle"><input type="checkbox" checked><span class="toggle__track"></span></label>
+              </div>
+
+              <div class="notif-row">
+                <div>
+                  <p class="notif-row__label">النشرة البريدية الأسبوعية</p>
+                  <p class="notif-row__desc">ملخص أسبوعي بأحدث الدورات والمحتوى المضاف</p>
+                </div>
+                <label class="toggle"><input type="checkbox"><span class="toggle__track"></span></label>
+              </div>
+
+              <div class="notif-row">
+                <div>
+                  <p class="notif-row__label">تذكير متابعة الدورات</p>
+                  <p class="notif-row__desc">تذكير يومي لمتابعة تقدمك في الدورات غير المكتملة</p>
+                </div>
+                <label class="toggle"><input type="checkbox" checked><span class="toggle__track"></span></label>
+              </div>
+
+              <div class="notif-row">
+                <div>
+                  <p class="notif-row__label">إشعارات العروض والخصومات</p>
+                  <p class="notif-row__desc">تنبيه عند وجود عروض على الدورات في قائمة أمنياتك</p>
+                </div>
+                <label class="toggle"><input type="checkbox"><span class="toggle__track"></span></label>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    }
+
+  </div>
+</div>
+
+<!-- ══ Certificate viewer modal ══════════════════════════════════ -->
+@if (activeCert) {
+  <app-certificate-modal
+    [cert]="activeCert"
+    [autoPrint]="certAutoPrint"
+    (closed)="closeCertModal()">
+  </app-certificate-modal>
+}

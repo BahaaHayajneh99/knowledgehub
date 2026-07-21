@@ -1,0 +1,118 @@
+<main class="pt-page">
+
+  <!-- ══ Hero ══════════════════════════════════════════════════════════ -->
+  <section class="pt-hero">
+    <div class="container">
+      <div class="pt-hero__badge">
+        <i class="pi pi-map"></i>
+        <span>مسارات التعلم</span>
+      </div>
+      <h1 class="pt-hero__title">طريقك نحو الاحتراف يبدأ هنا</h1>
+      <p class="pt-hero__subtitle">
+        اختر المسار المناسب لأهدافك المهنية وابدأ رحلة تعليمية مُصممة بعناية من خبراء متخصصين.
+        كل مسار يأخذك خطوة بخطوة من المبتدئ حتى الاحتراف الكامل.
+      </p>
+      <div class="pt-hero__stats">
+        <div class="pt-hero__stat-item">
+          <span class="pt-hero__stat-num">6</span>
+          <span class="pt-hero__stat-label">مسارات متخصصة</span>
+        </div>
+        <div class="pt-hero__stat-divider"></div>
+        <div class="pt-hero__stat-item">
+          <span class="pt-hero__stat-num">+1200</span>
+          <span class="pt-hero__stat-label">درس تفاعلي</span>
+        </div>
+        <div class="pt-hero__stat-divider"></div>
+        <div class="pt-hero__stat-item">
+          <span class="pt-hero__stat-num">+18K</span>
+          <span class="pt-hero__stat-label">متعلم مسجّل</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ Paths Grid ══════════════════════════════════════════════════ -->
+  <section class="pt-grid-section">
+    <div class="container">
+      <div class="section">
+        <div class="section__center">
+          <div class="section__title">اختر مسارك التعليمي</div>
+          <div class="section__description">
+            كل مسار يضم مجموعة متكاملة من الدورات المتسلسلة لتضمن تقدمك المستمر نحو الهدف.
+          </div>
+        </div>
+      </div>
+      <div class="pt-grid">
+        @for (path of paths; track path.id) {
+          <article class="pt-card" [ngClass]="path.colorClass" [routerLink]="['/paths', path.slug]">
+            <div class="pt-card__header">
+              <i class="pi {{ path.icon }} pt-card__icon"></i>
+            </div>
+            <div class="pt-card__body">
+              <h2 class="pt-card__title">{{ path.title }}</h2>
+              <p class="pt-card__subtitle">{{ path.subtitle }}</p>
+              <div class="pt-card__stats">
+                <span class="pt-card__stat">
+                  <i class="pi pi-book"></i>
+                  {{ path.totalCourses }} دورات
+                </span>
+                <span class="pt-card__stat">
+                  <i class="pi pi-clock"></i>
+                  {{ path.duration }}
+                </span>
+                <span class="pt-card__stat">
+                  <i class="pi pi-chart-line"></i>
+                  {{ path.level }}
+                </span>
+              </div>
+            </div>
+            <div class="pt-card__footer">
+              <a class="btn btn-primary pt-card__btn" [routerLink]="['/paths', path.slug]"
+                 (click)="$event.stopPropagation()">
+                ابدأ المسار
+                <i class="pi pi-arrow-left"></i>
+              </a>
+            </div>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ Why paths CTA ═══════════════════════════════════════════════ -->
+  <section class="pt-cta">
+    <div class="container">
+      <div class="pt-cta__inner">
+        <div class="pt-cta__text">
+          <h2 class="pt-cta__title">لماذا المسارات التعليمية؟</h2>
+          <p class="pt-cta__desc">
+            بدلاً من التعلم العشوائي، تمنحك مساراتنا خطة واضحة ومتسلسلة تضمن أقصى استفادة من وقتك.
+          </p>
+        </div>
+        <div class="pt-cta__features">
+          <div class="pt-cta__feature">
+            <i class="pi pi-verified"></i>
+            <span>محتوى منظّم بترتيب منطقي</span>
+          </div>
+          <div class="pt-cta__feature">
+            <i class="pi pi-verified"></i>
+            <span>مصادقة بشهادة معتمدة عند الإتمام</span>
+          </div>
+          <div class="pt-cta__feature">
+            <i class="pi pi-verified"></i>
+            <span>مشاريع تطبيقية حقيقية في كل مرحلة</span>
+          </div>
+          <div class="pt-cta__feature">
+            <i class="pi pi-verified"></i>
+            <span>دعم المجتمع ومساعدة الخبراء</span>
+          </div>
+        </div>
+        <a class="btn btn-primary pt-cta__btn" routerLink="/register">
+          <i class="pi pi-user-plus"></i>
+          سجّل مجاناً وابدأ الآن
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>

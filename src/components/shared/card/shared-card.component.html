@@ -1,0 +1,32 @@
+<article class="card card--lg" [routerLink]="detailRoute" style="cursor:pointer">
+  <img [src]="image" [alt]="title" class="card-img card-img--lg">
+  <div class="card-body">
+    <span class="badge badge-primary">{{ category }}</span>
+    <h3 class="card-title">{{ title }}</h3>
+    @if (rate !== null) {
+      <p class="card-meta">
+        <i class="pi pi-star-fill cd-star--full" style="font-size:.75rem"></i>
+        {{ rate }} &nbsp;·&nbsp; {{ lessons }} درساً
+      </p>
+    } @else if (readTime !== null) {
+      <p class="card-meta">
+        <i class="pi pi-clock" style="font-size:.75rem"></i>
+        {{ readTime }} دقائق &nbsp;·&nbsp; {{ date }}
+      </p>
+    }
+  </div>
+  <div class="card-footer">
+    <div class="card-author">
+      <img [src]="authorAvatar" [alt]="author" class="card-avatar">
+      <span class="card-author__name">{{ author }}</span>
+    </div>
+    @if (price !== null) {
+      <span class="sc-price">{{ price }} {{ currency }}</span>
+    } @else if (date && readTime === null) {
+      <span class="card-meta">{{ date }}</span>
+    }
+    @if (showDetailLink) {
+      <a class="home-section__show-all" [routerLink]="detailRoute" (click)="$event.stopPropagation()">{{ actionLabel }}</a>
+    }
+  </div>
+</article>

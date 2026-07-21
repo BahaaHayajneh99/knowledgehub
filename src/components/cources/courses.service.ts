@@ -41,8 +41,82 @@ export interface Category {
   route: string;
 }
 
+export interface Specialty {
+  slug: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  icon: string;
+  colorClass: string;
+  categoryNames: string[];
+  totalCount: number;
+}
+
 @Injectable({ providedIn: 'root' })
 export class CoursesService {
+
+  specialties: Specialty[] = [
+    {
+      slug: 'tech',
+      title: 'تطوير البرمجيات',
+      subtitle: 'احترف بناء التطبيقات والمواقع والأنظمة البرمجية الحديثة',
+      description: 'اكتشف مجموعة شاملة من الدورات في تطوير الويب والتطبيقات المحمولة وبرمجة الخوادم. من HTML وCSS إلى Angular وNode.js وReact Native، نوفر لك كل ما تحتاجه لتصبح مطوراً محترفاً يصنع فارقاً في سوق العمل.',
+      icon: 'pi-desktop',
+      colorClass: 'sp-color--tech',
+      categoryNames: ['تطوير الويب', 'تطوير الموبايل'],
+      totalCount: 142,
+    },
+    {
+      slug: 'design',
+      title: 'التصميم الإبداعي',
+      subtitle: 'أطلق إبداعك واحترف فنون التصميم الرقمي الحديث',
+      description: 'دورات متخصصة في تصميم واجهات المستخدم وتجربة المستخدم والتصوير الفوتوغرافي والجرافيك. تعلّم أدوات Figma وPhotoshop وIllustrator لتبدع في عالم التصميم وتبني مشاريع بصرية مميزة.',
+      icon: 'pi-palette',
+      colorClass: 'sp-color--design',
+      categoryNames: ['تصميم', 'تصوير'],
+      totalCount: 87,
+    },
+    {
+      slug: 'business',
+      title: 'الأعمال والإدارة',
+      subtitle: 'طوّر مهاراتك في ريادة الأعمال وقُد فريقك نحو النجاح',
+      description: 'دورات ومسارات متخصصة في إدارة الأعمال وريادة المشاريع والقيادة والتفاوض. اكتسب الأدوات الفكرية والمهارات العملية اللازمة للتفوق في بيئة الأعمال التنافسية وبناء مشروعك الناجح.',
+      icon: 'pi-briefcase',
+      colorClass: 'sp-color--business',
+      categoryNames: ['أعمال وإدارة'],
+      totalCount: 64,
+    },
+    {
+      slug: 'data',
+      title: 'علم البيانات',
+      subtitle: 'حوّل البيانات الخام إلى رؤى استراتيجية قابلة للتطبيق',
+      description: 'دورات متكاملة تغطي تحليل البيانات والتعلم الآلي والذكاء الاصطناعي والإحصاء التطبيقي. أتقن Python وأدوات Pandas وTensorFlow واجعل من الأرقام قصصاً مؤثرة تُحرّك قرارات الأعمال.',
+      icon: 'pi-chart-bar',
+      colorClass: 'sp-color--data',
+      categoryNames: ['علم البيانات'],
+      totalCount: 53,
+    },
+    {
+      slug: 'marketing',
+      title: 'التسويق الرقمي',
+      subtitle: 'أتقن فنون التسويق الرقمي وابنِ حضوراً قوياً عبر الإنترنت',
+      description: 'تعلّم استراتيجيات التسويق الرقمي عبر وسائل التواصل الاجتماعي ومحركات البحث والبريد الإلكتروني والإعلانات المدفوعة. من SEO إلى Google Ads، أتقن الأدوات التي تحوّل الزوار إلى عملاء وتُنمي علامتك التجارية.',
+      icon: 'pi-megaphone',
+      colorClass: 'sp-color--marketing',
+      categoryNames: ['تسويق رقمي'],
+      totalCount: 48,
+    },
+    {
+      slug: 'lang',
+      title: 'اللغات',
+      subtitle: 'تعلّم لغة جديدة وافتح أبواباً لا حصر لها من الفرص',
+      description: 'دورات تعليمية في اللغات الأكثر طلباً في سوق العمل العالمي. من الإنجليزية والفرنسية إلى الصينية والإسبانية، نقدم محتوى يجعل تعلّم اللغات تجربة ممتعة وفعّالة تفتح أمامك آفاق جديدة.',
+      icon: 'pi-language',
+      colorClass: 'sp-color--lang',
+      categoryNames: ['لغات'],
+      totalCount: 39,
+    },
+  ];
 
   categories: Category[] = [
     { icon: 'pi-palette',   name: 'تصميم',          count: 87,  color: '#667eea', bg: 'rgba(102,126,234,0.12)', route: '/courses' },

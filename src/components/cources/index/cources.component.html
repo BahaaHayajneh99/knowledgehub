@@ -15,7 +15,7 @@
             </div>
         </div>
         <div class="container">
-            <div class="hp-courses__grid">
+            <div class="co-courses__grid">
                 @for (c of pagedWelcome; track c.id) {
                 <article class="co-feat-card" [routerLink]="['/courses/details', c.id]">
                     <img [src]="c.image" alt="{{ c.title }}" class="co-feat-card__img card-img--lg">

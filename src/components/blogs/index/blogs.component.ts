@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Carousel, CarouselModule } from 'primeng/carousel';
 import { BlogsService, BlogPost } from '../blogs.service';
+import { SharedCardComponent } from '../../shared/card/shared-card.component';
 
 @Component({
   selector: 'app-blogs',
-  imports: [RouterModule, CarouselModule],
+  imports: [RouterModule, CarouselModule, SharedCardComponent],
   templateUrl: './blogs.component.html',
   styleUrl: './blogs.component.scss'
 })

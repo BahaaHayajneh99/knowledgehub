@@ -113,14 +113,42 @@
 } @else {
 
 <!-- ══ Finished screen ══════════════════════════════════════════════════ -->
-<div class="qd-finished">
-  <div class="qd-finished__icon">
-    <i class="pi pi-check"></i>
+<div class="qd-finished" [class.qd-finished--passed]="passed" [class.qd-finished--failed]="!passed">
+
+  <div class="qd-finished__icon" [class.qd-finished__icon--passed]="passed" [class.qd-finished__icon--failed]="!passed">
+    <i [class]="passed ? 'pi pi-trophy' : 'pi pi-times'"></i>
   </div>
+
   <h2 class="qd-finished__title">لقد أنهيت اختبارك</h2>
-  <p class="qd-finished__status">{{correctAnswers < (questions.length/2) ? 'للأسف لم تجتز الاختبار، حاول مرة أخرى!' : 'مبارك لقد اجتزت الاختبار! حظا موفقا والى الأمام'}}</p> 
+
+  <p class="qd-finished__status">
+    {{ passed ? 'مبارك! لقد اجتزت الاختبار بنجاح 🎉' : 'للأسف لم تجتز الاختبار، حاول مرة أخرى!' }}
+  </p>
+
   <p class="qd-finished__desc">نتيجتك في الاختبار {{ correctAnswers + '/' + questions.length }}</p>
+
+  <!-- Certificate buttons — shown only when passed -->
+  @if (passed) {
+    <div class="qd-finished__cert-row">
+      <button class="qd-finished__cert-btn qd-finished__cert-btn--primary" (click)="viewQuizCertificate()">
+        <i class="pi pi-verified"></i> عرض الشهادة
+      </button>
+      <button class="qd-finished__cert-btn" (click)="downloadQuizCertificate()">
+        <i class="pi pi-download"></i> تحميل PDF
+      </button>
+    </div>
+  }
+
   <a class="btn btn-primary" routerLink="/quizzes">العودة للاختبارات</a>
 </div>
+
+<!-- Certificate modal -->
+@if (activeCert) {
+  <app-certificate-modal
+    [cert]="activeCert"
+    [autoPrint]="certAutoPrint"
+    (closed)="closeCertModal()">
+  </app-certificate-modal>
+}
 
 }

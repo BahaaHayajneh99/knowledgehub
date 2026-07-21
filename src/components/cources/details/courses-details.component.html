@@ -190,22 +190,18 @@
       </div>
       <div class="cd-related__grid">
         @for (c of relatedCourses; track c.id) {
-          <article class="card card--lg" [routerLink]="['/courses/details', c.id]" style="cursor:pointer"> 
-          <img [src]="c.image" alt="{{ c.title }}" class="card-img card-img--lg card-img--grad-6">
-            <div class="card-body">
-              <span class="badge badge-primary">{{ c.category }}</span>
-              <h3 class="card-title">{{ c.title }}</h3>
-              <p class="card-meta"><i class="pi pi-star-fill cd-star--full" style="font-size:.8rem"></i> {{ c.rate }} &nbsp;·&nbsp; {{ c.numberOfLessons }} درساً</p>
-            </div>
-            <div class="card-footer">
-              <div class="card-author"> 
-              <img [src]="c.personAvatar" alt="Instructor avatar" class="card-avatar">
-
-                <span class="card-author__name">{{ c.author }}</span>
-              </div>
-              <span class="cd-price-tag">{{ c.price }} DJ</span>
-            </div>
-          </article>
+          <app-shared-card
+            [image]="c.image"
+            [title]="c.title"
+            [category]="c.category"
+            [detailRoute]="['/courses/details', c.id]"
+            [author]="c.author"
+            [authorAvatar]="c.personAvatar"
+            [rate]="c.rate"
+            [lessons]="c.numberOfLessons"
+            [price]="c.price"
+            [showDetailLink]="false">
+          </app-shared-card>
         }
       </div>
     </div>

@@ -1,0 +1,316 @@
+@use 'sass:list';
+
+// ── Color gradient map (same keys as index) ──────────────────────────
+$path-gradients: (
+  'frontend':   (#1565c0, #42a5f5),
+  'backend':    (#1b5e20, #43a047),
+  'data':       (#4a148c, #ab47bc),
+  'ux':         (#e65100, #ffa726),
+  'leadership': (#00695c, #26a69a),
+  'management': (#880e4f, #e91e63),
+);
+
+// ── Page ────────────────────────────────────────────────────────────
+.pth-page {
+  background: #f5f6fa;
+  min-height: 100vh;
+}
+
+// ── Breadcrumb ──────────────────────────────────────────────────────
+.pth-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  font-size: .85rem;
+  color: rgba(255,255,255,.75);
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+
+  a {
+    color: rgba(255,255,255,.75);
+    text-decoration: none;
+    &:hover { color: #fff; text-decoration: underline; }
+  }
+
+  span { color: #fff; font-weight: 600; }
+
+  i {
+    font-size: .65rem;
+    // flip arrow for RTL
+    transform: scaleX(-1);
+  }
+}
+
+// ── Hero ────────────────────────────────────────────────────────────
+.pth-hero {
+  color: #fff;
+  padding: 3.5rem 0 5rem;
+  background: linear-gradient(135deg, #1a2340, #2c3e6a); // fallback
+
+  @each $name, $colors in $path-gradients {
+    &.pt-color--#{$name} {
+      background: linear-gradient(135deg, list.nth($colors, 1), list.nth($colors, 2));
+    }
+  }
+
+  &__content {
+    max-width: 720px;
+  }
+
+  &__icon-wrap {
+    width: 68px;
+    height: 68px;
+    border-radius: 16px;
+    background: rgba(255,255,255,.2);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+
+    i { font-size: 2.2rem; }
+  }
+
+  &__title {
+    font-size: 2.4rem;
+    font-weight: 800;
+    margin-bottom: .6rem;
+    line-height: 1.25;
+  }
+
+  &__subtitle {
+    font-size: 1.05rem;
+    opacity: .88;
+    margin-bottom: 1.75rem;
+    line-height: 1.7;
+  }
+
+  &__meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+
+  &__stat {
+    display: flex;
+    align-items: center;
+    gap: .3rem;
+    font-size: .9rem;
+    opacity: .9;
+
+    i { font-size: .8rem; }
+  }
+
+  &__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    font-size: 1rem;
+    padding: .85rem 2.2rem;
+  }
+}
+
+// ── About ────────────────────────────────────────────────────────────
+.pth-about {
+  padding: 4rem 0 2.5rem;
+  background: #fff;
+
+  &__text {
+    max-width: 820px;
+    margin: 0 auto;
+    font-size: 1.05rem;
+    line-height: 2;
+    color: #444;
+    text-align: center;
+  }
+}
+
+// ── Outcomes ─────────────────────────────────────────────────────────
+.pth-outcomes {
+  padding: 3rem 0 4rem;
+  background: #eef2ff;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 1rem;
+    margin-top: .5rem;
+  }
+}
+
+.pth-outcome-item {
+  display: flex;
+  align-items: flex-start;
+  gap: .75rem;
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.1rem 1.25rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,.06);
+
+  &__icon {
+    color: #22c55e;
+    font-size: 1.2rem;
+    margin-top: .05rem;
+    flex-shrink: 0;
+  }
+
+  span {
+    font-size: .93rem;
+    color: #333;
+    line-height: 1.55;
+  }
+}
+
+// ── Prerequisites ─────────────────────────────────────────────────────
+.pth-prereqs {
+  padding: 3.5rem 0;
+  background: #fff;
+
+  &__list {
+    max-width: 620px;
+    margin: .5rem auto 0;
+    display: flex;
+    flex-direction: column;
+    gap: .85rem;
+    list-style: none;
+    padding: 0;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    font-size: .95rem;
+    color: #444;
+    background: #f8f9fc;
+    border-radius: 10px;
+    padding: .9rem 1.25rem;
+
+    i { color: #f7971e; font-size: 1.05rem; flex-shrink: 0; }
+  }
+}
+
+// ── Curriculum ───────────────────────────────────────────────────────
+.pth-curriculum {
+  padding: 4rem 0;
+  background: #f5f6fa;
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: .85rem;
+    margin-top: .5rem;
+  }
+}
+
+.pth-course-row {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  background: #fff;
+  border-radius: 14px;
+  padding: 1.25rem 1.75rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,.06);
+  transition: box-shadow .2s, transform .2s;
+
+  &:hover {
+    box-shadow: 0 6px 20px rgba(0,0,0,.1);
+    transform: translateX(-2px);
+  }
+
+  &__order {
+    min-width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #f7971e;
+    color: #fff;
+    font-weight: 700;
+    font-size: .95rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  &__info { flex: 1; }
+
+  &__title {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #1a202c;
+    display: block;
+    margin-bottom: .45rem;
+  }
+
+  &__meta {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    font-size: .82rem;
+    color: #666;
+
+    span { display: inline-flex; align-items: center; gap: .25rem; }
+    i { font-size: .75rem; }
+  }
+
+  &__btn {
+    flex-shrink: 0;
+    font-size: .85rem;
+    padding: .45rem 1.1rem;
+    white-space: nowrap;
+  }
+}
+
+// ── CTA ──────────────────────────────────────────────────────────────
+.pth-cta {
+  padding: 5rem 0;
+  background: linear-gradient(135deg, #1a2340 0%, #2c3e6a 100%);
+  color: #fff;
+  text-align: center;
+
+  &__inner {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  &__title {
+    font-size: 2.1rem;
+    font-weight: 700;
+    margin-bottom: .75rem;
+  }
+
+  &__sub {
+    opacity: .85;
+    margin-bottom: 2.5rem;
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  &__btns {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    .btn-outline {
+      border-color: rgba(255,255,255,.45);
+      color: #fff;
+      &:hover { background: rgba(255,255,255,.12); }
+    }
+
+    a { display: inline-flex; align-items: center; gap: .4rem; }
+  }
+}
+
+// ── Responsive ───────────────────────────────────────────────────────
+@media (max-width: 768px) {
+  .pth-hero__title { font-size: 1.8rem; }
+  .pth-hero__content { max-width: 100%; }
+  .pth-outcomes__grid { grid-template-columns: 1fr; }
+  .pth-course-row {
+    flex-wrap: wrap;
+    &__btn { width: 100%; text-align: center; justify-content: center; }
+  }
+}
