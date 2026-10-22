@@ -1,3 +1,5 @@
+@use '../../assets/styles/variables' as *;
+
 // ── Field error state ─────────────────────────────────────────────
 .sl-field__wrap--error {
   border-color: #ef4444 !important;
@@ -46,4 +48,149 @@
 // ── Terms checkbox error ───────────────────────────────────────────
 .sl-check--error {
   color: #ef4444;
+}
+
+// ══ nexium-ui form controls ══════════════════════════════════════════
+// nexium components use encapsulated styles, so sizing tweaks to match the
+// rest of the page go through ::ng-deep, scoped to this component by :host.
+
+:host ::ng-deep {
+
+  // Tabs
+  .sl-tabs-nx .nx-segmented-control {
+    padding: 4px;
+    background: $bg-white;
+    border-color: $border-color;
+    border-radius: $border-radius;
+  }
+
+  .sl-tabs-nx .nx-segment {
+    font-family: $font-family-base;
+    font-weight: $font-weight-medium;
+  }
+
+  .sl-tabs-nx .nx-segment.active {
+    background: $brand-primary;
+    color: $text-light;
+    font-weight: $font-weight-semibold;
+  }
+
+  // Inputs
+  .nx-input-wrapper {
+    gap: $space-xs;
+  }
+
+  .nx-input-label {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $text-secondary;
+    text-align: start;
+  }
+
+  .nx-input {
+    width: 100%;
+    padding: $space-sm $space-md;
+    border-radius: $border-radius;
+    font-family: $font-family-base;
+    transition: border-color $transition-base, box-shadow $transition-base;
+
+    &:focus {
+      box-shadow: 0 0 0 3px rgba($brand-primary, 0.12);
+    }
+
+    &.error:focus {
+      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.12);
+    }
+  }
+
+  .sl-nx-password .nx-input {
+    padding-right: 40px; // room for the eye toggle
+  }
+
+  // Inputs with dir="ltr" (email/password) keep their label right-aligned
+  nx-input[dir='ltr'] .nx-input-label,
+  nx-input[dir='ltr'] .nx-input-error {
+    direction: rtl;
+  }
+
+  // Checkbox
+  .nx-checkbox {
+    font-family: $font-family-base;
+    color: $text-secondary;
+  }
+
+  // Buttons
+  nx-button[fullWidth] .btn,
+  nx-button .btn.full-width {
+    width: 100%;
+    justify-content: center;
+  }
+
+  nx-button .btn {
+    font-family: $font-family-base;
+    font-weight: $font-weight-semibold;
+  }
+
+  .sl-social nx-button .btn.outline {
+    width: 100%;
+    justify-content: center;
+    gap: $space-sm;
+    border-color: $border-color;
+    color: $text-secondary;
+    background: $bg-white;
+
+    &:hover {
+      background: $bg-light;
+      color: $text-primary;
+    }
+  }
+
+  .sl-switch nx-button .btn.link {
+    padding: 0 4px;
+  }
+}
+
+// Password field: toggle sits over the end of the nx-input box
+.sl-nx-password {
+  position: relative;
+
+  &__toggle {
+    position: absolute;
+    right: 6px; // the input is dir="ltr", so the eye sits at its end (right)
+    bottom: 6px;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #94a3b8;
+    transition: color 0.2s;
+
+    &:hover { color: #475569; }
+  }
+}
+
+.sl-form__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sl-terms {
+  display: flex;
+  align-items: center;
+  gap: $space-sm;
+
+  &__text {
+    font-size: $font-size-sm;
+    color: $text-secondary;
+  }
+}
+
+.sl-social nx-button {
+  flex: 1;
 }

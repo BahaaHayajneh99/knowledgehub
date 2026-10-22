@@ -4368,6 +4368,17 @@ $_footer-divider: rgba(255, 255, 255, 0.12);
     color: $brand-info;
 }
 
+// ── nexium-ui theme ──────────────────────────────────────────────────────
+// Points nexium-ui's theme variables at the KnowledgeHub brand (its default
+// primary is blue). Loaded after node_modules/nexium-ui/styles.css, so it wins.
+:root {
+    --shell-primary: #{$brand-primary};
+    --primary-color-dark: #{$brand-primary-dark};
+    --shell-text: #{$text-primary};
+    --shell-border: #{$border-color};
+    --font-family: #{$font-family-base};
+}
+
 // ── Carousel (nexium-ui <nx-carousel>, prefix: kh-carousel) ──────────────
 // The carousel is forced to dir="ltr" because its track slides with a
 // negative translateX; each page is set back to dir="rtl". Selectors are

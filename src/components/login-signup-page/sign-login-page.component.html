@@ -40,10 +40,8 @@
     <div class="sl-form-box">
 
       <!-- Tab switcher -->
-      <div class="sl-tabs">
-        <button class="sl-tabs__btn" [class.sl-tabs__btn--active]="activeTab === 'login'" (click)="activeTab = 'login'">تسجيل الدخول</button>
-        <button class="sl-tabs__btn" [class.sl-tabs__btn--active]="activeTab === 'signup'" (click)="activeTab = 'signup'">إنشاء حساب</button>
-      </div>
+      <nx-segmented-control class="sl-tabs-nx" name="authTab" fullWidth size="large"
+        [options]="tabOptions" [value]="activeTab" (valueChange)="setTab($event)"></nx-segmented-control>
 
       <!-- ═ Login form ═ -->
       @if (activeTab === 'login') {
@@ -61,65 +59,43 @@
               </div>
             }
 
-            <div class="sl-field">
-              <label class="sl-field__label">البريد الإلكتروني</label>
-              <div class="sl-field__wrap" [class.sl-field__wrap--error]="loginSubmitted && !loginEmailValid">
-                <nx-icon variant="svg" icon="nx-mail" size="1em" class="sl-field__icon"></nx-icon>
-                <input class="sl-field__input" type="email" placeholder="example@email.com"
-                  name="loginEmail" [(ngModel)]="loginForm.email" required />
-              </div>
-              @if (loginSubmitted && !loginForm.email) {
-                <span class="sl-field__error">البريد الإلكتروني مطلوب</span>
-              } @else if (loginSubmitted && !loginEmailValid) {
-                <span class="sl-field__error">صيغة البريد الإلكتروني غير صحيحة</span>
-              }
+            <nx-input label="البريد الإلكتروني" type="email" placeholder="example@email.com" dir="ltr"
+              name="loginEmail" [(ngModel)]="loginForm.email" [error]="loginEmailError"></nx-input>
+
+            <div class="sl-nx-password">
+              <nx-input label="كلمة المرور" [type]="showLoginPassword ? 'text' : 'password'" placeholder="••••••••" dir="ltr"
+                name="loginPassword" [(ngModel)]="loginForm.password" [error]="loginPasswordError"></nx-input>
+              <button type="button" class="sl-nx-password__toggle" (click)="showLoginPassword = !showLoginPassword"
+                [attr.aria-label]="showLoginPassword ? 'إخفاء كلمة المرور' : 'إظهار كلمة المرور'">
+                <nx-icon variant="svg" [icon]="showLoginPassword ? 'nx-eye-off' : 'nx-eye'" size="1em"></nx-icon>
+              </button>
             </div>
 
-            <div class="sl-field">
-              <div class="sl-field__label-row">
-                <label class="sl-field__label">كلمة المرور</label>
-                <a class="sl-field__forgot" href="#">نسيت كلمة المرور؟</a>
-              </div>
-              <div class="sl-field__wrap" [class.sl-field__wrap--error]="loginSubmitted && !loginPasswordValid">
-                <nx-icon variant="svg" icon="nx-lock" size="1em" class="sl-field__icon"></nx-icon>
-                <input class="sl-field__input" [type]="showLoginPassword ? 'text' : 'password'" placeholder="••••••••"
-                  name="loginPassword" [(ngModel)]="loginForm.password" required />
-                <button type="button" class="sl-field__toggle" (click)="showLoginPassword = !showLoginPassword" tabindex="-1">
-                  <nx-icon variant="svg" [icon]="showLoginPassword ? 'nx-eye-off' : 'nx-eye'" size="1em"></nx-icon>
-                </button>
-              </div>
-              @if (loginSubmitted && !loginForm.password) {
-                <span class="sl-field__error">كلمة المرور مطلوبة</span>
-              } @else if (loginSubmitted && !loginPasswordValid) {
-                <span class="sl-field__error">كلمة المرور يجب أن تكون 6 أحرف على الأقل</span>
-              }
+            <div class="sl-form__row">
+              <nx-checkbox label="تذكّرني" name="loginRemember" [(ngModel)]="loginForm.remember"></nx-checkbox>
+              <a class="sl-field__forgot" href="#">نسيت كلمة المرور؟</a>
             </div>
 
-            <label class="sl-check">
-              <input type="checkbox" name="loginRemember" [(ngModel)]="loginForm.remember" />
-              تذكّرني
-            </label>
-
-            <button class="btn btn-primary w-100" type="submit">تسجيل الدخول</button>
+            <nx-button variant="primary" size="large" fullWidth>تسجيل الدخول</nx-button>
 
           </form>
 
-          <div class="sl-divider"><span>أو تابع من خلال</span></div>
+          <nx-divider label="أو تابع من خلال"></nx-divider>
 
           <div class="sl-social">
-            <button class="sl-social__btn">
+            <nx-button variant="outline">
               <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
               متابعة مع Google
-            </button>
-            <button class="sl-social__btn">
-              <nx-icon variant="svg" icon="nx-github" size="1em" style="font-size:1.1rem"></nx-icon>
+            </nx-button>
+            <nx-button variant="outline">
+              <nx-icon variant="svg" icon="nx-github" size="1.1rem"></nx-icon>
               متابعة مع GitHub
-            </button>
+            </nx-button>
           </div>
 
           <p class="sl-switch">
             ليس لديك حساب؟
-            <button class="sl-switch__btn" (click)="activeTab = 'signup'">إنشاء حساب</button>
+            <nx-button variant="link" size="small" (click)="activeTab = 'signup'">إنشاء حساب</nx-button>
           </p>
 
         </div>
@@ -141,85 +117,51 @@
               </div>
             }
 
-            <div class="sl-field">
-              <label class="sl-field__label">الاسم الكامل</label>
-              <div class="sl-field__wrap" [class.sl-field__wrap--error]="signupSubmitted && !signupNameValid">
-                <nx-icon variant="svg" icon="nx-user" size="1em" class="sl-field__icon"></nx-icon>
-                <input class="sl-field__input" type="text" placeholder="أحمد محمد"
-                  name="signupName" [(ngModel)]="signupForm.fullName" required />
-              </div>
-              @if (signupSubmitted && !signupForm.fullName.trim()) {
-                <span class="sl-field__error">الاسم الكامل مطلوب</span>
-              } @else if (signupSubmitted && !signupNameValid) {
-                <span class="sl-field__error">الاسم يجب أن يكون 3 أحرف على الأقل</span>
-              }
+            <nx-input label="الاسم الكامل" placeholder="أحمد محمد"
+              name="signupName" [(ngModel)]="signupForm.fullName" [error]="signupNameError"></nx-input>
+
+            <nx-input label="البريد الإلكتروني" type="email" placeholder="example@email.com" dir="ltr"
+              name="signupEmail" [(ngModel)]="signupForm.email" [error]="signupEmailError"></nx-input>
+
+            <div class="sl-nx-password">
+              <nx-input label="كلمة المرور" [type]="showSignupPassword ? 'text' : 'password'" placeholder="8 أحرف على الأقل" dir="ltr"
+                name="signupPassword" [(ngModel)]="signupForm.password" [error]="signupPasswordError"></nx-input>
+              <button type="button" class="sl-nx-password__toggle" (click)="showSignupPassword = !showSignupPassword"
+                [attr.aria-label]="showSignupPassword ? 'إخفاء كلمة المرور' : 'إظهار كلمة المرور'">
+                <nx-icon variant="svg" [icon]="showSignupPassword ? 'nx-eye-off' : 'nx-eye'" size="1em"></nx-icon>
+              </button>
             </div>
 
-            <div class="sl-field">
-              <label class="sl-field__label">البريد الإلكتروني</label>
-              <div class="sl-field__wrap" [class.sl-field__wrap--error]="signupSubmitted && !signupEmailValid">
-                <nx-icon variant="svg" icon="nx-mail" size="1em" class="sl-field__icon"></nx-icon>
-                <input class="sl-field__input" type="email" placeholder="example@email.com"
-                  name="signupEmail" [(ngModel)]="signupForm.email" required />
-              </div>
-              @if (signupSubmitted && !signupForm.email) {
-                <span class="sl-field__error">البريد الإلكتروني مطلوب</span>
-              } @else if (signupSubmitted && !signupEmailValid) {
-                <span class="sl-field__error">صيغة البريد الإلكتروني غير صحيحة</span>
-              }
-            </div>
-
-            <div class="sl-field">
-              <label class="sl-field__label">كلمة المرور</label>
-              <div class="sl-field__wrap" [class.sl-field__wrap--error]="signupSubmitted && !signupPasswordValid">
-                <nx-icon variant="svg" icon="nx-lock" size="1em" class="sl-field__icon"></nx-icon>
-                <input class="sl-field__input" [type]="showSignupPassword ? 'text' : 'password'" placeholder="8 أحرف على الأقل"
-                  name="signupPassword" [(ngModel)]="signupForm.password" required />
-                <button type="button" class="sl-field__toggle" (click)="showSignupPassword = !showSignupPassword" tabindex="-1">
-                  <nx-icon variant="svg" [icon]="showSignupPassword ? 'nx-eye-off' : 'nx-eye'" size="1em"></nx-icon>
-                </button>
-              </div>
-              @if (signupSubmitted && !signupForm.password) {
-                <span class="sl-field__error">كلمة المرور مطلوبة</span>
-              } @else if (signupSubmitted && !signupPasswordValid) {
-                <span class="sl-field__error">كلمة المرور يجب أن تكون 8 أحرف على الأقل</span>
-              }
-            </div>
-
-            <div class="sl-field">
-              <label class="sl-field__label">تأكيد كلمة المرور</label>
-              <div class="sl-field__wrap" [class.sl-field__wrap--error]="signupSubmitted && !signupConfirmValid">
-                <nx-icon variant="svg" icon="nx-lock" size="1em" class="sl-field__icon"></nx-icon>
-                <input class="sl-field__input" [type]="showSignupConfirm ? 'text' : 'password'" placeholder="أعد كتابة كلمة المرور"
-                  name="signupConfirm" [(ngModel)]="signupForm.confirmPassword" required />
-                <button type="button" class="sl-field__toggle" (click)="showSignupConfirm = !showSignupConfirm" tabindex="-1">
-                  <nx-icon variant="svg" [icon]="showSignupConfirm ? 'nx-eye-off' : 'nx-eye'" size="1em"></nx-icon>
-                </button>
-              </div>
-              @if (signupSubmitted && !signupForm.confirmPassword) {
-                <span class="sl-field__error">تأكيد كلمة المرور مطلوب</span>
-              } @else if (signupSubmitted && !signupConfirmValid) {
-                <span class="sl-field__error">كلمتا المرور غير متطابقتين</span>
-              }
+            <div class="sl-nx-password">
+              <nx-input label="تأكيد كلمة المرور" [type]="showSignupConfirm ? 'text' : 'password'" placeholder="أعد كتابة كلمة المرور" dir="ltr"
+                name="signupConfirm" [(ngModel)]="signupForm.confirmPassword" [error]="signupConfirmError"></nx-input>
+              <button type="button" class="sl-nx-password__toggle" (click)="showSignupConfirm = !showSignupConfirm"
+                [attr.aria-label]="showSignupConfirm ? 'إخفاء كلمة المرور' : 'إظهار كلمة المرور'">
+                <nx-icon variant="svg" [icon]="showSignupConfirm ? 'nx-eye-off' : 'nx-eye'" size="1em"></nx-icon>
+              </button>
             </div>
 
             <div>
-              <label class="sl-check" [class.sl-check--error]="signupSubmitted && !signupTermsValid">
-                <input type="checkbox" name="signupTerms" [(ngModel)]="signupForm.terms" required />
-                أوافق على <a class="sl-check__link" href="#">شروط الخدمة</a> و <a class="sl-check__link" href="#">سياسة الخصوصية</a>
-              </label>
+              <div class="sl-terms">
+                <nx-checkbox name="signupTerms" [(ngModel)]="signupForm.terms"
+                  [invalid]="signupSubmitted && !signupTermsValid"></nx-checkbox>
+                <span class="sl-terms__text" [class.sl-check--error]="signupSubmitted && !signupTermsValid">
+                  أوافق على <a class="sl-check__link" routerLink="/terms">شروط الخدمة</a>
+                  و <a class="sl-check__link" routerLink="/privacy">سياسة الخصوصية</a>
+                </span>
+              </div>
               @if (signupSubmitted && !signupTermsValid) {
                 <span class="sl-field__error">يجب الموافقة على الشروط والأحكام</span>
               }
             </div>
 
-            <button class="btn btn-primary w-100" type="submit">إنشاء الحساب</button>
+            <nx-button variant="primary" size="large" fullWidth>إنشاء الحساب</nx-button>
 
           </form>
 
           <p class="sl-switch">
-            لديك حساب بالفعل؟;
-            <button class="sl-switch__btn" (click)="activeTab = 'login'">تسجيل الدخول</button>
+            لديك حساب بالفعل؟
+            <nx-button variant="link" size="small" (click)="activeTab = 'login'">تسجيل الدخول</nx-button>
           </p>
 
         </div>
