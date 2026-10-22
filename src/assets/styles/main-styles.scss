@@ -2179,6 +2179,7 @@ $_footer-divider: rgba(255, 255, 255, 0.12);
         font-size: $font-size-md;
         font-family: $font-family-base;
         padding: 0;
+        text-decoration: none;
     }
 
     &__play {
@@ -2215,14 +2216,28 @@ $_footer-divider: rgba(255, 255, 255, 0.12);
 
     &__person {
         position: absolute;
-        inset-inline-start: 20%;
-        transform: translateX(-50%);
-        height: 100%;
-        border-radius: $border-radius-lg $border-radius-lg 0 0;
+        inset: $space-xl $space-xxl;
+        z-index: 1;
+
+        // Offset outline behind the photo
+        &::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            transform: translate(-16px, 16px) rotate(-3deg);
+            border: 2px dashed rgba($bg-white, 0.7);
+            border-radius: 28px;
+            z-index: -1;
+        }
 
         img {
+            width: 100%;
             height: 100%;
-            max-width: 420px;
+            object-fit: cover;
+            border: 6px solid $bg-white;
+            border-radius: 28px;
+            box-shadow: $shadow-md;
+            display: block;
         }
     }
 
@@ -2245,15 +2260,12 @@ $_footer-divider: rgba(255, 255, 255, 0.12);
 
         &--analytics {
             top: $space-md;
-            inset-inline-end: $space-sm;
-            background: linear-gradient(135deg, #f5576c, #c94b4b);
-            color: $text-light;
-            border-radius: $border-radius;
-            width: 48px;
-            height: 48px;
-            justify-content: center;
-            padding: 0;
-            font-size: 1.4rem;
+            inset-inline-end: -$space-md;
+            flex-direction: column;
+            align-items: stretch;
+            gap: $space-sm;
+            width: 170px;
+            padding: $space-sm $space-md $space-md;
         }
 
         &--congrats {
@@ -2313,6 +2325,57 @@ $_footer-divider: rgba(255, 255, 255, 0.12);
         display: flex;
         align-items: center;
         gap: $space-sm;
+    }
+
+    &__float-chart-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: $space-xs;
+    }
+
+    &__float-trend {
+        display: inline-flex;
+        align-items: center;
+        gap: 2px;
+        padding: 2px 6px;
+        border-radius: $border-radius-pill;
+        background: rgba($brand-success, 0.15);
+        color: #1f9d55;
+        font-size: $font-size-xs;
+        font-weight: $font-weight-semibold;
+        direction: ltr;
+        white-space: nowrap;
+
+        .pi {
+            font-size: 0.6rem;
+        }
+    }
+
+    &__float-bars {
+        display: flex;
+        align-items: flex-end;
+        gap: 6px;
+        height: 48px;
+
+        span {
+            flex: 1;
+            height: var(--h);
+            border-radius: 4px 4px 2px 2px;
+            background: rgba($brand-primary, 0.25);
+            transform-origin: bottom;
+            animation: hp-bar-grow 0.8s ease-out both;
+
+            @for $i from 1 through 5 {
+                &:nth-child(#{$i}) {
+                    animation-delay: #{$i * 0.08}s;
+                }
+            }
+
+            &.is-active {
+                background: linear-gradient(180deg, #f5576c, #c94b4b);
+            }
+        }
     }
 
     &__float-avatar {
@@ -2389,6 +2452,15 @@ $_footer-divider: rgba(255, 255, 255, 0.12);
     }
 }
 
+
+@keyframes hp-bar-grow {
+    from { transform: scaleY(0); }
+    to   { transform: scaleY(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hp-intro__float-bars span { animation: none; }
+}
 
 // ── HP Responsive ─────────────────────────────────────────────────────────
 @media (max-width: 1024px) {

@@ -13,19 +13,19 @@
                 </p>
                 <div class="hp-intro__actions">
                     <a class="hp-intro__btn-join" href="/courses">انضم مجاناً</a>
-                    <button class="hp-intro__btn-watch">
-                        <span class="hp-intro__play"><i class="pi pi-play"></i></span>
-                        <span>شاهد كيف يعمل</span>
-                    </button>
+                    <a class="hp-intro__btn-watch" routerLink="/paths">
+                        <span class="hp-intro__play"><i class="pi pi-compass"></i></span>
+                        <span>اكتشف مسارك التعليمي</span>
+                    </a>
                 </div>
             </div>
 
             <!-- Image + floating cards -->
             <div class="hp-intro__visual">
 
-                <!-- Person placeholder -->
+                <!-- Hero photo -->
                 <div class="hp-intro__person">
-                    <img src="../assets/img/landing-pic-2.png">
+                    <img src="../assets/img/landing-pic-5.jpg" alt="طالب يدرس عبر الإنترنت باستخدام جهاز لوحي ودفتر ملاحظات">
                 </div>
 
                 <!-- Floating: students count -->
@@ -37,9 +37,19 @@
                     </div>
                 </div>
 
-                <!-- Floating: analytics icon -->
+                <!-- Floating: weekly progress -->
                 <div class="hp-intro__float hp-intro__float--analytics">
-                    <i class="pi pi-chart-bar"></i>
+                    <div class="hp-intro__float-chart-header">
+                        <p class="hp-intro__float-title">تقدّمك هذا الأسبوع</p>
+                        <span class="hp-intro__float-trend"><i class="pi pi-arrow-up"></i> 24%</span>
+                    </div>
+                    <div class="hp-intro__float-bars">
+                        <span style="--h: 40%"></span>
+                        <span style="--h: 65%"></span>
+                        <span style="--h: 50%"></span>
+                        <span style="--h: 80%"></span>
+                        <span class="is-active" style="--h: 100%"></span>
+                    </div>
                 </div>
 
                 <!-- Floating: congratulations -->
