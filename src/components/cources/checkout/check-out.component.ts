@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+
 import { RouterModule } from '@angular/router';
 import { CartService } from '../cart.service';
 import { CoursesService, Course } from '../courses.service';
 
 @Component({
   selector: 'app-check-out',
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, RouterModule],
+  imports: [ReactiveFormsModule, FormsModule, RouterModule],
   templateUrl: './check-out.component.html',
   styleUrl: './check-out.component.scss'
 })

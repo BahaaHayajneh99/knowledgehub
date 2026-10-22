@@ -1,5 +1,5 @@
 import { Component, inject, OnInit, AfterViewInit, OnDestroy, ElementRef } from '@angular/core';
-import { NgFor, NgIf } from '@angular/common';
+
 import { RouterLink } from '@angular/router';
 import {CarouselModule } from 'primeng/carousel';
 import { BlogPost, BlogsService } from '../components/blogs/blogs.service';
@@ -7,7 +7,7 @@ import { SharedCardComponent } from '../components/shared/card/shared-card.compo
 
 @Component({
   selector: 'app-home',
-  imports: [NgFor, NgIf, RouterLink, CarouselModule, SharedCardComponent],
+  imports: [RouterLink, CarouselModule, SharedCardComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

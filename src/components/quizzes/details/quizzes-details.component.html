@@ -1,154 +1,137 @@
 @if (!isFinished) {
-<div class="qd" *ngIf="quiz?.id > 0">
-
-  <!-- ══ Header bar ═════════════════════════════════════════════════ -->
-  <header class="qd-header">
-    <div class="container qd-header__inner"> 
-      <h2 class="qd-header__title">{{ quiz.title }}</h2>
-      <nav class="cd-breadcrumb">
-        <a routerLink="/"><i class="pi pi-home"></i></a>
-        <i class="pi pi-angle-left"></i>
-        <a routerLink="/quizzes">الاختبارات</a>
-      </nav>
-    </div>
-  </header>
-
-
-
-  <!-- ══ Main layout ═════════════════════════════════════════════════ -->
-  <div class="container"> 
-   <div class="qd-layout">
-    <!-- ── Questions list ────────────────────────────────────────────── -->
-    <main class="qd-questions">
-
-      @for (q of questions; track q.id) {
-        <div class="qd-question" [class.qd-question--active]="activeQuestion === q.id">
-          <p class="qd-question__text">{{ q.id }}. {{ q.text }}</p>
-
-          <div class="qd-question__options">
-            @if (q.type === 'single') {
-              @for (opt of q.options; track opt.id) {
-                <label class="qd-option" [ngClass]="{'qd-option--correct': q.isAnsweredCorrectly && opt.isSelected || !q.isAnsweredCorrectly && opt.id === q.optionAnswerId && q.isAnswered, 'qd-option--incorrect': !q.isAnsweredCorrectly && q.isAnswered && opt.isSelected}">
-                  <input type="radio" [name]="'q' + q.id" [disabled]="q.isAnswered" class="qd-option__input" (change)="onAnswerChoosed($event,opt.id,opt,q)">
-                  <span class="qd-option__indicator"></span>
-                  <span class="qd-option__text">{{ opt.text }}</span>
-                </label>
-              }
-            }
-            @if (q.type === 'multiple') {
-              @for (opt of q.options; track opt.id) {
-                <label class="qd-option qd-option--check" [ngClass]="{'qd-option--correct': opt.isCorrect, 'qd-option--incorrect': !opt.isCorrect && q.isAnswered}">
-                  <input type="checkbox" class="qd-option__input" [disabled]="q.isAnswered" (change)="onAnswerChoosed($event,opt.id,opt,q)">
-                  <span class="qd-option__indicator"></span>
-                  <span class="qd-option__text">{{ opt.text }}</span>
-                </label>
-              }
-            }
-          </div>
+  @if (quiz?.id > 0) {
+    <div class="qd">
+      <!-- ══ Header bar ═════════════════════════════════════════════════ -->
+      <header class="qd-header">
+        <div class="container qd-header__inner">
+          <h2 class="qd-header__title">{{ quiz.title }}</h2>
+          <nav class="cd-breadcrumb">
+            <a routerLink="/"><i class="pi pi-home"></i></a>
+            <i class="pi pi-angle-left"></i>
+            <a routerLink="/quizzes">الاختبارات</a>
+          </nav>
         </div>
-      }
-
-      <!-- Submit -->
-      <div class="qd-submit-row">
-        <button class="qd-submit-btn" (click)="submitQuiz()">انهاء الاختبار</button>
-      </div>
-
-    </main>
-
-    <!-- ── Sidebar ──────────────────────────────────────────────────── -->
-    <aside class="qd-sidebar">
-
-      <!-- Timer -->
-      <div class="qd-timer">
-        <p class="qd-timer__label">الوقت المتبقي</p>
-        <div class="qd-timer__circle-wrap">
-          <svg class="qd-timer__svg" viewBox="0 0 100 100">
-            <circle class="qd-timer__track"    cx="50" cy="50" r="40"/>
-            <circle class="qd-timer__progress" cx="50" cy="50" r="40"
+      </header>
+      <!-- ══ Main layout ═════════════════════════════════════════════════ -->
+      <div class="container">
+        <div class="qd-layout">
+          <!-- ── Questions list ────────────────────────────────────────────── -->
+          <main class="qd-questions">
+            @for (q of questions; track q.id) {
+              <div class="qd-question" [class.qd-question--active]="activeQuestion === q.id">
+                <p class="qd-question__text">{{ q.id }}. {{ q.text }}</p>
+                <div class="qd-question__options">
+                  @if (q.type === 'single') {
+                    @for (opt of q.options; track opt.id) {
+                      <label class="qd-option" [ngClass]="{'qd-option--correct': q.isAnsweredCorrectly && opt.isSelected || !q.isAnsweredCorrectly && opt.id === q.optionAnswerId && q.isAnswered, 'qd-option--incorrect': !q.isAnsweredCorrectly && q.isAnswered && opt.isSelected}">
+                        <input type="radio" [name]="'q' + q.id" [disabled]="q.isAnswered" class="qd-option__input" (change)="onAnswerChoosed($event,opt.id,opt,q)">
+                        <span class="qd-option__indicator"></span>
+                        <span class="qd-option__text">{{ opt.text }}</span>
+                      </label>
+                    }
+                  }
+                  @if (q.type === 'multiple') {
+                    @for (opt of q.options; track opt.id) {
+                      <label class="qd-option qd-option--check" [ngClass]="{'qd-option--correct': opt.isCorrect, 'qd-option--incorrect': !opt.isCorrect && q.isAnswered}">
+                        <input type="checkbox" class="qd-option__input" [disabled]="q.isAnswered" (change)="onAnswerChoosed($event,opt.id,opt,q)">
+                        <span class="qd-option__indicator"></span>
+                        <span class="qd-option__text">{{ opt.text }}</span>
+                      </label>
+                    }
+                  }
+                </div>
+              </div>
+            }
+            <!-- Submit -->
+            <div class="qd-submit-row">
+              <button class="qd-submit-btn" (click)="submitQuiz()">انهاء الاختبار</button>
+            </div>
+          </main>
+          <!-- ── Sidebar ──────────────────────────────────────────────────── -->
+          <aside class="qd-sidebar">
+            <!-- Timer -->
+            <div class="qd-timer">
+              <p class="qd-timer__label">الوقت المتبقي</p>
+              <div class="qd-timer__circle-wrap">
+                <svg class="qd-timer__svg" viewBox="0 0 100 100">
+                  <circle class="qd-timer__track"    cx="50" cy="50" r="40"/>
+                  <circle class="qd-timer__progress" cx="50" cy="50" r="40"
                     stroke-dasharray="251.2" stroke-dashoffset="0"/>
-          </svg>
-          <span class="qd-timer__display">{{durationDisplay}}</span>
-        </div>
+                  </svg>
+                  <span class="qd-timer__display">{{durationDisplay}}</span>
+                </div>
+              </div>
+              <!-- Question navigator -->
+              <div class="qd-nav">
+                @for (n of questionNums; track n) {
+                  <button class="qd-nav__btn" [class.qd-nav__btn--correct]="checkIfAnsweredCorrectly(n)"
+                    [class.qd-nav__btn--wrong]="checkIfAnsweredIncorrectly(n)">
+                    {{ n }}
+                  </button>
+                }
+              </div>
+              <div class="qd-timer">
+                <p class="qd-timer__label text-success">الاجابات الصحيحة</p>
+                <div class="qd-timer__circle-wrap">
+                  <span class="qd-timer__display text-success">{{ correctAnswers }}</span>
+                </div>
+              </div>
+              <div class="qd-timer">
+                <p class="qd-timer__label text-danger">الاجابات الخاطئة</p>
+                <div class="qd-timer__circle-wrap">
+                  <span class="qd-timer__display text-danger">{{ incorrectAnswers }}</span>
+                </div>
+              </div>
+              <!-- Section select -->
+              <!-- <select class="qd-section-select">
+              <option value="">اختر القسم</option>
+              <option value="1">القسم الأول</option>
+              <option value="2">القسم الثاني</option>
+            </select> -->
+          </aside>
+        </div><!-- /qd-layout -->
       </div>
-
-            <!-- Question navigator -->
-            <div class="qd-nav">
-              @for (n of questionNums; track n) {
-              <button class="qd-nav__btn" [class.qd-nav__btn--correct]="checkIfAnsweredCorrectly(n)"
-                [class.qd-nav__btn--wrong]="checkIfAnsweredIncorrectly(n)">
-                {{ n }}
-              </button>
-              }
-            </div>
-
-
-        <div class="qd-timer">
-            <p class="qd-timer__label text-success">الاجابات الصحيحة</p>
-            <div class="qd-timer__circle-wrap"> 
-                <span class="qd-timer__display text-success">{{ correctAnswers }}</span>
-            </div>
-        </div>
-
-        <div class="qd-timer">
-            <p class="qd-timer__label text-danger">الاجابات الخاطئة</p>
-            <div class="qd-timer__circle-wrap"> 
-                <span class="qd-timer__display text-danger">{{ incorrectAnswers }}</span>
-            </div>
-        </div>
-
-
-
-      <!-- Section select -->
-      <!-- <select class="qd-section-select">
-        <option value="">اختر القسم</option>
-        <option value="1">القسم الأول</option>
-        <option value="2">القسم الثاني</option>
-      </select> -->
-
-    </aside>
-
-  </div><!-- /qd-layout -->
-</div>
-</div>
-} @else {
-
-<!-- ══ Finished screen ══════════════════════════════════════════════════ -->
-<div class="qd-finished" [class.qd-finished--passed]="passed" [class.qd-finished--failed]="!passed">
-
-  <div class="qd-finished__icon" [class.qd-finished__icon--passed]="passed" [class.qd-finished__icon--failed]="!passed">
-    <i [class]="passed ? 'pi pi-trophy' : 'pi pi-times'"></i>
-  </div>
-
-  <h2 class="qd-finished__title">لقد أنهيت اختبارك</h2>
-
-  <p class="qd-finished__status">
-    {{ passed ? 'مبارك! لقد اجتزت الاختبار بنجاح 🎉' : 'للأسف لم تجتز الاختبار، حاول مرة أخرى!' }}
-  </p>
-
-  <p class="qd-finished__desc">نتيجتك في الاختبار {{ correctAnswers + '/' + questions.length }}</p>
-
-  <!-- Certificate buttons — shown only when passed -->
-  @if (passed) {
-    <div class="qd-finished__cert-row">
-      <button class="qd-finished__cert-btn qd-finished__cert-btn--primary" (click)="viewQuizCertificate()">
-        <i class="pi pi-verified"></i> عرض الشهادة
-      </button>
-      <button class="qd-finished__cert-btn" (click)="downloadQuizCertificate()">
-        <i class="pi pi-download"></i> تحميل PDF
-      </button>
     </div>
   }
+} @else {
 
-  <a class="btn btn-primary" routerLink="/quizzes">العودة للاختبارات</a>
-</div>
+  <!-- ══ Finished screen ══════════════════════════════════════════════════ -->
+  <div class="qd-finished" [class.qd-finished--passed]="passed" [class.qd-finished--failed]="!passed">
 
-<!-- Certificate modal -->
-@if (activeCert) {
-  <app-certificate-modal
-    [cert]="activeCert"
-    [autoPrint]="certAutoPrint"
-    (closed)="closeCertModal()">
-  </app-certificate-modal>
-}
+    <div class="qd-finished__icon" [class.qd-finished__icon--passed]="passed" [class.qd-finished__icon--failed]="!passed">
+      <i [class]="passed ? 'pi pi-trophy' : 'pi pi-times'"></i>
+    </div>
+
+    <h2 class="qd-finished__title">لقد أنهيت اختبارك</h2>
+
+    <p class="qd-finished__status">
+      {{ passed ? 'مبارك! لقد اجتزت الاختبار بنجاح 🎉' : 'للأسف لم تجتز الاختبار، حاول مرة أخرى!' }}
+    </p>
+
+    <p class="qd-finished__desc">نتيجتك في الاختبار {{ correctAnswers + '/' + questions.length }}</p>
+
+    <!-- Certificate buttons — shown only when passed -->
+    @if (passed) {
+      <div class="qd-finished__cert-row">
+        <button class="qd-finished__cert-btn qd-finished__cert-btn--primary" (click)="viewQuizCertificate()">
+          <i class="pi pi-verified"></i> عرض الشهادة
+        </button>
+        <button class="qd-finished__cert-btn" (click)="downloadQuizCertificate()">
+          <i class="pi pi-download"></i> تحميل PDF
+        </button>
+      </div>
+    }
+
+    <a class="btn btn-primary" routerLink="/quizzes">العودة للاختبارات</a>
+  </div>
+
+  <!-- Certificate modal -->
+  @if (activeCert) {
+    <app-certificate-modal
+      [cert]="activeCert"
+      [autoPrint]="certAutoPrint"
+      (closed)="closeCertModal()">
+    </app-certificate-modal>
+  }
 
 }

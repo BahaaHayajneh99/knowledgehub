@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { QuizzesService } from '../quizzes.service';
-import { NgIf, NgClass } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { AuthService } from '../../guard/auth/auth.service';
 import { CertificateModalComponent, CertData } from '../../profile/certificate-modal/certificate-modal.component';
 
@@ -15,7 +15,7 @@ export interface QuizQuestion {
 
 @Component({
   selector: 'app-quizzes-details',
-  imports: [RouterModule, NgIf, NgClass, CertificateModalComponent],
+  imports: [RouterModule, NgClass, CertificateModalComponent],
   templateUrl: './quizzes-details.component.html',
   styleUrl: './quizzes-details.component.scss'
 })
