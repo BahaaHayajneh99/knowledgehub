@@ -1,59 +1,116 @@
 # KnowledgeHub
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.5.
+KnowledgeHub is an Arabic (RTL) e-learning platform front end built with Angular 19. It offers courses, learning paths, quizzes, a blog, and a user profile with certificates.
 
-## Development server
+> **Note:** This is a front-end-only project. All data (courses, quizzes, blogs, paths) is hard-coded in Angular services, and user accounts are stored in the browser's `localStorage`. There is no backend or API yet.
 
-To start a local development server, run:
+## Features
 
-```bash
-ng serve
-```
+- **Courses**: browse by specialty, view course details, add to cart, and check out
+- **Learning paths**: structured paths with a details page for each
+- **Quizzes**: quizzes grouped by category, each with timed multiple-choice questions
+- **Blog**: article list and article details
+- **Profile**: overview, enrolled courses, settings, and printable certificates (A4 landscape)
+- **Authentication**: sign up and log in, with protected routes behind an auth guard
+- **Static pages**: About, Contact Us, FAQ, Terms & Conditions, Privacy Policy, and a 404 page
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Tech stack
 
-## Code scaffolding
+- [Angular 19](https://angular.dev) (standalone components plus lazy-loaded feature modules)
+- [PrimeNG 19](https://primeng.org) and [PrimeIcons](https://primeng.org/icons)
+- SCSS with a shared design system (`src/assets/styles`)
+- TypeScript 5.7, RxJS 7.8
+- Karma and Jasmine for unit tests
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Getting started
 
-```bash
-ng generate component component-name
-```
+### Prerequisites
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+- Node.js 18.19+ or 20+
+- npm
 
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+### Install and run
 
 ```bash
-ng test
+npm install
+npm start
 ```
 
-## Running end-to-end tests
+Then open `http://localhost:4500/`. The app reloads automatically when you change a source file.
 
-For end-to-end (e2e) testing, run:
+Most pages require login. Open `/register`, create an account, and you'll be signed in. The account is saved only in your browser.
 
-```bash
-ng e2e
+## Scripts
+
+| Command         | Description                                         |
+| --------------- | --------------------------------------------------- |
+| `npm start`     | Start the dev server (`ng serve`)                   |
+| `npm run build` | Production build, output in `dist/knowledge-hub`    |
+| `npm run watch` | Development build that rebuilds on file changes     |
+| `npm test`      | Run unit tests with Karma                           |
+
+## Project structure
+
+```
+src/
+├── app/                     # Root component, app config, and routes (app.routes.ts)
+├── home/                    # Landing page
+├── layout/
+│   ├── header/              # Site header / navigation
+│   └── footer/              # Site footer
+├── components/
+│   ├── about/               # About page
+│   ├── blogs/               # Blog list and details (lazy-loaded module)
+│   ├── contact/             # Contact Us page
+│   ├── cources/             # Courses: list, specialty, details, cart, checkout
+│   ├── FAQ/                 # FAQ page
+│   ├── guard/auth/          # AuthService (localStorage) and authGuard
+│   ├── login-signup-page/   # Login and sign-up
+│   ├── page-no-found/       # 404 page
+│   ├── paths/               # Learning paths (lazy-loaded module)
+│   ├── privacy/             # Privacy Policy
+│   ├── profile/             # Profile, certificates modal
+│   ├── quizzes/             # Quizzes: list, categories, details (lazy-loaded module)
+│   ├── shared/              # Shared components (cards)
+│   └── terms/               # Terms & Conditions
+├── assets/
+│   ├── fonts/               # Segoe UI
+│   ├── img/                 # Course, blog, quiz, and avatar images
+│   └── styles/              # variables.scss, mixins.scss, main-styles.scss
+├── index.html               # lang="ar" dir="rtl"
+└── styles.scss              # Global entry point
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## Routes
 
-## Additional Resources
+| Path                         | Page                    | Auth required |
+| ---------------------------- | ----------------------- | :-----------: |
+| `/`                          | Home                    |               |
+| `/register`                  | Login / Sign up         |               |
+| `/faq`                       | FAQ                     |               |
+| `/terms`                     | Terms & Conditions      |               |
+| `/privacy`                   | Privacy Policy          |               |
+| `/contact-us`                | Contact Us              | ✓             |
+| `/about`                     | About                   | ✓             |
+| `/courses`                   | Course list             | ✓             |
+| `/courses/:specialty`        | Courses by specialty    | ✓             |
+| `/courses/details/:id`       | Course details          | ✓             |
+| `/courses/checkout`          | Checkout                | ✓             |
+| `/paths`, `/paths/:slug`     | Learning paths          | ✓             |
+| `/quizzes`                   | Quiz list               | ✓             |
+| `/quizzes/categories/:id`    | Quizzes in a category   | ✓             |
+| `/quizzes/details/:id`       | Take a quiz             | ✓             |
+| `/blogs`, `/blogs/details/:id` | Blog                  | ✓             |
+| `/profile`                   | User profile            | ✓             |
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Data and authentication
+
+- **Content** lives in services: `courses.service.ts`, `quizzes.service.ts`, `paths.service.ts`, `blogs.service.ts`. To add a course or quiz, add an entry to the matching array.
+- **Users** are stored in `localStorage` under `knowledgehub_users`. The logged-in session is a token stored under `currentUserToken`.
+- Passwords are stored in plain text in the browser. This is for demo purposes only. Replace `AuthService` with a real backend before any production use.
+- The contact form currently only logs submissions to the console.
+
+## Styling
+
+All styles are global and live in `src/assets/styles/main-styles.scss`. Each page uses its own BEM class prefix, for example `hp-` (home), `cd-` (course details), and `ct-` (contact). Colors, spacing, and fonts are defined in `variables.scss`. The layout is right-to-left, so prefer logical properties such as `margin-inline-start` over `left`/`right`.
+"# knowledgehub" 

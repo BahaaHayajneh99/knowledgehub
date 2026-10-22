@@ -50,7 +50,7 @@ export class AboutComponent {
       name: 'سارة الزهراني',
       role: 'مديرة المحتوى',
       bio: 'متخصصة في تصميم المناهج التعليمية وتطوير تجارب التعلم التفاعلية.',
-      avatar: 'assets/img/person-avatar-4.jpg',
+      avatar: 'assets/img/person-avatar-8.jpg',
     },
     {
       name: 'خالد العمري',
@@ -62,7 +62,7 @@ export class AboutComponent {
       name: 'نورة الشمري',
       role: 'مديرة تجربة المستخدم',
       bio: 'مصممة متخصصة في تحسين تجربة المستخدم وجعل التعلم ممتعاً وسلساً.',
-      avatar: 'assets/img/person-avatar-6.jpg',
+      avatar: 'assets/img/person-avatar-9.jpg',
     },
   ];
 }

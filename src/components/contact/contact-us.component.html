@@ -17,44 +17,82 @@
       <div class="ct-card">
 
         <!-- ── Form ───────────────────────────────────────────────────── -->
-        <form class="ct-form" (ngSubmit)="send()" #contactForm="ngForm" novalidate>
+        @if (sent) {
+        <div class="ct-success">
+          <div class="ct-success__icon">
+            <i class="pi pi-check"></i>
+          </div>
+          <h2 class="ct-success__title">تم إرسال رسالتك بنجاح</h2>
+          <p class="ct-success__desc">شكراً لتواصلك معنا، سيقوم فريقنا بالرد عليك خلال 24 ساعة.</p>
+          <button class="btn btn-outline" type="button" (click)="sendAnother()">إرسال رسالة أخرى</button>
+        </div>
+        } @else {
+        <form class="ct-form" (ngSubmit)="send(contactForm)" #contactForm="ngForm" novalidate>
 
           <div class="ct-form__row">
             <div class="ct-form__group">
-              <label class="ct-form__label">الاسم الأول</label>
-              <input class="ct-form__input" type="text" placeholder="أدخل الاسم الأول"
-                name="firstName" [(ngModel)]="model.firstName" required />
+              <label class="ct-form__label" for="ct-firstName">الاسم الأول</label>
+              <input id="ct-firstName" class="ct-form__input" type="text" placeholder="أدخل الاسم الأول"
+                name="firstName" [(ngModel)]="model.firstName" #firstName="ngModel" required
+                [class.ct-form__input--invalid]="firstName.invalid && (firstName.touched || submitted)" />
+              @if (firstName.invalid && (firstName.touched || submitted)) {
+              <span class="ct-form__error">الاسم الأول مطلوب</span>
+              }
             </div>
             <div class="ct-form__group">
-              <label class="ct-form__label">الاسم الأخير</label>
-              <input class="ct-form__input" type="text" placeholder="أدخل الاسم الأخير"
-                name="lastName" [(ngModel)]="model.lastName" required />
+              <label class="ct-form__label" for="ct-lastName">الاسم الأخير</label>
+              <input id="ct-lastName" class="ct-form__input" type="text" placeholder="أدخل الاسم الأخير"
+                name="lastName" [(ngModel)]="model.lastName" #lastName="ngModel" required
+                [class.ct-form__input--invalid]="lastName.invalid && (lastName.touched || submitted)" />
+              @if (lastName.invalid && (lastName.touched || submitted)) {
+              <span class="ct-form__error">الاسم الأخير مطلوب</span>
+              }
             </div>
           </div>
 
           <div class="ct-form__row">
             <div class="ct-form__group">
-              <label class="ct-form__label">البريد الإلكتروني</label>
-              <input class="ct-form__input" type="email" placeholder="أدخل بريدك الإلكتروني"
-                name="email" [(ngModel)]="model.email" required />
+              <label class="ct-form__label" for="ct-email">البريد الإلكتروني</label>
+              <input id="ct-email" class="ct-form__input" type="email" placeholder="أدخل بريدك الإلكتروني"
+                name="email" [(ngModel)]="model.email" #email="ngModel" required email
+                [class.ct-form__input--invalid]="email.invalid && (email.touched || submitted)" />
+              @if (email.invalid && (email.touched || submitted)) {
+              <span class="ct-form__error">
+                {{ email.errors?.['required'] ? 'البريد الإلكتروني مطلوب' : 'صيغة البريد الإلكتروني غير صحيحة' }}
+              </span>
+              }
             </div>
             <div class="ct-form__group">
-              <label class="ct-form__label">رقم الهاتف</label>
-              <input class="ct-form__input" type="number" placeholder="أدخل رقم هاتفك"
-                name="phone" [(ngModel)]="model.phone" />
+              <label class="ct-form__label" for="ct-phone">رقم الهاتف <span class="ct-form__optional">(اختياري)</span></label>
+              <input id="ct-phone" class="ct-form__input" type="tel" dir="ltr" placeholder="+962 7X XXX XXXX"
+                name="phone" [(ngModel)]="model.phone" #phone="ngModel" pattern="^\+?[0-9\s\-]{7,15}$"
+                [class.ct-form__input--invalid]="phone.invalid && (phone.touched || submitted)" />
+              @if (phone.invalid && (phone.touched || submitted)) {
+              <span class="ct-form__error">رقم الهاتف غير صحيح</span>
+              }
             </div>
           </div>
 
           <div class="ct-form__group">
-            <label class="ct-form__label">الموضوع</label>
-            <input class="ct-form__input" type="text" placeholder="أدخل الموضوع"
-              name="subject" [(ngModel)]="model.subject" required />
+            <label class="ct-form__label" for="ct-subject">الموضوع</label>
+            <input id="ct-subject" class="ct-form__input" type="text" placeholder="أدخل الموضوع"
+              name="subject" [(ngModel)]="model.subject" #subject="ngModel" required
+              [class.ct-form__input--invalid]="subject.invalid && (subject.touched || submitted)" />
+            @if (subject.invalid && (subject.touched || submitted)) {
+            <span class="ct-form__error">الموضوع مطلوب</span>
+            }
           </div>
 
           <div class="ct-form__group">
-            <label class="ct-form__label">الرسالة</label>
-            <textarea class="ct-form__input ct-form__textarea" placeholder="أدخل رسالتك هنا..."
-              name="message" [(ngModel)]="model.message" rows="5" required></textarea>
+            <label class="ct-form__label" for="ct-message">الرسالة</label>
+            <textarea id="ct-message" class="ct-form__input ct-form__textarea" placeholder="أدخل رسالتك هنا..."
+              name="message" [(ngModel)]="model.message" #message="ngModel" rows="5" required minlength="10"
+              [class.ct-form__input--invalid]="message.invalid && (message.touched || submitted)"></textarea>
+            @if (message.invalid && (message.touched || submitted)) {
+            <span class="ct-form__error">
+              {{ message.errors?.['required'] ? 'الرسالة مطلوبة' : 'يجب أن تحتوي الرسالة على 10 أحرف على الأقل' }}
+            </span>
+            }
           </div>
 
           <div class="ct-form__footer">
@@ -64,6 +102,7 @@
           </div>
 
         </form>
+        }
 
         <!-- ── Contact info ───────────────────────────────────────────── -->
         <aside class="ct-info">

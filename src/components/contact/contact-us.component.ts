@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 
 interface ContactModel {
   firstName: string;
@@ -18,16 +18,35 @@ interface ContactModel {
 })
 export class ContactUsComponent {
 
-  model: ContactModel = {
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    subject: '',
-    message: ''
-  };
+  model: ContactModel = this.emptyModel();
 
-  send(): void {
+  submitted = false;
+  sent = false;
+
+  send(form: NgForm): void {
+    this.submitted = true;
+    if (form.invalid) return;
+
     console.log('Contact form submitted:', this.model);
+
+    this.sent = true;
+    this.submitted = false;
+    this.model = this.emptyModel();
+    form.resetForm(this.model);
+  }
+
+  sendAnother(): void {
+    this.sent = false;
+  }
+
+  private emptyModel(): ContactModel {
+    return {
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      subject: '',
+      message: ''
+    };
   }
 }

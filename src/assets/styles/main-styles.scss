@@ -4618,6 +4618,22 @@ $_footer-divider: rgba(255, 255, 255, 0.12);
             border-color: $brand-primary;
             box-shadow: 0 0 0 3px rgba($brand-primary, 0.12);
         }
+
+        &--invalid,
+        &--invalid:focus {
+            border-color: $brand-danger;
+            box-shadow: 0 0 0 3px rgba($brand-danger, 0.12);
+        }
+    }
+
+    &__optional {
+        font-weight: normal;
+        color: $text-muted;
+    }
+
+    &__error {
+        font-size: $font-size-xs;
+        color: $brand-danger;
     }
 
     &__textarea {
@@ -4635,6 +4651,43 @@ $_footer-divider: rgba(255, 255, 255, 0.12);
     &__submit {
         padding: $space-sm $space-xl;
         min-width: 180px;
+    }
+}
+
+// ── Success state ─────────────────────────────────────────────────────────
+.ct-success {
+    padding: $space-xxl $space-xl;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: $space-md;
+    text-align: center;
+    border-inline-end: 1px solid $border-color;
+
+    &__icon {
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        background-color: rgba($brand-success, 0.15);
+        color: darken($brand-success, 25%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.6rem;
+    }
+
+    &__title {
+        font-size: 1.4rem;
+        font-weight: $font-weight-bold;
+        color: $text-primary;
+        margin: 0;
+    }
+
+    &__desc {
+        font-size: $font-size-md;
+        color: $text-muted;
+        margin: 0;
     }
 }
 
@@ -4734,7 +4787,8 @@ $_footer-divider: rgba(255, 255, 255, 0.12);
         grid-template-columns: 1fr;
     }
 
-    .ct-form {
+    .ct-form,
+    .ct-success {
         border-inline-end: none;
         border-bottom: 1px solid $border-color;
     }
