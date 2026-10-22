@@ -6,8 +6,8 @@
         <div class="container qd-header__inner">
           <h2 class="qd-header__title">{{ quiz.title }}</h2>
           <nav class="cd-breadcrumb">
-            <a routerLink="/"><i class="pi pi-home"></i></a>
-            <i class="pi pi-angle-left"></i>
+            <a routerLink="/"><nx-icon variant="svg" icon="nx-home" size="1em"></nx-icon></a>
+            <nx-icon variant="svg" icon="nx-chevron-left" size="1em"></nx-icon>
             <a routerLink="/quizzes">الاختبارات</a>
           </nav>
         </div>
@@ -99,7 +99,7 @@
   <div class="qd-finished" [class.qd-finished--passed]="passed" [class.qd-finished--failed]="!passed">
 
     <div class="qd-finished__icon" [class.qd-finished__icon--passed]="passed" [class.qd-finished__icon--failed]="!passed">
-      <i [class]="passed ? 'pi pi-trophy' : 'pi pi-times'"></i>
+      <nx-icon variant="svg" [icon]="passed ? 'nx-star' : 'nx-close'" size="1em"></nx-icon>
     </div>
 
     <h2 class="qd-finished__title">لقد أنهيت اختبارك</h2>
@@ -114,10 +114,10 @@
     @if (passed) {
       <div class="qd-finished__cert-row">
         <button class="qd-finished__cert-btn qd-finished__cert-btn--primary" (click)="viewQuizCertificate()">
-          <i class="pi pi-verified"></i> عرض الشهادة
+          <nx-icon variant="svg" icon="nx-check-circle" size="1em"></nx-icon> عرض الشهادة
         </button>
         <button class="qd-finished__cert-btn" (click)="downloadQuizCertificate()">
-          <i class="pi pi-download"></i> تحميل PDF
+          <nx-icon variant="svg" icon="nx-download" size="1em"></nx-icon> تحميل PDF
         </button>
       </div>
     }

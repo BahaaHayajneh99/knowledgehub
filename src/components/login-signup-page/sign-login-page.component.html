@@ -4,7 +4,7 @@
   <aside class="sl-side">
 
     <a class="sl-side__logo" routerLink="/">
-      <i class="pi pi-graduation-cap sl-side__logo-icon"></i>
+      <nx-icon variant="svg" icon="nx-book" size="1em" class="sl-side__logo-icon"></nx-icon>
       <span class="sl-side__logo-text">KnowledgeHub</span>
     </a>
 
@@ -57,14 +57,14 @@
 
             @if (loginError) {
               <div class="sl-alert sl-alert--error">
-                <i class="pi pi-exclamation-circle"></i> {{ loginError }}
+                <nx-icon variant="svg" icon="nx-alert-triangle" size="1em"></nx-icon> {{ loginError }}
               </div>
             }
 
             <div class="sl-field">
               <label class="sl-field__label">البريد الإلكتروني</label>
               <div class="sl-field__wrap" [class.sl-field__wrap--error]="loginSubmitted && !loginEmailValid">
-                <i class="pi pi-envelope sl-field__icon"></i>
+                <nx-icon variant="svg" icon="nx-mail" size="1em" class="sl-field__icon"></nx-icon>
                 <input class="sl-field__input" type="email" placeholder="example@email.com"
                   name="loginEmail" [(ngModel)]="loginForm.email" required />
               </div>
@@ -81,11 +81,11 @@
                 <a class="sl-field__forgot" href="#">نسيت كلمة المرور؟</a>
               </div>
               <div class="sl-field__wrap" [class.sl-field__wrap--error]="loginSubmitted && !loginPasswordValid">
-                <i class="pi pi-lock sl-field__icon"></i>
+                <nx-icon variant="svg" icon="nx-lock" size="1em" class="sl-field__icon"></nx-icon>
                 <input class="sl-field__input" [type]="showLoginPassword ? 'text' : 'password'" placeholder="••••••••"
                   name="loginPassword" [(ngModel)]="loginForm.password" required />
                 <button type="button" class="sl-field__toggle" (click)="showLoginPassword = !showLoginPassword" tabindex="-1">
-                  <i class="pi" [class.pi-eye]="!showLoginPassword" [class.pi-eye-slash]="showLoginPassword"></i>
+                  <nx-icon variant="svg" [icon]="showLoginPassword ? 'nx-eye-off' : 'nx-eye'" size="1em"></nx-icon>
                 </button>
               </div>
               @if (loginSubmitted && !loginForm.password) {
@@ -112,7 +112,7 @@
               متابعة مع Google
             </button>
             <button class="sl-social__btn">
-              <i class="pi pi-github" style="font-size:1.1rem"></i>
+              <nx-icon variant="svg" icon="nx-github" size="1em" style="font-size:1.1rem"></nx-icon>
               متابعة مع GitHub
             </button>
           </div>
@@ -137,14 +137,14 @@
 
             @if (signupError) {
               <div class="sl-alert sl-alert--error">
-                <i class="pi pi-exclamation-circle"></i> {{ signupError }}
+                <nx-icon variant="svg" icon="nx-alert-triangle" size="1em"></nx-icon> {{ signupError }}
               </div>
             }
 
             <div class="sl-field">
               <label class="sl-field__label">الاسم الكامل</label>
               <div class="sl-field__wrap" [class.sl-field__wrap--error]="signupSubmitted && !signupNameValid">
-                <i class="pi pi-user sl-field__icon"></i>
+                <nx-icon variant="svg" icon="nx-user" size="1em" class="sl-field__icon"></nx-icon>
                 <input class="sl-field__input" type="text" placeholder="أحمد محمد"
                   name="signupName" [(ngModel)]="signupForm.fullName" required />
               </div>
@@ -158,7 +158,7 @@
             <div class="sl-field">
               <label class="sl-field__label">البريد الإلكتروني</label>
               <div class="sl-field__wrap" [class.sl-field__wrap--error]="signupSubmitted && !signupEmailValid">
-                <i class="pi pi-envelope sl-field__icon"></i>
+                <nx-icon variant="svg" icon="nx-mail" size="1em" class="sl-field__icon"></nx-icon>
                 <input class="sl-field__input" type="email" placeholder="example@email.com"
                   name="signupEmail" [(ngModel)]="signupForm.email" required />
               </div>
@@ -172,11 +172,11 @@
             <div class="sl-field">
               <label class="sl-field__label">كلمة المرور</label>
               <div class="sl-field__wrap" [class.sl-field__wrap--error]="signupSubmitted && !signupPasswordValid">
-                <i class="pi pi-lock sl-field__icon"></i>
+                <nx-icon variant="svg" icon="nx-lock" size="1em" class="sl-field__icon"></nx-icon>
                 <input class="sl-field__input" [type]="showSignupPassword ? 'text' : 'password'" placeholder="8 أحرف على الأقل"
                   name="signupPassword" [(ngModel)]="signupForm.password" required />
                 <button type="button" class="sl-field__toggle" (click)="showSignupPassword = !showSignupPassword" tabindex="-1">
-                  <i class="pi" [class.pi-eye]="!showSignupPassword" [class.pi-eye-slash]="showSignupPassword"></i>
+                  <nx-icon variant="svg" [icon]="showSignupPassword ? 'nx-eye-off' : 'nx-eye'" size="1em"></nx-icon>
                 </button>
               </div>
               @if (signupSubmitted && !signupForm.password) {
@@ -189,11 +189,11 @@
             <div class="sl-field">
               <label class="sl-field__label">تأكيد كلمة المرور</label>
               <div class="sl-field__wrap" [class.sl-field__wrap--error]="signupSubmitted && !signupConfirmValid">
-                <i class="pi pi-lock sl-field__icon"></i>
+                <nx-icon variant="svg" icon="nx-lock" size="1em" class="sl-field__icon"></nx-icon>
                 <input class="sl-field__input" [type]="showSignupConfirm ? 'text' : 'password'" placeholder="أعد كتابة كلمة المرور"
                   name="signupConfirm" [(ngModel)]="signupForm.confirmPassword" required />
                 <button type="button" class="sl-field__toggle" (click)="showSignupConfirm = !showSignupConfirm" tabindex="-1">
-                  <i class="pi" [class.pi-eye]="!showSignupConfirm" [class.pi-eye-slash]="showSignupConfirm"></i>
+                  <nx-icon variant="svg" [icon]="showSignupConfirm ? 'nx-eye-off' : 'nx-eye'" size="1em"></nx-icon>
                 </button>
               </div>
               @if (signupSubmitted && !signupForm.confirmPassword) {

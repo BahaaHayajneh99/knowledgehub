@@ -23,7 +23,7 @@
     font-size: .85rem;
     margin-bottom: 1.25rem;
 
-    i { font-size: .8rem; }
+    nx-icon { font-size: .8rem; }
   }
 
   &__title {
@@ -50,7 +50,7 @@
     opacity: .75;
 
     span { display: inline-flex; align-items: center; gap: .35rem; }
-    i { font-size: .75rem; }
+    nx-icon { font-size: .75rem; }
   }
 }
 

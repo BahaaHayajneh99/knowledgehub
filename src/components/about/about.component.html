@@ -5,15 +5,15 @@
     <div class="container cd-hero__inner">
       <nav class="cd-breadcrumb">
         <a routerLink="/">الرئيسية</a>
-        <i class="pi pi-angle-left"></i>
+        <nx-icon variant="svg" icon="nx-chevron-left" size="1em"></nx-icon>
         <span>من نحن</span>
       </nav>
       <span class="badge badge-primary cd-hero__badge">من نحن</span>
       <h1 class="cd-hero__title">نحن KnowledgeHub</h1>
       <div class="cd-hero__meta">
-        <span><i class="pi pi-users"></i> أكثر من 250,000 طالب</span>
-        <span><i class="pi pi-book"></i> 500+ دورة تدريبية</span>
-        <span><i class="pi pi-verified"></i> منصة عربية معتمدة</span>
+        <span><nx-icon variant="svg" icon="nx-users" size="1em"></nx-icon> أكثر من 250,000 طالب</span>
+        <span><nx-icon variant="svg" icon="nx-book" size="1em"></nx-icon> 500+ دورة تدريبية</span>
+        <span><nx-icon variant="svg" icon="nx-check-circle" size="1em"></nx-icon> منصة عربية معتمدة</span>
       </div>
     </div>
   </section>
@@ -36,10 +36,10 @@
           انطلقنا عام 2020 برؤية واضحة: جعل التعليم الجيد في متناول كل متحدث.
         </p>
         <ul class="ab-mission__list">
-          <li><i class="pi pi-check-circle"></i> محتوى باللغة العربية بالكامل</li>
-          <li><i class="pi pi-check-circle"></i> مدرّسون معتمدون من كبرى الجامعات</li>
-          <li><i class="pi pi-check-circle"></i> تمارين تطبيقية وامتحانات تقييمية</li>
-          <li><i class="pi pi-check-circle"></i> مجتمع تعليمي داعم ونشط</li>
+          <li><nx-icon variant="svg" icon="nx-check-circle" size="1em"></nx-icon> محتوى باللغة العربية بالكامل</li>
+          <li><nx-icon variant="svg" icon="nx-check-circle" size="1em"></nx-icon> مدرّسون معتمدون من كبرى الجامعات</li>
+          <li><nx-icon variant="svg" icon="nx-check-circle" size="1em"></nx-icon> تمارين تطبيقية وامتحانات تقييمية</li>
+          <li><nx-icon variant="svg" icon="nx-check-circle" size="1em"></nx-icon> مجتمع تعليمي داعم ونشط</li>
         </ul>
         <a class="btn btn-primary" routerLink="/courses">استعرض الدورات</a>
       </div>
@@ -53,7 +53,7 @@
       <div class="ab-stats__grid">
         @for (stat of stats; track stat.label) {
           <div class="ab-stats__item">
-            <div class="ab-stats__icon"><i class="pi {{ stat.icon }}"></i></div>
+            <div class="ab-stats__icon"><nx-icon variant="svg" [icon]="stat.icon" size="1em"></nx-icon></div>
             <span class="ab-stats__number">{{ stat.value }}</span>
             <span class="ab-stats__label">{{ stat.label }}</span>
           </div>
@@ -74,7 +74,7 @@
       <div class="ab-values__grid">
         @for (v of values; track v.title) {
           <div class="ab-value-card">
-            <div class="ab-value-card__icon"><i class="pi {{ v.icon }}"></i></div>
+            <div class="ab-value-card__icon"><nx-icon variant="svg" [icon]="v.icon" size="1em"></nx-icon></div>
             <h3 class="ab-value-card__title">{{ v.title }}</h3>
             <p class="ab-value-card__desc">{{ v.desc }}</p>
           </div>
@@ -101,8 +101,8 @@
               <p class="ab-team-card__role">{{ m.role }}</p>
               <p class="ab-team-card__bio">{{ m.bio }}</p>
               <div class="ab-team-card__social">
-                <a href="#" class="ab-team-card__social-link" aria-label="LinkedIn"><i class="pi pi-linkedin"></i></a>
-                <a href="#" class="ab-team-card__social-link" aria-label="Twitter"><i class="pi pi-twitter"></i></a>
+                <a href="#" class="ab-team-card__social-link" aria-label="LinkedIn"><nx-icon variant="svg" icon="nx-linkedin" size="1em"></nx-icon></a>
+                <a href="#" class="ab-team-card__social-link" aria-label="Twitter"><nx-icon variant="svg" icon="nx-x-twitter" size="1em"></nx-icon></a>
               </div>
             </div>
           </div>

@@ -1,4 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
+import { NxIcon } from 'nexium-ui';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { QuizzesService } from '../quizzes.service';
 import { NgClass } from '@angular/common';
@@ -15,7 +16,7 @@ export interface QuizQuestion {
 
 @Component({
   selector: 'app-quizzes-details',
-  imports: [RouterModule, NgClass, CertificateModalComponent],
+  imports: [NxIcon, RouterModule, NgClass, CertificateModalComponent],
   templateUrl: './quizzes-details.component.html',
   styleUrl: './quizzes-details.component.scss'
 })

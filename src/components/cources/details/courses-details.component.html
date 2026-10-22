@@ -6,9 +6,9 @@
     <div class="container cd-hero__inner">
       <nav class="cd-breadcrumb">
         <a routerLink="/">الرئيسية</a>
-        <i class="pi pi-angle-left"></i>
+        <nx-icon variant="svg" icon="nx-chevron-left" size="1em"></nx-icon>
         <a routerLink="/courses">الدورات</a>
-        <i class="pi pi-angle-left"></i>
+        <nx-icon variant="svg" icon="nx-chevron-left" size="1em"></nx-icon>
         <span>{{ course.category }}</span>
       </nav>
       <span class="badge badge-primary cd-hero__badge">{{ course.category }}</span>
@@ -16,19 +16,19 @@
       <div class="cd-hero__meta">
         <span class="cd-hero__stars">
           @for (_ of fullStars; track $index) {
-            <i class="pi pi-star-fill cd-star cd-star--full"></i>
+            <nx-icon variant="svg" icon="nx-star" size="1em" class="cd-star cd-star--full nx-icon--filled"></nx-icon>
           }
           @if (hasHalfStar) {
-            <i class="pi pi-star-half-fill cd-star cd-star--half"></i>
+            <nx-icon variant="svg" icon="nx-star" size="1em" class="cd-star cd-star--half nx-icon--filled"></nx-icon>
           }
           @for (_ of emptyStars; track $index) {
-            <i class="pi pi-star cd-star cd-star--empty"></i>
+            <nx-icon variant="svg" icon="nx-star" size="1em" class="cd-star cd-star--empty"></nx-icon>
           }
           <span class="cd-hero__rate">{{ course.rate }}</span>
         </span>
-        <span><i class="pi pi-users"></i> ٢٬٤٠٠+ طالب</span>
-        <span><i class="pi pi-video"></i> {{ course.numberOfLessons }} درساً</span>
-        <span><i class="pi pi-user"></i> {{ course.author }}</span>
+        <span><nx-icon variant="svg" icon="nx-users" size="1em"></nx-icon> ٢٬٤٠٠+ طالب</span>
+        <span><nx-icon variant="svg" icon="nx-video" size="1em"></nx-icon> {{ course.numberOfLessons }} درساً</span>
+        <span><nx-icon variant="svg" icon="nx-user" size="1em"></nx-icon> {{ course.author }}</span>
       </div>
     </div>
   </section>
@@ -45,7 +45,7 @@
         <p class="cd-desc">{{ course.description }}</p>
         <ul class="cd-outcomes">
           @for (o of outcomes; track $index) {
-            <li><i class="pi pi-check-circle"></i> {{ o }}</li>
+            <li><nx-icon variant="svg" icon="nx-check-circle" size="1em"></nx-icon> {{ o }}</li>
           }
         </ul>
       </section>
@@ -58,7 +58,7 @@
           @for (chapter of curriculum; track $index) {
             <li class="cd-chapter">
               <div class="cd-chapter__header">
-                <span class="cd-chapter__icon"><i class="pi pi-folder"></i></span>
+                <span class="cd-chapter__icon"><nx-icon variant="svg" icon="nx-folder" size="1em"></nx-icon></span>
                 <span class="cd-chapter__title">{{ chapter.title }}</span>
                 <span class="cd-chapter__meta">{{ chapter.lessons }} دروس · {{ chapter.duration }}</span>
               </div>
@@ -75,10 +75,10 @@
             <span class="cd-rating__big">{{ course.rate }}</span>
             <div class="cd-rating__stars">
               @for (_ of fullStars; track $index) {
-                <i class="pi pi-star-fill cd-star cd-star--full"></i>
+                <nx-icon variant="svg" icon="nx-star" size="1em" class="cd-star cd-star--full nx-icon--filled"></nx-icon>
               }
               @if (hasHalfStar) {
-                <i class="pi pi-star-half-fill cd-star cd-star--half"></i>
+                <nx-icon variant="svg" icon="nx-star" size="1em" class="cd-star cd-star--half nx-icon--filled"></nx-icon>
               }
             </div>
             <span class="cd-rating__label">تقييم الدورة</span>
@@ -91,7 +91,7 @@
                 </div>
                 <span class="cd-rating__bar-stars">
                   @for (i of [1,2,3,4,5]; track i) {
-                    <i class="pi" [class.pi-star-fill]="i <= row.stars" [class.pi-star]="i > row.stars" [class.cd-star--full]="i <= row.stars"></i>
+                    <nx-icon variant="svg" icon="nx-star" size="1em" [class.nx-icon--filled]="i <= row.stars" [class.cd-star--full]="i <= row.stars"></nx-icon>
                   }
                 </span>
                 <span class="cd-rating__percent">{{ row.percent }}%</span>
@@ -114,7 +114,7 @@
                   <span class="card-meta">{{ review.date }}</span>
                   <div class="cd-review__stars">
                     @for (i of [1,2,3,4,5]; track i) {
-                      <i class="pi" [class.pi-star-fill]="i <= review.rate" [class.pi-star]="i > review.rate" [class.cd-star--full]="i <= review.rate"></i>
+                      <nx-icon variant="svg" icon="nx-star" size="1em" [class.nx-icon--filled]="i <= review.rate" [class.cd-star--full]="i <= review.rate"></nx-icon>
                     }
                   </div>
                 </div>
@@ -141,28 +141,28 @@
         <a class="btn btn-primary w-100 cd-price-card__buy" [routerLink]="['/courses/checkout']">اشترِ الآن</a>
         <button class="btn btn-outline w-100">أضف للمفضلة</button>
 
-        <p class="cd-price-card__note"><i class="pi pi-clock"></i> العرض ينتهي قريباً!</p>
+        <p class="cd-price-card__note"><nx-icon variant="svg" icon="nx-clock" size="1em"></nx-icon> العرض ينتهي قريباً!</p>
 
         <!-- What's included -->
         <hr class="divider">
         <h4 class="cd-price-card__section-title">تشمل هذه الدورة</h4>
         <ul class="cd-includes">
-          <li><i class="pi pi-play-circle"></i> {{ course.numberOfLessons }} درساً مرئياً</li>
-          <li><i class="pi pi-info"></i> وصول مدى الحياة</li>
-          <li><i class="pi pi-mobile"></i> متاح على الجوال والكمبيوتر</li>
-          <li><i class="pi pi-download"></i> ملفات ومصادر قابلة للتنزيل</li>
-          <li><i class="pi pi-verified"></i> شهادة إتمام معتمدة</li>
-          <li><i class="pi pi-comments"></i> دعم مباشر من المدرّب</li>
+          <li><nx-icon variant="svg" icon="nx-video" size="1em"></nx-icon> {{ course.numberOfLessons }} درساً مرئياً</li>
+          <li><nx-icon variant="svg" icon="nx-info-circle" size="1em"></nx-icon> وصول مدى الحياة</li>
+          <li><nx-icon variant="svg" icon="nx-smartphone" size="1em"></nx-icon> متاح على الجوال والكمبيوتر</li>
+          <li><nx-icon variant="svg" icon="nx-download" size="1em"></nx-icon> ملفات ومصادر قابلة للتنزيل</li>
+          <li><nx-icon variant="svg" icon="nx-check-circle" size="1em"></nx-icon> شهادة إتمام معتمدة</li>
+          <li><nx-icon variant="svg" icon="nx-message" size="1em"></nx-icon> دعم مباشر من المدرّب</li>
         </ul>
 
         <!-- Share -->
         <hr class="divider">
         <h4 class="cd-price-card__section-title">شارك الدورة</h4>
         <div class="cd-share">
-          <a class="cd-share__icon cd-share__icon--fb"  href="#" aria-label="Facebook"><i class="pi pi-facebook"></i></a>
-          <a class="cd-share__icon cd-share__icon--tw"  href="#" aria-label="Twitter"><i class="pi pi-twitter"></i></a>
-          <a class="cd-share__icon cd-share__icon--wa"  href="#" aria-label="WhatsApp"><i class="pi pi-whatsapp"></i></a>
-          <a class="cd-share__icon cd-share__icon--li"  href="#" aria-label="LinkedIn"><i class="pi pi-linkedin"></i></a>
+          <a class="cd-share__icon cd-share__icon--fb"  href="#" aria-label="Facebook"><nx-icon variant="svg" icon="nx-facebook" size="1em"></nx-icon></a>
+          <a class="cd-share__icon cd-share__icon--tw"  href="#" aria-label="Twitter"><nx-icon variant="svg" icon="nx-x-twitter" size="1em"></nx-icon></a>
+          <a class="cd-share__icon cd-share__icon--wa"  href="#" aria-label="WhatsApp"><nx-icon variant="svg" icon="nx-whatsapp" size="1em"></nx-icon></a>
+          <a class="cd-share__icon cd-share__icon--li"  href="#" aria-label="LinkedIn"><nx-icon variant="svg" icon="nx-linkedin" size="1em"></nx-icon></a>
         </div>
 
       </div>
@@ -227,7 +227,7 @@
 </div><!-- /cd -->
 } @else {
   <div class="container" style="padding: 4rem 0; text-align: center;">
-    <i class="pi pi-exclamation-triangle" style="font-size:3rem; color:#f7971e; display:block; margin-bottom:1rem;"></i>
+    <nx-icon variant="svg" icon="nx-alert-triangle" size="1em" style="font-size:3rem; color:#f7971e; display:block; margin-bottom:1rem;"></nx-icon>
     <h2>الدورة غير موجودة</h2>
     <a class="btn btn-primary" routerLink="/courses" style="margin-top:1.5rem; display:inline-flex;">العودة للدورات</a>
   </div>

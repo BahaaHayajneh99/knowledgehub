@@ -1,6 +1,6 @@
 # KnowledgeHub
 
-KnowledgeHub is an Arabic (RTL) e-learning platform front end built with Angular 19. It offers courses, learning paths, quizzes, a blog, and a user profile with certificates.
+KnowledgeHub is an Arabic (RTL) e-learning platform front end built with Angular 21. It offers courses, learning paths, quizzes, a blog, and a user profile with certificates.
 
 > **Note:** This is a front-end-only project. All data (courses, quizzes, blogs, paths) is hard-coded in Angular services, and user accounts are stored in the browser's `localStorage`. There is no backend or API yet.
 
@@ -16,17 +16,17 @@ KnowledgeHub is an Arabic (RTL) e-learning platform front end built with Angular
 
 ## Tech stack
 
-- [Angular 19](https://angular.dev) (standalone components plus lazy-loaded feature modules)
-- [PrimeNG 19](https://primeng.org) and [PrimeIcons](https://primeng.org/icons)
+- [Angular 21](https://angular.dev) (standalone components plus lazy-loaded feature modules)
+- [nexium-ui](https://www.npmjs.com/package/nexium-ui) for UI components (`nx-icon` icons, `nx-carousel`)
 - SCSS with a shared design system (`src/assets/styles`)
-- TypeScript 5.7, RxJS 7.8
+- TypeScript 5.9, RxJS 7.8
 - Karma and Jasmine for unit tests
 
 ## Getting started
 
 ### Prerequisites
 
-- Node.js 18.19+ or 20+
+- Node.js 20.19+, 22.12+, or 24+ (required by Angular 21)
 - npm
 
 ### Install and run
@@ -71,10 +71,11 @@ src/
 │   ├── privacy/             # Privacy Policy
 │   ├── profile/             # Profile, certificates modal
 │   ├── quizzes/             # Quizzes: list, categories, details (lazy-loaded module)
-│   ├── shared/              # Shared components (cards)
+│   ├── shared/              # Shared card component and carousel-pages pipe
 │   └── terms/               # Terms & Conditions
 ├── assets/
 │   ├── fonts/               # Segoe UI
+│   ├── icons/               # favicon.svg
 │   ├── img/                 # Course, blog, quiz, and avatar images
 │   └── styles/              # variables.scss, mixins.scss, main-styles.scss
 ├── index.html               # lang="ar" dir="rtl"
@@ -113,4 +114,9 @@ src/
 ## Styling
 
 All styles are global and live in `src/assets/styles/main-styles.scss`. Each page uses its own BEM class prefix, for example `hp-` (home), `cd-` (course details), and `ct-` (contact). Colors, spacing, and fonts are defined in `variables.scss`. The layout is right-to-left, so prefer logical properties such as `margin-inline-start` over `left`/`right`.
-"# knowledgehub" 
+
+### Icons and carousels
+
+- Icons use `nexium-ui`'s icon component, for example `<nx-icon variant="svg" icon="nx-mail" size="1em"></nx-icon>`. Import `NxIcon` from `nexium-ui` in the component.
+- Carousels use `<nx-carousel>` with the `carouselPages` pipe, which groups items into pages of 1–3 cards depending on screen width. The carousel is set to `dir="ltr"` and each page to `dir="rtl"`, because its sliding track doesn't support right-to-left layouts. Carousel styles live in the `kh-carousel` section of `main-styles.scss`.
+- The `nexium-ui` stylesheet is loaded through the `styles` array in `angular.json`.

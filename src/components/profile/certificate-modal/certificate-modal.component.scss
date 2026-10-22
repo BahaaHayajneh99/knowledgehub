@@ -163,7 +163,7 @@
   pointer-events: none;
   z-index: 0;
 
-  i {
+  nx-icon {
     font-size: 30vw;
     color: rgba(77, 217, 207, 0.04);
   }
@@ -382,7 +382,7 @@
     box-shadow: 0 4px 14px rgba(184,134,11,0.35);
     border: 2px solid rgba(255,255,255,0.6);
 
-    i { font-size: 1.4rem; color: #fff; }
+    nx-icon { font-size: 1.4rem; color: #fff; }
   }
 
   &__date {

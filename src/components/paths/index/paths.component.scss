@@ -34,7 +34,7 @@ $path-gradients: (
     font-size: .85rem;
     margin-bottom: 1.5rem;
 
-    i { font-size: .8rem; }
+    nx-icon { font-size: .8rem; }
   }
 
   &__title {
@@ -172,7 +172,7 @@ $path-gradients: (
     padding: .25rem .65rem;
     border-radius: 20px;
 
-    i { font-size: .72rem; }
+    nx-icon { font-size: .72rem; }
   }
 
   // ── Footer ────────────────────────────────────────────────────
@@ -184,7 +184,7 @@ $path-gradients: (
     width: 100%;
     justify-content: center;
     gap: .4rem;
-    i { font-size: .8rem; }
+    nx-icon { font-size: .8rem; }
   }
 }
 
@@ -229,7 +229,7 @@ $path-gradients: (
     font-size: .92rem;
     color: #444;
 
-    i {
+    nx-icon {
       color: #22c55e;
       font-size: 1rem;
       flex-shrink: 0;

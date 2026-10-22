@@ -25,26 +25,25 @@
                         كل يوم.</div>
                 </div>
             </div>
-            <p-carousel
-                [value]="trending"
-                [numVisible]="3"
-                [numScroll]="1"
-                [circular]="true"
-                [responsiveOptions]="responsiveOptions">
-                <ng-template let-p pTemplate="item">
-                    <app-shared-card
-                        style="margin: 0 .5rem"
-                        [image]="p.image"
-                        [title]="p.title"
-                        [category]="p.category"
-                        [detailRoute]="['/blogs/details', p.id]"
-                        [author]="p.author"
-                        [authorAvatar]="p.authorAvatar"
-                        [readTime]="p.readTime"
-                        [date]="p.date">
-                    </app-shared-card>
-                </ng-template>
-            </p-carousel>
+            <nx-carousel class="kh-carousel" dir="ltr" autoplay [interval]="5000">
+              @for (page of trending | carouselPages : 3 : viewportWidth(); track $index) {
+                <div *nxCarouselSlide class="kh-carousel__page" dir="rtl">
+                  @for (p of page; track p.id) {
+                        <app-shared-card
+                           
+                            [image]="p.image"
+                            [title]="p.title"
+                            [category]="p.category"
+                            [detailRoute]="['/blogs/details', p.id]"
+                            [author]="p.author"
+                            [authorAvatar]="p.authorAvatar"
+                            [readTime]="p.readTime"
+                            [date]="p.date">
+                        </app-shared-card>
+                  }
+                </div>
+              }
+            </nx-carousel>
         </div>
     </section>
 
@@ -59,26 +58,25 @@
                     </div>
                 </div>
             </div>
-            <p-carousel
-                [value]="related"
-                [numVisible]="2"
-                [numScroll]="1"
-                [circular]="true"
-                [responsiveOptions]="responsiveOptions">
-                <ng-template let-p pTemplate="item">
-                    <app-shared-card
-                        style="margin: 0 .5rem"
-                        [image]="p.image"
-                        [title]="p.title"
-                        [category]="p.category"
-                        [detailRoute]="['/blogs/details', p.id]"
-                        [author]="p.author"
-                        [authorAvatar]="p.authorAvatar"
-                        [readTime]="p.readTime"
-                        [date]="p.date">
-                    </app-shared-card>
-                </ng-template>
-            </p-carousel>
+            <nx-carousel class="kh-carousel" dir="ltr" autoplay [interval]="5000">
+              @for (page of related | carouselPages : 2 : viewportWidth(); track $index) {
+                <div *nxCarouselSlide class="kh-carousel__page" dir="rtl">
+                  @for (p of page; track p.id) {
+                        <app-shared-card
+                           
+                            [image]="p.image"
+                            [title]="p.title"
+                            [category]="p.category"
+                            [detailRoute]="['/blogs/details', p.id]"
+                            [author]="p.author"
+                            [authorAvatar]="p.authorAvatar"
+                            [readTime]="p.readTime"
+                            [date]="p.date">
+                        </app-shared-card>
+                  }
+                </div>
+              }
+            </nx-carousel>
         </div>
     </section>
 
@@ -93,26 +91,25 @@
                     </div>
                 </div>
             </div>
-            <p-carousel
-                [value]="allPosts"
-                [numVisible]="3"
-                [numScroll]="1"
-                [circular]="true"
-                [responsiveOptions]="responsiveOptions">
-                <ng-template let-p pTemplate="item">
-                    <app-shared-card
-                        style="margin: 0 .5rem"
-                        [image]="p.image"
-                        [title]="p.title"
-                        [category]="p.category"
-                        [detailRoute]="['/blogs/details', p.id]"
-                        [author]="p.author"
-                        [authorAvatar]="p.authorAvatar"
-                        [readTime]="p.readTime"
-                        [date]="p.date">
-                    </app-shared-card>
-                </ng-template>
-            </p-carousel>
+            <nx-carousel class="kh-carousel" dir="ltr" autoplay [interval]="5000">
+              @for (page of allPosts | carouselPages : 3 : viewportWidth(); track $index) {
+                <div *nxCarouselSlide class="kh-carousel__page" dir="rtl">
+                  @for (p of page; track p.id) {
+                        <app-shared-card
+                           
+                            [image]="p.image"
+                            [title]="p.title"
+                            [category]="p.category"
+                            [detailRoute]="['/blogs/details', p.id]"
+                            [author]="p.author"
+                            [authorAvatar]="p.authorAvatar"
+                            [readTime]="p.readTime"
+                            [date]="p.date">
+                        </app-shared-card>
+                  }
+                </div>
+              }
+            </nx-carousel>
         </div>
     </section>
 

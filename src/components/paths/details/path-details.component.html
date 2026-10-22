@@ -8,15 +8,15 @@
       <!-- Breadcrumb -->
       <nav class="pth-breadcrumb" aria-label="breadcrumb">
         <a routerLink="/">الرئيسية</a>
-        <i class="pi pi-angle-left"></i>
+        <nx-icon variant="svg" icon="nx-chevron-left" size="1em"></nx-icon>
         <a routerLink="/paths">مسارات التعلم</a>
-        <i class="pi pi-angle-left"></i>
+        <nx-icon variant="svg" icon="nx-chevron-left" size="1em"></nx-icon>
         <span>{{ path.title }}</span>
       </nav>
 
       <div class="pth-hero__content">
         <div class="pth-hero__icon-wrap">
-          <i class="pi {{ path.icon }}"></i>
+          <nx-icon variant="svg" [icon]="path.icon" size="1em"></nx-icon>
         </div>
         <h1 class="pth-hero__title">{{ path.title }}</h1>
         <p class="pth-hero__subtitle">{{ path.subtitle }}</p>
@@ -24,18 +24,18 @@
         <div class="pth-hero__meta">
           <span class="badge badge-primary">{{ path.level }}</span>
           <span class="pth-hero__stat">
-            <i class="pi pi-book"></i> {{ path.totalCourses }} دورات
+            <nx-icon variant="svg" icon="nx-book" size="1em"></nx-icon> {{ path.totalCourses }} دورات
           </span>
           <span class="pth-hero__stat">
-            <i class="pi pi-clock"></i> {{ path.duration }}
+            <nx-icon variant="svg" icon="nx-clock" size="1em"></nx-icon> {{ path.duration }}
           </span>
           <span class="pth-hero__stat">
-            <i class="pi pi-desktop"></i> {{ path.totalLessons }} درس
+            <nx-icon variant="svg" icon="nx-monitor" size="1em"></nx-icon> {{ path.totalLessons }} درس
           </span>
         </div>
 
         <a class="btn btn-primary pth-hero__cta" routerLink="/register">
-          <i class="pi pi-play-circle"></i>
+          <nx-icon variant="svg" icon="nx-video" size="1em"></nx-icon>
           ابدأ المسار الآن مجاناً
         </a>
       </div>
@@ -67,7 +67,7 @@
       <div class="pth-outcomes__grid">
         @for (outcome of path.outcomes; track $index) {
           <div class="pth-outcome-item">
-            <i class="pi pi-check-circle pth-outcome-item__icon"></i>
+            <nx-icon variant="svg" icon="nx-check-circle" size="1em" class="pth-outcome-item__icon"></nx-icon>
             <span>{{ outcome }}</span>
           </div>
         }
@@ -86,7 +86,7 @@
       <ul class="pth-prereqs__list">
         @for (req of path.prerequisites; track $index) {
           <li class="pth-prereqs__item">
-            <i class="pi pi-info-circle"></i>
+            <nx-icon variant="svg" icon="nx-info-circle" size="1em"></nx-icon>
             {{ req }}
           </li>
         }
@@ -112,7 +112,7 @@
             <div class="pth-course-row__info">
               <span class="pth-course-row__title">{{ course.title }}</span>
               <div class="pth-course-row__meta">
-                <span><i class="pi pi-clock"></i> {{ course.duration }}</span>
+                <span><nx-icon variant="svg" icon="nx-clock" size="1em"></nx-icon> {{ course.duration }}</span>
                 <span class="badge badge-primary">{{ course.level }}</span>
               </div>
             </div>
@@ -136,11 +136,11 @@
         </p>
         <div class="pth-cta__btns">
           <a class="btn btn-primary" routerLink="/register">
-            <i class="pi pi-user-plus"></i>
+            <nx-icon variant="svg" icon="nx-user-plus" size="1em"></nx-icon>
             سجّل مجاناً
           </a>
           <a class="btn btn-outline" routerLink="/paths">
-            <i class="pi pi-arrow-right"></i>
+            <nx-icon variant="svg" icon="nx-arrow-right" size="1em"></nx-icon>
             عرض مسارات أخرى
           </a>
         </div>
@@ -151,11 +151,11 @@
 </div>
 } @else {
 <div class="container" style="padding:5rem 0;text-align:center">
-  <i class="pi pi-exclamation-triangle" style="font-size:3.5rem;color:#f7971e;display:block;margin-bottom:1rem"></i>
+  <nx-icon variant="svg" icon="nx-alert-triangle" size="1em" style="font-size:3.5rem;color:#f7971e;display:block;margin-bottom:1rem"></nx-icon>
   <h2>المسار غير موجود</h2>
   <p style="color:#666;margin:.75rem 0 1.5rem">عذراً، لم يتم العثور على هذا المسار التعليمي.</p>
   <a class="btn btn-primary" routerLink="/paths" style="display:inline-flex;align-items:center;gap:.4rem">
-    <i class="pi pi-arrow-right"></i>
+    <nx-icon variant="svg" icon="nx-arrow-right" size="1em"></nx-icon>
     عرض جميع المسارات
   </a>
 </div>

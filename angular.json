@@ -29,7 +29,8 @@
                 "src/assets"
               ],
             "styles": [
-            "src/styles.scss"
+              "node_modules/nexium-ui/styles.css",
+              "src/styles.scss"
             ],
             "scripts": []
           },
@@ -88,6 +89,7 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/nexium-ui/styles.css",
               "src/styles.scss"
             ],
             "scripts": []

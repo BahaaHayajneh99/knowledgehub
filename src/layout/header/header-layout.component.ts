@@ -1,10 +1,11 @@
 import { Component, inject, HostListener } from '@angular/core';
+import { NxIcon } from 'nexium-ui';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../components/guard/auth/auth.service';
 
 @Component({
   selector: 'app-header-layout',
-  imports: [RouterLink],
+  imports: [NxIcon, RouterLink],
   templateUrl: './header-layout.component.html',
   styleUrl: './header-layout.component.scss'
 })

@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges, ElementRef, ViewChild } from '@angular/core';
+import { NxIcon } from 'nexium-ui';
 
 export interface CertData {
   title: string;
@@ -10,7 +11,7 @@ export interface CertData {
 
 @Component({
   selector: 'app-certificate-modal',
-  imports: [],
+  imports: [NxIcon, ],
   templateUrl: './certificate-modal.component.html',
   styleUrl: './certificate-modal.component.scss'
 })

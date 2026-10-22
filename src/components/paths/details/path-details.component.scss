@@ -34,7 +34,7 @@ $path-gradients: (
 
   span { color: #fff; font-weight: 600; }
 
-  i {
+  nx-icon {
     font-size: .65rem;
     // flip arrow for RTL
     transform: scaleX(-1);
@@ -68,7 +68,7 @@ $path-gradients: (
     justify-content: center;
     margin-bottom: 1.5rem;
 
-    i { font-size: 2.2rem; }
+    nx-icon { font-size: 2.2rem; }
   }
 
   &__title {
@@ -100,7 +100,7 @@ $path-gradients: (
     font-size: .9rem;
     opacity: .9;
 
-    i { font-size: .8rem; }
+    nx-icon { font-size: .8rem; }
   }
 
   &__cta {
@@ -188,7 +188,7 @@ $path-gradients: (
     border-radius: 10px;
     padding: .9rem 1.25rem;
 
-    i { color: #f7971e; font-size: 1.05rem; flex-shrink: 0; }
+    nx-icon { color: #f7971e; font-size: 1.05rem; flex-shrink: 0; }
   }
 }
 
@@ -252,7 +252,7 @@ $path-gradients: (
     color: #666;
 
     span { display: inline-flex; align-items: center; gap: .25rem; }
-    i { font-size: .75rem; }
+    nx-icon { font-size: .75rem; }
   }
 
   &__btn {

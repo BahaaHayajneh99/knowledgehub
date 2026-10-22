@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
+import { NxIcon } from 'nexium-ui';
 import { RouterModule } from '@angular/router';
 import { NgClass } from '@angular/common';
 import { PathsService, LearningPath } from '../paths.service';
 
 @Component({
   selector: 'app-paths',
-  imports: [RouterModule, NgClass],
+  imports: [NxIcon, RouterModule, NgClass],
   templateUrl: './paths.component.html',
   styleUrl: './paths.component.scss',
 })

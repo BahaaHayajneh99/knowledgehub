@@ -1,13 +1,14 @@
-import { Component, inject, OnInit, AfterViewInit, OnDestroy, ElementRef } from '@angular/core';
+import { Component, inject, OnInit, AfterViewInit, OnDestroy, ElementRef, HostListener, signal } from '@angular/core';
+import { NxCarousel, NxCarouselSlideDirective, NxIcon } from 'nexium-ui';
 
 import { RouterLink } from '@angular/router';
-import {CarouselModule } from 'primeng/carousel';
 import { BlogPost, BlogsService } from '../components/blogs/blogs.service';
 import { SharedCardComponent } from '../components/shared/card/shared-card.component';
+import { CarouselPagesPipe } from '../components/shared/carousel/carousel-pages.pipe';
 
 @Component({
   selector: 'app-home',
-  imports: [RouterLink, CarouselModule, SharedCardComponent],
+  imports: [NxIcon, NxCarousel, NxCarouselSlideDirective, CarouselPagesPipe, RouterLink, SharedCardComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -17,11 +18,13 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   private observer!: IntersectionObserver;
   allBlogs: BlogPost[] = [];
 
-  responsiveOptions = [
-    { breakpoint: '1400px', numVisible: 3, numScroll: 1 },
-    { breakpoint: '1199px', numVisible: 2, numScroll: 1 },
-    { breakpoint: '767px',  numVisible: 1, numScroll: 1 },
-  ];
+  // Drives how many cards each carousel page holds (see CarouselPagesPipe)
+  viewportWidth = signal(window.innerWidth);
+
+  @HostListener('window:resize')
+  onResize(): void {
+    this.viewportWidth.set(window.innerWidth);
+  }
 
   coursesCount = 0;
   courcesNumber = 500;

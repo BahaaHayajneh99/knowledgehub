@@ -8,15 +8,15 @@
       <!-- Breadcrumb -->
       <nav class="sp-breadcrumb" aria-label="breadcrumb">
         <a routerLink="/">الرئيسية</a>
-        <i class="pi pi-angle-left"></i>
+        <nx-icon variant="svg" icon="nx-chevron-left" size="1em"></nx-icon>
         <a routerLink="/courses">الدورات</a>
-        <i class="pi pi-angle-left"></i>
+        <nx-icon variant="svg" icon="nx-chevron-left" size="1em"></nx-icon>
         <span>{{ specialty.title }}</span>
       </nav>
 
       <div class="sp-hero__content">
         <div class="sp-hero__icon-wrap">
-          <i class="pi {{ specialty.icon }}"></i>
+          <nx-icon variant="svg" [icon]="specialty.icon" size="1em"></nx-icon>
         </div>
         <h1 class="sp-hero__title">{{ specialty.title }}</h1>
         <p class="sp-hero__subtitle">{{ specialty.subtitle }}</p>
@@ -56,11 +56,11 @@
       <!-- toolbar -->
       <div class="sp-toolbar">
         <span class="sp-toolbar__count">
-          <i class="pi pi-book"></i>
+          <nx-icon variant="svg" icon="nx-book" size="1em"></nx-icon>
           {{ courses.length }} دورة متاحة
         </span>
         <a class="btn btn-outline sp-toolbar__all-btn" routerLink="/courses">
-          <i class="pi pi-th-large"></i>
+          <nx-icon variant="svg" icon="nx-grid" size="1em"></nx-icon>
           كل الدورات
         </a>
       </div>
@@ -90,7 +90,7 @@
           <button class="sp-pagination__btn"
                   [disabled]="currentPage === 1"
                   (click)="setPage(currentPage - 1)">
-            <i class="pi pi-angle-right"></i>
+            <nx-icon variant="svg" icon="nx-chevron-right" size="1em"></nx-icon>
           </button>
 
           @for (page of pages; track page) {
@@ -104,7 +104,7 @@
           <button class="sp-pagination__btn"
                   [disabled]="currentPage === totalPages"
                   (click)="setPage(currentPage + 1)">
-            <i class="pi pi-angle-left"></i>
+            <nx-icon variant="svg" icon="nx-chevron-left" size="1em"></nx-icon>
           </button>
         </div>
       }
@@ -124,7 +124,7 @@
         @for (s of svc.specialties; track s.slug) {
           @if (s.slug !== specialty.slug) {
             <a class="sp-other-card" [routerLink]="['/courses', s.slug]" [ngClass]="s.colorClass">
-              <i class="pi {{ s.icon }} sp-other-card__icon"></i>
+              <nx-icon variant="svg" [icon]="s.icon" size="1em" class="sp-other-card__icon"></nx-icon>
               <span class="sp-other-card__title">{{ s.title }}</span>
               <span class="sp-other-card__count">{{ s.totalCount }}+ دورة</span>
             </a>
@@ -137,12 +137,12 @@
 </div>
 } @else {
 <div class="container" style="padding:5rem 0;text-align:center">
-  <i class="pi pi-exclamation-triangle" style="font-size:3.5rem;color:#f7971e;display:block;margin-bottom:1rem"></i>
+  <nx-icon variant="svg" icon="nx-alert-triangle" size="1em" style="font-size:3.5rem;color:#f7971e;display:block;margin-bottom:1rem"></nx-icon>
   <h2>التخصص غير موجود</h2>
   <p style="color:#666;margin:.75rem 0 1.5rem">عذراً، لم يتم العثور على هذا التخصص.</p>
   <a class="btn btn-primary" routerLink="/courses"
      style="display:inline-flex;align-items:center;gap:.4rem">
-    <i class="pi pi-arrow-right"></i>
+    <nx-icon variant="svg" icon="nx-arrow-right" size="1em"></nx-icon>
     عرض جميع الدورات
   </a>
 </div>

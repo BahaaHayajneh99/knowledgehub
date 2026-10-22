@@ -5,15 +5,15 @@
     <div class="container cd-hero__inner">
       <nav class="cd-breadcrumb">
         <a routerLink="/">الرئيسية</a>
-        <i class="pi pi-angle-left"></i>
+        <nx-icon variant="svg" icon="nx-chevron-left" size="1em"></nx-icon>
         <span>الأسئلة الشائعة</span>
       </nav>
       <span class="badge badge-primary cd-hero__badge">دعم وتعليم</span>
       <h1 class="cd-hero__title">صفحة الأسئلة الشائعة</h1>
       <div class="cd-hero__meta">
-        <span><i class="pi pi-question-circle"></i> {{ faqs.length }} سؤال</span>
-        <span><i class="pi pi-users"></i> يجيب على أكثر الأسئلة شيوعاً</span>
-        <span><i class="pi pi-clock"></i> تحديث مستمر</span>
+        <span><nx-icon variant="svg" icon="nx-help-circle" size="1em"></nx-icon> {{ faqs.length }} سؤال</span>
+        <span><nx-icon variant="svg" icon="nx-users" size="1em"></nx-icon> يجيب على أكثر الأسئلة شيوعاً</span>
+        <span><nx-icon variant="svg" icon="nx-clock" size="1em"></nx-icon> تحديث مستمر</span>
       </div>
     </div>
   </section>
@@ -35,7 +35,7 @@
             <button class="faq-accordion__trigger" (click)="toggle($index)">
               <span class="faq-accordion__question">{{ item.question }}</span>
               <span class="faq-accordion__icon">
-                <i class="pi" [class.pi-plus]="!item.open" [class.pi-minus]="item.open"></i>
+                <nx-icon variant="svg" [icon]="item.open ? 'nx-minus' : 'nx-plus'" size="1em"></nx-icon>
               </span>
             </button>
             @if (item.open) {

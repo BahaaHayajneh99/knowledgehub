@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { NxIcon } from 'nexium-ui';
 import { RouterModule } from '@angular/router';
 import { QuizzesService } from '../quizzes.service';
 
@@ -14,7 +15,7 @@ export interface QuizCard {
 
 @Component({
   selector: 'app-quizzes',
-  imports: [RouterModule],
+  imports: [NxIcon, RouterModule],
   templateUrl: './quizzes.component.html',
   styleUrl: './quizzes.component.scss'
 })

@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { NxIcon } from 'nexium-ui';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../guard/auth/auth.service';
@@ -7,7 +8,7 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 @Component({
   selector: 'app-sign-login-page',
-  imports: [FormsModule, RouterLink],
+  imports: [NxIcon, FormsModule, RouterLink],
   templateUrl: './sign-login-page.component.html',
   styleUrl: './sign-login-page.component.scss'
 })

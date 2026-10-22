@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
+import { NxIcon } from 'nexium-ui';
 import { RouterModule } from '@angular/router';
 import { CoursesService, Course, Category } from '../courses.service';
 
 @Component({
   selector: 'app-cources',
-  imports: [RouterModule],
+  imports: [NxIcon, RouterModule],
   templateUrl: './cources.component.html',
   styleUrl: './cources.component.scss'
 })

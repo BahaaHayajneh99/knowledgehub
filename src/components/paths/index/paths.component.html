@@ -4,7 +4,7 @@
   <section class="pt-hero">
     <div class="container">
       <div class="pt-hero__badge">
-        <i class="pi pi-map"></i>
+        <nx-icon variant="svg" icon="nx-map-pin" size="1em"></nx-icon>
         <span>مسارات التعلم</span>
       </div>
       <h1 class="pt-hero__title">طريقك نحو الاحتراف يبدأ هنا</h1>
@@ -46,22 +46,22 @@
         @for (path of paths; track path.id) {
           <article class="pt-card" [ngClass]="path.colorClass" [routerLink]="['/paths', path.slug]">
             <div class="pt-card__header">
-              <i class="pi {{ path.icon }} pt-card__icon"></i>
+              <nx-icon variant="svg" [icon]="path.icon" size="1em" class="pt-card__icon"></nx-icon>
             </div>
             <div class="pt-card__body">
               <h2 class="pt-card__title">{{ path.title }}</h2>
               <p class="pt-card__subtitle">{{ path.subtitle }}</p>
               <div class="pt-card__stats">
                 <span class="pt-card__stat">
-                  <i class="pi pi-book"></i>
+                  <nx-icon variant="svg" icon="nx-book" size="1em"></nx-icon>
                   {{ path.totalCourses }} دورات
                 </span>
                 <span class="pt-card__stat">
-                  <i class="pi pi-clock"></i>
+                  <nx-icon variant="svg" icon="nx-clock" size="1em"></nx-icon>
                   {{ path.duration }}
                 </span>
                 <span class="pt-card__stat">
-                  <i class="pi pi-chart-line"></i>
+                  <nx-icon variant="svg" icon="nx-chart-bar" size="1em"></nx-icon>
                   {{ path.level }}
                 </span>
               </div>
@@ -70,7 +70,7 @@
               <a class="btn btn-primary pt-card__btn" [routerLink]="['/paths', path.slug]"
                  (click)="$event.stopPropagation()">
                 ابدأ المسار
-                <i class="pi pi-arrow-left"></i>
+                <nx-icon variant="svg" icon="nx-arrow-left" size="1em"></nx-icon>
               </a>
             </div>
           </article>
@@ -91,24 +91,24 @@
         </div>
         <div class="pt-cta__features">
           <div class="pt-cta__feature">
-            <i class="pi pi-verified"></i>
+            <nx-icon variant="svg" icon="nx-check-circle" size="1em"></nx-icon>
             <span>محتوى منظّم بترتيب منطقي</span>
           </div>
           <div class="pt-cta__feature">
-            <i class="pi pi-verified"></i>
+            <nx-icon variant="svg" icon="nx-check-circle" size="1em"></nx-icon>
             <span>مصادقة بشهادة معتمدة عند الإتمام</span>
           </div>
           <div class="pt-cta__feature">
-            <i class="pi pi-verified"></i>
+            <nx-icon variant="svg" icon="nx-check-circle" size="1em"></nx-icon>
             <span>مشاريع تطبيقية حقيقية في كل مرحلة</span>
           </div>
           <div class="pt-cta__feature">
-            <i class="pi pi-verified"></i>
+            <nx-icon variant="svg" icon="nx-check-circle" size="1em"></nx-icon>
             <span>دعم المجتمع ومساعدة الخبراء</span>
           </div>
         </div>
         <a class="btn btn-primary pt-cta__btn" routerLink="/register">
-          <i class="pi pi-user-plus"></i>
+          <nx-icon variant="svg" icon="nx-user-plus" size="1em"></nx-icon>
           سجّل مجاناً وابدأ الآن
         </a>
       </div>

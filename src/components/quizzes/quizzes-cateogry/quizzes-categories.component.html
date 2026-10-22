@@ -6,9 +6,9 @@
     <div class="container">
       <nav class="cd-breadcrumb" style="margin-bottom: 1rem">
         <a routerLink="/">الرئيسية</a>
-        <i class="pi pi-angle-left"></i>
+        <nx-icon variant="svg" icon="nx-chevron-left" size="1em"></nx-icon>
         <a routerLink="/quizzes">الاختبارات</a>
-        <i class="pi pi-angle-left"></i>
+        <nx-icon variant="svg" icon="nx-chevron-left" size="1em"></nx-icon>
         <span>{{ quiz.title }}</span>
       </nav>
       <div class="section">
@@ -46,7 +46,7 @@
         </div>
       } @else {
         <div style="text-align:center; padding: 3rem 0; color: #777">
-          <i class="pi pi-inbox" style="font-size:3rem; display:block; margin-bottom:1rem"></i>
+          <nx-icon variant="svg" icon="nx-mail" size="1em" style="font-size:3rem; display:block; margin-bottom:1rem"></nx-icon>
           <p>لا توجد فئات متاحة لهذا الاختبار</p>
         </div>
       }
@@ -56,7 +56,7 @@
 </div>
 } @else {
   <div class="container" style="padding:4rem 0; text-align:center">
-    <i class="pi pi-exclamation-triangle" style="font-size:3rem; color:#f7971e; display:block; margin-bottom:1rem"></i>
+    <nx-icon variant="svg" icon="nx-alert-triangle" size="1em" style="font-size:3rem; color:#f7971e; display:block; margin-bottom:1rem"></nx-icon>
     <h2>الاختبار غير موجود</h2>
     <a class="btn btn-primary" routerLink="/quizzes" style="margin-top:1.5rem; display:inline-flex">العودة للاختبارات</a>
   </div>

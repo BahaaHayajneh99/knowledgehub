@@ -34,7 +34,7 @@ $specialty-gradients: (
 
   span { color: #fff; font-weight: 600; }
 
-  i {
+  nx-icon {
     font-size: .65rem;
     transform: scaleX(-1);
   }
@@ -65,7 +65,7 @@ $specialty-gradients: (
     justify-content: center;
     margin-bottom: 1.5rem;
 
-    i { font-size: 2.4rem; }
+    nx-icon { font-size: 2.4rem; }
   }
 
   &__title {
@@ -150,7 +150,7 @@ $specialty-gradients: (
     align-items: center;
     gap: .4rem;
 
-    i { color: #f7971e; }
+    nx-icon { color: #f7971e; }
   }
 
   &__all-btn {

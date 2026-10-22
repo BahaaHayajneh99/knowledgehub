@@ -5,12 +5,12 @@
     <h3 class="card-title">{{ title }}</h3>
     @if (rate !== null) {
       <p class="card-meta">
-        <i class="pi pi-star-fill cd-star--full" style="font-size:.75rem"></i>
+        <nx-icon variant="svg" icon="nx-star" size="1em" class="cd-star--full nx-icon--filled" style="font-size:.75rem"></nx-icon>
         {{ rate }} &nbsp;·&nbsp; {{ lessons }} درساً
       </p>
     } @else if (readTime !== null) {
       <p class="card-meta">
-        <i class="pi pi-clock" style="font-size:.75rem"></i>
+        <nx-icon variant="svg" icon="nx-clock" size="1em" style="font-size:.75rem"></nx-icon>
         {{ readTime }} دقائق &nbsp;·&nbsp; {{ date }}
       </p>
     }

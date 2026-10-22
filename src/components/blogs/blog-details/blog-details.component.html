@@ -7,18 +7,18 @@
         <div class="container cd-hero__inner">
             <nav class="cd-breadcrumb">
                 <a routerLink="/">الرئيسية</a>
-                <i class="pi pi-angle-left"></i>
+                <nx-icon variant="svg" icon="nx-chevron-left" size="1em"></nx-icon>
                 <a routerLink="/blogs">المدونة</a>
-                <i class="pi pi-angle-left"></i>
+                <nx-icon variant="svg" icon="nx-chevron-left" size="1em"></nx-icon>
                 <span>{{ post.category }}</span>
             </nav>
             <span class="badge badge-primary cd-hero__badge">{{ post.category }}</span>
             <h1 class="cd-hero__title">{{ post.title }}</h1>
             <div class="cd-hero__meta">
-                <span><i class="pi pi-calendar"></i> {{ post.date }}</span>
-                <span><i class="pi pi-clock"></i> {{ post.readTime }} دقائق قراءة</span>
-                <span><i class="pi pi-user"></i> {{ post.author }}</span>
-                <span><i class="pi pi-tag"></i> {{ post.tags.join(' · ') }}</span>
+                <span><nx-icon variant="svg" icon="nx-calendar" size="1em"></nx-icon> {{ post.date }}</span>
+                <span><nx-icon variant="svg" icon="nx-clock" size="1em"></nx-icon> {{ post.readTime }} دقائق قراءة</span>
+                <span><nx-icon variant="svg" icon="nx-user" size="1em"></nx-icon> {{ post.author }}</span>
+                <span><nx-icon variant="svg" icon="nx-tag" size="1em"></nx-icon> {{ post.tags.join(' · ') }}</span>
             </div>
         </div>
     </section>
@@ -32,7 +32,7 @@
             <div class="bd-article__header">
                 <span class="badge badge-primary">{{ post.category }}</span>
                 <span class="card-meta">{{ post.date }}</span>
-                <span class="card-meta"><i class="pi pi-clock"></i> {{ post.readTime }} دقائق قراءة</span>
+                <span class="card-meta"><nx-icon variant="svg" icon="nx-clock" size="1em"></nx-icon> {{ post.readTime }} دقائق قراءة</span>
             </div>
 
             <h1 class="bd-article__title">{{ post.title }}</h1>
@@ -69,14 +69,10 @@
             <div class="bd-sidebar__card">
                 <h3 class="bd-sidebar__title">شارك المقال</h3>
                 <div class="cd-share">
-                    <a class="cd-share__icon cd-share__icon--fb" href="#" aria-label="Facebook"><i
-                            class="pi pi-facebook"></i></a>
-                    <a class="cd-share__icon cd-share__icon--tw" href="#" aria-label="Twitter"><i
-                            class="pi pi-twitter"></i></a>
-                    <a class="cd-share__icon cd-share__icon--wa" href="#" aria-label="WhatsApp"><i
-                            class="pi pi-whatsapp"></i></a>
-                    <a class="cd-share__icon cd-share__icon--li" href="#" aria-label="LinkedIn"><i
-                            class="pi pi-linkedin"></i></a>
+                    <a class="cd-share__icon cd-share__icon--fb" href="#" aria-label="Facebook"><nx-icon variant="svg" icon="nx-facebook" size="1em"></nx-icon></a>
+                    <a class="cd-share__icon cd-share__icon--tw" href="#" aria-label="Twitter"><nx-icon variant="svg" icon="nx-x-twitter" size="1em"></nx-icon></a>
+                    <a class="cd-share__icon cd-share__icon--wa" href="#" aria-label="WhatsApp"><nx-icon variant="svg" icon="nx-whatsapp" size="1em"></nx-icon></a>
+                    <a class="cd-share__icon cd-share__icon--li" href="#" aria-label="LinkedIn"><nx-icon variant="svg" icon="nx-linkedin" size="1em"></nx-icon></a>
                 </div>
             </div>
 
@@ -115,7 +111,7 @@
                 </div>
                 <p class="bd-comment__text">{{ c.text }}</p>
                 <button class="bd-comment__reply-btn">
-                  <i class="pi pi-reply"></i> رد
+                  <nx-icon variant="svg" icon="nx-message" size="1em"></nx-icon> رد
                 </button>
 
                 <!-- Nested replies -->
@@ -131,7 +127,7 @@
                           </div>
                           <p class="bd-comment__text">{{ r.text }}</p>
                           <button class="bd-comment__reply-btn">
-                            <i class="pi pi-reply"></i> رد
+                            <nx-icon variant="svg" icon="nx-message" size="1em"></nx-icon> رد
                           </button>
                         </div>
                       </div>
@@ -146,13 +142,13 @@
         <!-- Pagination -->
         <div class="pagination">
           <button class="pagination__btn" [disabled]="commentsPage <= 1" (click)="commentsPage = commentsPage - 1">
-            <i class="pi pi-angle-right"></i>
+            <nx-icon variant="svg" icon="nx-chevron-right" size="1em"></nx-icon>
           </button>
           @for (p of pageNums; track p) {
             <button class="pagination__page" [class.pagination__page--active]="p === commentsPage" (click)="commentsPage = p">{{ p }}</button>
           }
           <button class="pagination__btn" [disabled]="commentsPage >= totalPages" (click)="commentsPage = commentsPage + 1">
-            <i class="pi pi-angle-left"></i>
+            <nx-icon variant="svg" icon="nx-chevron-left" size="1em"></nx-icon>
           </button>
         </div>
 
@@ -215,7 +211,7 @@
 </div>
 } @else {
 <div class="container" style="padding:4rem 0;text-align:center">
-    <i class="pi pi-exclamation-triangle" style="font-size:3rem;color:#f7971e;display:block;margin-bottom:1rem"></i>
+    <nx-icon variant="svg" icon="nx-alert-triangle" size="1em" style="font-size:3rem;color:#f7971e;display:block;margin-bottom:1rem"></nx-icon>
     <h2>المقال غير موجود</h2>
     <a class="btn btn-primary" routerLink="/blogs" style="margin-top:1.5rem;display:inline-flex">العودة للمدونة</a>
 </div>

@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { NxIcon } from 'nexium-ui';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { QuizzesService, QuizCard } from '../quizzes.service';
 
 @Component({
   selector: 'app-quizzes-categories',
-  imports: [RouterModule],
+  imports: [NxIcon, RouterModule],
   templateUrl: './quizzes-categories.component.html',
   styleUrl: './quizzes-categories.component.scss'
 })

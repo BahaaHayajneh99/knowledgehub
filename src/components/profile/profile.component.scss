@@ -100,7 +100,7 @@
   gap: 6px;
   margin-bottom: 6px;
 
-  i { color: #4DD9CF; }
+  nx-icon { color: #4DD9CF; }
 }
 
 .profile__bio {
@@ -188,7 +188,7 @@
   justify-content: center;
   flex-shrink: 0;
 
-  i { font-size: 1.2rem; }
+  nx-icon { font-size: 1.2rem; }
 }
 
 .profile__stat-value {
@@ -245,7 +245,7 @@
     font-weight: 700;
   }
 
-  i { font-size: 0.9rem; }
+  nx-icon { font-size: 0.9rem; }
 }
 
 .profile__tab-chip {
@@ -285,7 +285,7 @@
   gap: 8px;
   margin-bottom: 16px;
 
-  i { color: #4DD9CF; font-size: 1.05rem; }
+  nx-icon { color: #4DD9CF; font-size: 1.05rem; }
 }
 
 .pcard__sub-title {
@@ -336,7 +336,7 @@
     font-size: 0.875rem;
     color: #475569;
 
-    i { color: #4DD9CF; width: 16px; font-size: 0.9rem; }
+    nx-icon { color: #4DD9CF; width: 16px; font-size: 0.9rem; }
   }
 }
 

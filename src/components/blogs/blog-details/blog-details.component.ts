@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NxIcon } from 'nexium-ui';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { BlogsService, BlogPost } from '../blogs.service';
 import { FormsModule } from '@angular/forms';
@@ -15,7 +16,7 @@ export interface Comment {
 
 @Component({
   selector: 'app-blog-details',
-  imports: [RouterModule, FormsModule, SharedCardComponent],
+  imports: [NxIcon, RouterModule, FormsModule, SharedCardComponent],
   templateUrl: './blog-details.component.html',
   styleUrl: './blog-details.component.scss'
 })

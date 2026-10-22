@@ -37,13 +37,13 @@
             <!-- Welcome pagination -->
             <div class="pagination">
               <button class="pagination__btn" [disabled]="welcomePage <= 1" (click)="welcomePage = welcomePage - 1">
-                <i class="pi pi-angle-right"></i>
+                <nx-icon variant="svg" icon="nx-chevron-right" size="1em"></nx-icon>
               </button>
               @for (p of pageNums(totalWelcome); track p) {
                 <button class="pagination__page" [class.pagination__page--active]="p === welcomePage" (click)="welcomePage = p">{{ p }}</button>
               }
               <button class="pagination__btn" [disabled]="welcomePage >= totalWelcome" (click)="welcomePage = welcomePage + 1">
-                <i class="pi pi-angle-left"></i>
+                <nx-icon variant="svg" icon="nx-chevron-left" size="1em"></nx-icon>
               </button>
             </div>
         </div>
@@ -63,7 +63,7 @@
                 @for (cat of categories; track cat.name) {
                 <a class="co-cat-card" [routerLink]="cat.route" [style.--cat-color]="cat.color"
                     [style.--cat-bg]="cat.bg">
-                    <div class="co-cat-card__icon"><i class="pi {{ cat.icon }}"></i></div>
+                    <div class="co-cat-card__icon"><nx-icon variant="svg" [icon]="cat.icon" size="1em"></nx-icon></div>
                     <h3 class="co-cat-card__name">{{ cat.name }}</h3>
                     <p class="co-cat-card__count">{{ cat.count }} دورة</p>
                 </a>
@@ -97,7 +97,7 @@
                             </div>
                             <div class="co-course-card__right">
                                 <span class="co-course-card__rate">
-                                    <i class="pi pi-star-fill cd-star--full" style="font-size:.75rem"></i>
+                                    <nx-icon variant="svg" icon="nx-star" size="1em" class="cd-star--full nx-icon--filled" style="font-size:.75rem"></nx-icon>
                                     {{ c.rate }}
                                 </span>
                                 <span class="co-course-card__price">{{ c.price }} DJ</span>
@@ -109,13 +109,13 @@
             </div>
             <div class="pagination">
               <button class="pagination__btn" [disabled]="recommendedPage <= 1" (click)="recommendedPage = recommendedPage - 1">
-                <i class="pi pi-angle-right"></i>
+                <nx-icon variant="svg" icon="nx-chevron-right" size="1em"></nx-icon>
               </button>
               @for (p of pageNums(totalRecommended); track p) {
                 <button class="pagination__page" [class.pagination__page--active]="p === recommendedPage" (click)="recommendedPage = p">{{ p }}</button>
               }
               <button class="pagination__btn" [disabled]="recommendedPage >= totalRecommended" (click)="recommendedPage = recommendedPage + 1">
-                <i class="pi pi-angle-left"></i>
+                <nx-icon variant="svg" icon="nx-chevron-left" size="1em"></nx-icon>
               </button>
             </div>
         </div>
@@ -146,7 +146,7 @@
                             </div>
                             <div class="co-course-card__right">
                                 <span class="co-course-card__rate">
-                                    <i class="pi pi-star-fill cd-star--full" style="font-size:.75rem"></i>
+                                    <nx-icon variant="svg" icon="nx-star" size="1em" class="cd-star--full nx-icon--filled" style="font-size:.75rem"></nx-icon>
                                     {{ c.rate }}
                                 </span>
                                 <span class="co-course-card__price">{{ c.price }} DJ</span>
@@ -158,13 +158,13 @@
             </div>
             <div class="pagination">
               <button class="pagination__btn" [disabled]="getAheadPage <= 1" (click)="getAheadPage = getAheadPage - 1">
-                <i class="pi pi-angle-right"></i>
+                <nx-icon variant="svg" icon="nx-chevron-right" size="1em"></nx-icon>
               </button>
               @for (p of pageNums(totalGetAhead); track p) {
                 <button class="pagination__page" [class.pagination__page--active]="p === getAheadPage" (click)="getAheadPage = p">{{ p }}</button>
               }
               <button class="pagination__btn" [disabled]="getAheadPage >= totalGetAhead" (click)="getAheadPage = getAheadPage + 1">
-                <i class="pi pi-angle-left"></i>
+                <nx-icon variant="svg" icon="nx-chevron-left" size="1em"></nx-icon>
               </button>
             </div>
         </div>
@@ -211,7 +211,7 @@
                             </div>
                             <div class="co-course-card__right">
                                 <span class="co-course-card__rate">
-                                    <i class="pi pi-star-fill cd-star--full" style="font-size:.75rem"></i>
+                                    <nx-icon variant="svg" icon="nx-star" size="1em" class="cd-star--full nx-icon--filled" style="font-size:.75rem"></nx-icon>
                                     {{ c.rate }}
                                 </span>
                                 <span class="co-course-card__price">{{ c.price }} DJ</span>
@@ -223,13 +223,13 @@
             </div>
             <div class="pagination">
               <button class="pagination__btn" [disabled]="personalDevPage <= 1" (click)="personalDevPage = personalDevPage - 1">
-                <i class="pi pi-angle-right"></i>
+                <nx-icon variant="svg" icon="nx-chevron-right" size="1em"></nx-icon>
               </button>
               @for (p of pageNums(totalPersonalDev); track p) {
                 <button class="pagination__page" [class.pagination__page--active]="p === personalDevPage" (click)="personalDevPage = p">{{ p }}</button>
               }
               <button class="pagination__btn" [disabled]="personalDevPage >= totalPersonalDev" (click)="personalDevPage = personalDevPage + 1">
-                <i class="pi pi-angle-left"></i>
+                <nx-icon variant="svg" icon="nx-chevron-left" size="1em"></nx-icon>
               </button>
             </div>
         </div>
@@ -260,7 +260,7 @@
                             </div>
                             <div class="co-course-card__right">
                                 <span class="co-course-card__rate">
-                                    <i class="pi pi-star-fill cd-star--full" style="font-size:.75rem"></i>
+                                    <nx-icon variant="svg" icon="nx-star" size="1em" class="cd-star--full nx-icon--filled" style="font-size:.75rem"></nx-icon>
                                     {{ c.rate }}
                                 </span>
                                 <span class="co-course-card__price">{{ c.price }} DJ</span>
@@ -272,13 +272,13 @@
             </div>
             <div class="pagination">
               <button class="pagination__btn" [disabled]="alsoViewingPage <= 1" (click)="alsoViewingPage = alsoViewingPage - 1">
-                <i class="pi pi-angle-right"></i>
+                <nx-icon variant="svg" icon="nx-chevron-right" size="1em"></nx-icon>
               </button>
               @for (p of pageNums(totalAlsoViewing); track p) {
                 <button class="pagination__page" [class.pagination__page--active]="p === alsoViewingPage" (click)="alsoViewingPage = p">{{ p }}</button>
               }
               <button class="pagination__btn" [disabled]="alsoViewingPage >= totalAlsoViewing" (click)="alsoViewingPage = alsoViewingPage + 1">
-                <i class="pi pi-angle-left"></i>
+                <nx-icon variant="svg" icon="nx-chevron-left" size="1em"></nx-icon>
               </button>
             </div>
         </div>

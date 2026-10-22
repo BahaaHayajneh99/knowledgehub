@@ -4,15 +4,15 @@
     <!-- ── Toolbar (hidden on print) ───────────────────────────────── -->
     <div class="cert-toolbar no-print">
       <div class="cert-toolbar__info">
-        <i class="pi pi-verified" style="color:#4DD9CF"></i>
+        <nx-icon variant="svg" icon="nx-check-circle" size="1em" style="color:#4DD9CF"></nx-icon>
         <span>{{ cert?.title }}</span>
       </div>
       <div class="cert-toolbar__actions">
         <button class="cert-toolbar__btn cert-toolbar__btn--primary" (click)="print()">
-          <i class="pi pi-print"></i> طباعة / حفظ PDF
+          <nx-icon variant="svg" icon="nx-file" size="1em"></nx-icon> طباعة / حفظ PDF
         </button>
         <button class="cert-toolbar__btn" (click)="closed.emit()">
-          <i class="pi pi-times"></i> إغلاق
+          <nx-icon variant="svg" icon="nx-close" size="1em"></nx-icon> إغلاق
         </button>
       </div>
     </div>
@@ -31,7 +31,7 @@
 
         <!-- Background watermark seal -->
         <div class="cert-watermark">
-          <i class="pi pi-verified"></i>
+          <nx-icon variant="svg" icon="nx-check-circle" size="1em"></nx-icon>
         </div>
 
         <!-- ── Header row ───────────────────────────────────────────── -->
@@ -45,7 +45,7 @@
 
           <div class="cert-seal">
             <div class="cert-seal__ring">
-              <i class="pi pi-verified cert-seal__icon"></i>
+              <nx-icon variant="svg" icon="nx-check-circle" size="1em" class="cert-seal__icon"></nx-icon>
             </div>
             <span class="cert-seal__label">معتمدة</span>
           </div>
@@ -93,7 +93,7 @@
 
           <div class="cert-emblem">
             <div class="cert-emblem__circle">
-              <i class="pi pi-star-fill"></i>
+              <nx-icon variant="svg" icon="nx-star" size="1em" class="nx-icon--filled"></nx-icon>
             </div>
             <p class="cert-emblem__date">{{ cert?.date }}</p>
             <p class="cert-emblem__id">{{ cert?.id }}</p>

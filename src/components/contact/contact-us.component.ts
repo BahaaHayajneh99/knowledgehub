@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NxIcon } from 'nexium-ui';
 import { FormsModule, NgForm } from '@angular/forms';
 
 interface ContactModel {
@@ -12,7 +13,7 @@ interface ContactModel {
 
 @Component({
   selector: 'app-contact-us',
-  imports: [FormsModule],
+  imports: [NxIcon, FormsModule],
   templateUrl: './contact-us.component.html',
   styleUrl: './contact-us.component.scss'
 })

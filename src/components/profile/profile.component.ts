@@ -1,4 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
+import { NxIcon } from 'nexium-ui';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../guard/auth/auth.service';
@@ -8,7 +9,7 @@ type Tab = 'overview' | 'courses' | 'certificates' | 'settings';
 
 @Component({
   selector: 'app-profile',
-  imports: [FormsModule, RouterLink, CertificateModalComponent],
+  imports: [NxIcon, FormsModule, RouterLink, CertificateModalComponent],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
 })
@@ -34,10 +35,10 @@ export class ProfileComponent implements OnInit {
   showConfirmPwd = false;
 
   readonly stats = [
-    { label: 'الدورات المسجّلة',  value: 7,    icon: 'pi-book',          color: '#4DD9CF' },
-    { label: 'الدورات المكتملة',  value: 3,    icon: 'pi-check-circle',  color: '#43e97b' },
-    { label: 'الاختبارات',         value: 12,   icon: 'pi-pencil',        color: '#f9c74f' },
-    { label: 'النقاط المكتسبة',   value: 1840, icon: 'pi-star',          color: '#f5576c' },
+    { label: 'الدورات المسجّلة',  value: 7,    icon: 'nx-book',          color: '#4DD9CF' },
+    { label: 'الدورات المكتملة',  value: 3,    icon: 'nx-check-circle',  color: '#43e97b' },
+    { label: 'الاختبارات',         value: 12,   icon: 'nx-edit',        color: '#f9c74f' },
+    { label: 'النقاط المكتسبة',   value: 1840, icon: 'nx-star',          color: '#f5576c' },
   ];
 
   readonly courses = [
@@ -57,12 +58,12 @@ export class ProfileComponent implements OnInit {
   ];
 
   readonly activity = [
-    { icon: 'pi-book',          color: '#4DD9CF', text: 'أكملت درس "المصفوفات في Python"',             time: 'منذ ساعتين' },
-    { icon: 'pi-check-circle',  color: '#43e97b', text: 'اجتزت اختبار "أساسيات CSS" بدرجة 92%',        time: 'أمس' },
-    { icon: 'pi-star',          color: '#f9c74f', text: 'حصلت على شهادة تطوير Angular',                 time: 'منذ 3 أيام' },
-    { icon: 'pi-play',          color: '#a78bfa', text: 'بدأت دورة "أمن المعلومات والشبكات"',           time: 'منذ أسبوع' },
-    { icon: 'pi-pencil',        color: '#1E90FF', text: 'أجريت اختبار "قواعد البيانات" بدرجة 78%',      time: 'منذ أسبوعين' },
-    { icon: 'pi-book',          color: '#fb923c', text: 'استأنفت دورة "إدارة المشاريع Agile"',          time: 'منذ 3 أسابيع' },
+    { icon: 'nx-book',          color: '#4DD9CF', text: 'أكملت درس "المصفوفات في Python"',             time: 'منذ ساعتين' },
+    { icon: 'nx-check-circle',  color: '#43e97b', text: 'اجتزت اختبار "أساسيات CSS" بدرجة 92%',        time: 'أمس' },
+    { icon: 'nx-star',          color: '#f9c74f', text: 'حصلت على شهادة تطوير Angular',                 time: 'منذ 3 أيام' },
+    { icon: 'nx-video',          color: '#a78bfa', text: 'بدأت دورة "أمن المعلومات والشبكات"',           time: 'منذ أسبوع' },
+    { icon: 'nx-edit',        color: '#1E90FF', text: 'أجريت اختبار "قواعد البيانات" بدرجة 78%',      time: 'منذ أسبوعين' },
+    { icon: 'nx-book',          color: '#fb923c', text: 'استأنفت دورة "إدارة المشاريع Agile"',          time: 'منذ 3 أسابيع' },
   ];
 
   readonly skills = ['Python', 'Angular', 'UI/UX', 'SQL', 'Agile', 'HTML/CSS', 'JavaScript', 'Git', 'Linux', 'Docker'];

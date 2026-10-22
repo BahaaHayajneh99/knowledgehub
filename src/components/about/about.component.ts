@@ -1,39 +1,40 @@
 import { Component } from '@angular/core';
+import { NxIcon } from 'nexium-ui';
 import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-about',
-  imports: [RouterLink],
+  imports: [NxIcon, RouterLink],
   templateUrl: './about.component.html',
   styleUrl: './about.component.scss'
 })
 export class AboutComponent {
 
   stats = [
-    { icon: 'pi-graduation-cap', value: '500+', label: 'دورة تدريبية' },
-    { icon: 'pi-users',          value: '18k+', label: 'طالب مسجّل' },
-    { icon: 'pi-star',           value: '120+', label: 'مدرّب خبير' },
-    { icon: 'pi-verified',       value: '25',   label: 'تخصصاً متاحاً' },
+    { icon: 'nx-book', value: '500+', label: 'دورة تدريبية' },
+    { icon: 'nx-users',          value: '18k+', label: 'طالب مسجّل' },
+    { icon: 'nx-star',           value: '120+', label: 'مدرّب خبير' },
+    { icon: 'nx-check-circle',       value: '25',   label: 'تخصصاً متاحاً' },
   ];
 
   values = [
     {
-      icon: 'pi-lightbulb',
+      icon: 'nx-new',
       title: 'الابتكار',
       desc: 'نسعى دائماً لتقديم أساليب تعليمية مبتكرة تواكب أحدث التقنيات وتلبي احتياجات المتعلم العصري.'
     },
     {
-      icon: 'pi-shield',
+      icon: 'nx-lock',
       title: 'الجودة',
       desc: 'نلتزم بأعلى معايير الجودة في المحتوى التعليمي من خلال مراجعة دقيقة ومستمرة من قِبل متخصصين.'
     },
     {
-      icon: 'pi-heart',
+      icon: 'nx-heart',
       title: 'الشمولية',
       desc: 'نؤمن بأن التعليم حق للجميع، لذا نوفر محتوى ميسور التكلفة يصل إلى كل متعلم عربي في العالم.'
     },
     {
-      icon: 'pi-users',
+      icon: 'nx-users',
       title: 'المجتمع',
       desc: 'نبني مجتمعاً تعليمياً داعماً يتيح للطلاب التواصل والتعاون وتبادل الخبرات والمعرفة.'
     },

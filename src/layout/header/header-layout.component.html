@@ -27,16 +27,16 @@
         <div class="header__user" (click)="toggleDropdown()">
           <div class="header__avatar">{{ userInitials }}</div>
           <span class="header__user-name">{{ firstName }}</span>
-          <i class="pi pi-chevron-down header__chevron" [class.header__chevron--open]="dropdownOpen"></i>
+          <nx-icon variant="svg" icon="nx-chevron-down" size="1em" class="header__chevron" [class.header__chevron--open]="dropdownOpen"></nx-icon>
 
           @if (dropdownOpen) {
             <div class="header__dropdown">
               <a class="header__dropdown-item" routerLink="/profile">
-                <i class="pi pi-user"></i> الملف الشخصي
+                <nx-icon variant="svg" icon="nx-user" size="1em"></nx-icon> الملف الشخصي
               </a>
               <div class="header__dropdown-divider"></div>
               <button class="header__dropdown-item header__dropdown-item--danger" (click)="logout()">
-                <i class="pi pi-sign-out"></i> تسجيل الخروج
+                <nx-icon variant="svg" icon="nx-external-link" size="1em"></nx-icon> تسجيل الخروج
               </button>
             </div>
           }

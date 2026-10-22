@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NxIcon } from 'nexium-ui';
 
 import { RouterLink } from '@angular/router';
 
@@ -10,7 +11,7 @@ interface FaqItem {
 
 @Component({
   selector: 'app-faq',
-  imports: [RouterLink],
+  imports: [NxIcon, RouterLink],
   templateUrl: './faq.component.html',
   styleUrl: './faq.component.scss'
 })

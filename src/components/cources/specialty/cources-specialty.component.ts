@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NxIcon } from 'nexium-ui';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { NgClass } from '@angular/common';
 import { CoursesService, Course, Specialty } from '../courses.service';
@@ -6,7 +7,7 @@ import { SharedCardComponent } from '../../shared/card/shared-card.component';
 
 @Component({
   selector: 'app-cources-specialty',
-  imports: [RouterModule, NgClass, SharedCardComponent],
+  imports: [NxIcon, RouterModule, NgClass, SharedCardComponent],
   templateUrl: './cources-specialty.component.html',
   styleUrl: './cources-specialty.component.scss',
 })

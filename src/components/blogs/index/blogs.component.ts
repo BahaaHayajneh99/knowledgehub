@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, HostListener, signal } from '@angular/core';
+import { NxCarousel, NxCarouselSlideDirective } from 'nexium-ui';
 import { RouterModule } from '@angular/router';
-import { Carousel, CarouselModule } from 'primeng/carousel';
 import { BlogsService, BlogPost } from '../blogs.service';
 import { SharedCardComponent } from '../../shared/card/shared-card.component';
+import { CarouselPagesPipe } from '../../shared/carousel/carousel-pages.pipe';
 
 @Component({
   selector: 'app-blogs',
-  imports: [RouterModule, CarouselModule, SharedCardComponent],
+  imports: [RouterModule, NxCarousel, NxCarouselSlideDirective, CarouselPagesPipe, SharedCardComponent],
   templateUrl: './blogs.component.html',
   styleUrl: './blogs.component.scss'
 })
@@ -16,11 +17,13 @@ export class BlogsComponent {
 
   allPosts: BlogPost[];
 
-  responsiveOptions = [
-    { breakpoint: '1400px', numVisible: 3, numScroll: 1 },
-    { breakpoint: '1199px', numVisible: 2, numScroll: 1 },
-    { breakpoint: '767px',  numVisible: 1, numScroll: 1 },
-  ];
+  // Drives how many cards each carousel page holds (see CarouselPagesPipe)
+  viewportWidth = signal(window.innerWidth);
+
+  @HostListener('window:resize')
+  onResize(): void {
+    this.viewportWidth.set(window.innerWidth);
+  }
 
   // ── Pagination state (articles section only) ─────────────────────────
   articlesPage = 1;

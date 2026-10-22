@@ -1,9 +1,10 @@
 import { Component, Input } from '@angular/core';
+import { NxIcon } from 'nexium-ui';
 import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-shared-card',
-  imports: [RouterLink],
+  imports: [NxIcon, RouterLink],
   templateUrl: './shared-card.component.html',
   styleUrl: './shared-card.component.scss'
 })
